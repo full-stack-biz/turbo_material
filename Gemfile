@@ -12,3 +12,7 @@ gem "sprockets-rails"
 
 # Start debugger with binding.b [https://github.com/ruby/debug]
 # gem "debug", ">= 1.0.0"
+
+gem "stimulus-rails", "~> 1.3"
+
+gem "lookbook"
