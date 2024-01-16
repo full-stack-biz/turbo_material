@@ -1,0 +1,28 @@
+<%# locals: (form:, disabled: false, required: false, name:, label: nil, full_name:, checked: false, value: nil, parent: nil) %>
+<div class="mdc-form-field flex flex-col">
+  <label>
+    <%= label || name.capitalize %>
+  </label>
+  <div class="flex flex-row items-center w-full">
+    <div class="mdc-radio <%= disabled ? 'mdc-radio--disabled' : '' %>" data-controller="material-radio">
+      <%= form.radio_button name.to_sym, 'true', class: 'mdc-radio__native-control', id: full_name + '-1', checked: value, disabled: disabled %>
+      <div class="mdc-radio__background">
+        <div class="mdc-radio__outer-circle"></div>
+        <div class="mdc-radio__inner-circle"></div>
+      </div>
+      <div class="mdc-radio__ripple"></div>
+      <div class="mdc-radio__focus-ring"></div>
+    </div>
+    <label for="<%= full_name %>-1">Yes</label>
+    <div class="mdc-radio <%= disabled ? 'mdc-radio--disabled' : '' %>">
+      <%= form.radio_button name.to_sym, 'false', class: 'mdc-radio__native-control', id: full_name + '-2', checked: !value, disabled: disabled %>
+      <div class="mdc-radio__background">
+        <div class="mdc-radio__outer-circle"></div>
+        <div class="mdc-radio__inner-circle"></div>
+      </div>
+      <div class="mdc-radio__ripple"></div>
+      <div class="mdc-radio__focus-ring"></div>
+    </div>
+    <label for="<%= full_name %>-2">No</label>
+  </div>
+</div>

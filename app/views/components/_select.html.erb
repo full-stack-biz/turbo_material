@@ -1,0 +1,67 @@
+<%# locals: (form:, disabled: false, required: false, name:, label: nil, full_name:, checked: false, value: nil, parent: nil, frame: nil, selected_text: nil, fixed: false, options: [], hint: nil, helper: nil) %>
+<div class="mdc-select mdc-select--filled w-full<%= disabled ? ' mdc-select--disabled' : '' %><%= required ? ' mdc-select--required' : '' %>"
+     data-controller="material-select" <% if frame %> data-frame="<%= frame %>"<% end %> id="<%= full_name %>">
+  <%= form.hidden_field name.to_sym, value: value %>
+  <div class="mdc-select__anchor"
+       role="button"
+       aria-haspopup="listbox"
+       aria-expanded="false"
+       aria-labelledby="<%= full_name %>-label <%= full_name %>-selected-text"
+       <% if disabled %>aria-disabled="true"<% end %>
+       <% if required %>aria-required="true"<% end %>
+  >
+    <span class="mdc-select__ripple"></span>
+    <span id="<%= full_name %>-label" class="mdc-floating-label"><%= label || name.capitalize %></span>
+    <span class="mdc-select__selected-text-container">
+      <span id="<%= full_name %>-selected-text" class="mdc-select__selected-text">
+        <%= selected_text || value %>
+      </span>
+    </span>
+    <span class="mdc-select__dropdown-icon">
+            <svg
+              class="mdc-select__dropdown-icon-graphic"
+              viewBox="7 10 10 5" focusable="false">
+              <polygon
+                class="mdc-select__dropdown-icon-inactive"
+                stroke="none"
+                fill-rule="evenodd"
+                points="7 10 12 15 17 10">
+              </polygon>
+              <polygon
+                class="mdc-select__dropdown-icon-active"
+                stroke="none"
+                fill-rule="evenodd"
+                points="7 15 12 10 17 15">
+              </polygon>
+            </svg>
+          </span>
+    <span class="mdc-line-ripple"></span>
+  </div>
+
+  <div class="mdc-select__menu mdc-menu mdc-menu-surface !z-100 <%= fixed ? 'mdc-menu-surface--fixed' : 'mdc-menu-surface--fullwidth' %>" id="<%= full_name %>-surface">
+    <ul class="mdc-deprecated-list" role="listbox" aria-label="<%= label %> listbox">
+      <% options.each do |option| %>
+        <li class="mdc-deprecated-list-item<%= value == option[:value] ? ' mdc-deprecated-list-item--selected' : '' %>" aria-selected="<%= (value == option[:value]).to_s %>" data-value="<%= option[:value] %>" role="option">
+          <span class="mdc-deprecated-list-item__ripple"></span>
+          <span class="mdc-deprecated-list-item__text"><%= option[:label] %></span>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+</div>
+<%- if hint.present? -%>
+  <div class="font-sans text-xs p-2"><%= hint %></div>
+<%- end -%>
+<%- if helper.present? || parent&.errors.present? -%>
+  <div class="mdc-text-field-helper-line">
+    <%- if helper -%>
+      <div class="mdc-text-field-helper-text" aria-hidden="true"><%= helper %></div>
+    <%- end -%>
+    <%- parent&.errors&.[](name.to_sym)&.each do |msg| -%>
+      <div class="mdc-text-field-helper-text--validation-msg text-sm text-red-500"
+           aria-hidden="true">
+        <%= msg %>
+      </div>
+    <%- end -%>
+  </div>
+<%- end -%>

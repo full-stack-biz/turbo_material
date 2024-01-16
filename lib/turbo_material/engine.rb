@@ -6,7 +6,14 @@ module TurboMaterial
 
     initializer 'local_helper.action_controller' do
       ActiveSupport.on_load :action_controller do
+        helper TurboMaterial::ApplicationHelper
         helper TurboMaterial::InputHelper
+        helper TurboMaterial::CheckboxHelper
+        helper TurboMaterial::ChipsInputHelper
+        helper TurboMaterial::ChipsSelectHelper
+        helper TurboMaterial::RadioHelper
+        helper TurboMaterial::SelectHelper
+        helper TurboMaterial::SwitchHelper
       end
     end
 
@@ -26,7 +33,7 @@ module TurboMaterial
     end
 
     initializer "turbo_material.precompile" do |app|
-      app.config.assets.paths << root.join("app/javascripts")
+      app.config.assets.paths << root.join("app/assets/javascripts")
       app.config.assets.precompile << "turbo_material/application.js"
     end
   end

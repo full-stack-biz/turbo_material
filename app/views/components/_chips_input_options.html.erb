@@ -1,0 +1,20 @@
+<%# locals: (suffix:, options: [], label:, name:, opened: 'false') %>
+<%- id = [name, suffix].compact_blank.join('-') -%>
+<div id="<%= "#{id}-panel" %>"
+     class="mdc-menu-surface <%= (opened != 'true' || options.size.zero?) ? '' : 'mdc-menu-surface--open' %> !z-100 mdc-menu-surface--fullwidth"
+     data-controller="material-menu-surface"
+     data-material-chips-input-target="panel" data-size="<%= options.size %>">
+  <ul class="mdc-deprecated-list max-h-64 overflow-y-auto"
+      id="<%= "#{id}-list" %>"
+      role="listbox"
+      aria-label="<%= label %>"
+      data-controller="material-list"
+  >
+    <%- options.each_with_index do |option, idx| -%>
+      <li class="mdc-deprecated-list-item" data-value="<%= option[:id] %>" data-name="<%= option[:label] %>" <% if idx.zero? %> tabindex="0"<% end %>>
+        <span class="mdc-deprecated-list-item__ripple"></span>
+        <span class="mdc-deprecated-list-item__text"><%= option[:label] %></span>
+      </li>
+    <%- end -%>
+  </ul>
+</div>

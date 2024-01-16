@@ -1,0 +1,56 @@
+<%# locals: (form:, disabled: false, required: false, name:, label: nil, full_name:, value: nil, url: nil, frame: nil, source_override: nil, options: [], confirmable: false, query_string: nil, modal_name: nil, modal_url: nil, chip_css: nil, fixed: false) %>
+<div class="mdc-select mdc-select--filled w-full"
+     data-controller="material-chips-select"
+     data-material-chips-select-selected-value="<%= value %>"
+     data-material-chips-select-url-value="<%= url %>"
+     data-material-chips-select-confirmable-value="<%= confirmable %>"
+     data-material-chips-select-query-string-value="<%= query_string %>"
+     data-material-chips-select-modal-name-value="<%= modal_name %>"
+     data-material-chips-select-modal-url-value="<%= modal_url %>"
+     data-material-chips-select-chip-css-value="<%= chip_css %>"
+>
+  <div class="mdc-select__anchor"
+       role="button"
+       aria-haspopup="listbox"
+       aria-expanded="false"
+       aria-expanded="false"
+       aria-labelledby="<%= full_name %>-label <%= full_name %>-selected-text"
+       <% if disabled %>aria-disabled="true"<% end %>
+       <% if required %>aria-required="true"<% end %>
+  >
+    <span class="mdc-select__ripple"></span>
+    <span id="<%= full_name %>-label" class="mdc-floating-label pb-1"><%= label || name.capitalize %></span>
+    <div class="mdc-chip-set mdc-chip-set--input"></div>
+    <span class="mdc-select__selected-text-container"><span id="<%= full_name %>-selected-text" class="mdc-select__selected-text !hidden"></span></span>
+    <span class="mdc-select__dropdown-icon">
+      <svg
+        class="mdc-select__dropdown-icon-graphic"
+        viewBox="7 10 10 5" focusable="false">
+        <polygon
+          class="mdc-select__dropdown-icon-inactive"
+          stroke="none"
+          fill-rule="evenodd"
+          points="7 10 12 15 17 10">
+        </polygon>
+        <polygon
+          class="mdc-select__dropdown-icon-active"
+          stroke="none"
+          fill-rule="evenodd"
+          points="7 15 12 10 17 15">
+        </polygon>
+      </svg>
+    </span>
+    <span class="mdc-line-ripple"></span>
+  </div>
+  <%= form.hidden_field name.to_sym, value: value, data: { 'material-chips-select-target': 'hidden' } if form %>
+  <div class="mdc-select__menu mdc-menu mdc-menu-surface <%= fixed ? 'mdc-menu-surface--fixed' : 'mdc-menu-surface--fullwidth' %>">
+    <ul class="mdc-deprecated-list" role="listbox" aria-label="<%= label %> listbox">
+      <% options.each do |option| %>
+        <li class="mdc-deprecated-list-item" aria-selected="false" data-value="<%= option[:value] %>" data-label="<%= option[:label] %>" <% if option[:confirmed].in? [true, false] %>data-confirmed="<%= option[:confirmed] %>"<% end %> role="option">
+          <span class="mdc-deprecated-list-item__ripple"></span>
+          <span class="mdc-deprecated-list-item__text"><%= option[:label] %></span>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+</div>

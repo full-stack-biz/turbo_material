@@ -1,0 +1,34 @@
+<%# locals: (form:, disabled: false, name:, label: nil, full_name:, value: nil, true_label: nil, false_label: nil, frame: nil) %>
+<div data-controller="material-switch" <% if frame %> data-frame="<%= frame %>"<% end %>>
+  <button id="selected-switch" class="mdc-switch <%= cast_boolean(value) ? 'mdc-switch--selected' : '' %>"
+          type="button" role="switch" aria-checked="<%= cast_boolean(value) ? 'true' : 'false' %>" <% if disabled %>disabled<% end %>>
+    <div class="mdc-switch__track"></div>
+    <div class="mdc-switch__handle-track">
+      <div class="mdc-switch__handle">
+        <div class="mdc-switch__shadow">
+          <div class="mdc-elevation-overlay"></div>
+        </div>
+        <div class="mdc-switch__ripple"></div>
+        <div class="mdc-switch__icons">
+          <svg class="mdc-switch__icon mdc-switch__icon--on" viewBox="0 0 24 24">
+            <path d="M19.69,5.23L8.96,15.96l-4.23-4.23L2.96,13.5l6,6L21.46,7L19.69,5.23z"/>
+          </svg>
+          <svg class="mdc-switch__icon mdc-switch__icon--off" viewBox="0 0 24 24">
+            <path d="M20 13H4v-2h16v2z"/>
+          </svg>
+        </div>
+      </div>
+    </div>
+    <span class="mdc-switch__focus-ring-wrapper">
+              <div class="mdc-switch__focus-ring"></div>
+            </span>
+  </button>
+  <label for="selected-switch">
+    <% if cast_boolean(value) %>
+      <%= true_label || label %>
+    <% else %>
+      <%= false_label || label  %>
+    <% end %>
+  </label>
+  <%= form.hidden_field name.to_sym, value: value %>
+</div>

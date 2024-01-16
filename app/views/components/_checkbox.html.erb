@@ -1,0 +1,25 @@
+<%# locals: (form:, disabled: false, name:, label: nil, full_name:, checked: false, checked_value: '1', unchecked_value: '0', frame: nil, source_override: nil) %>
+<div class="mdc-form-field" data-controller="material-checkbox">
+  <div class="mdc-checkbox <%= disabled ? 'mdc-checkbox--disabled' : '' %>">
+    <%= form.check_box name.to_sym, {
+      id: full_name, class: "mdc-checkbox__native-control",
+      disabled: disabled,
+      checked: checked || form&.object&.[](source_override || name.to_sym),
+      data: { frame: frame }.compact
+    }, checked_value, unchecked_value %>
+    <div class="mdc-checkbox__background">
+      <svg class="mdc-checkbox__checkmark"
+           viewBox="0 0 24 24">
+        <path class="mdc-checkbox__checkmark-path"
+              fill="none"
+              d="M1.73,12.91 8.1,19.28 22.79,4.59"/>
+      </svg>
+      <div class="mdc-checkbox__mixedmark"></div>
+    </div>
+    <div class="mdc-checkbox__ripple"></div>
+    <div class="mdc-checkbox__focus-ring"></div>
+  </div>
+  <label for="<%= full_name %>">
+    <%= label || name.capitalize %>
+  </label>
+</div>
