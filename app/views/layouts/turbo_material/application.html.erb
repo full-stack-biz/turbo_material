@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Turbo material</title>
+  <%= csrf_meta_tags %>
+  <%= csp_meta_tag %>
+
+  <%= javascript_importmap_tags %>
+
+  <%= javascript_import_module_tag "turbo_material/application" %>
+
+  <%= stylesheet_link_tag    "turbo_material/application", media: "all" %>
+</head>
+<body>
+
+<%= yield %>
+
+</body>
+</html>
