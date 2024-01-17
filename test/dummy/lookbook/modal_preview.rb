@@ -1,5 +1,7 @@
 class ModalPreview < Lookbook::Preview
-  def default
-    render 'common/standalone', helper_name: 'material_modal'
+
+  # @param title text
+  def default(title: 'Modal')
+    render 'common/standalone', helper_name: 'material_modal', title:
   end
 end

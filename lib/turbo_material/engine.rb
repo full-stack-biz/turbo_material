@@ -15,6 +15,7 @@ module TurboMaterial
         helper TurboMaterial::RadioHelper
         helper TurboMaterial::SelectHelper
         helper TurboMaterial::SwitchHelper
+        helper TurboMaterial::TextareaHelper
       end
     end
 
