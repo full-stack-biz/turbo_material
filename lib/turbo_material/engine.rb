@@ -35,6 +35,8 @@ module TurboMaterial
     initializer "turbo_material.precompile" do |app|
       app.config.assets.paths << root.join("app/assets/javascripts")
       app.config.assets.precompile << "turbo_material/application.js"
+      app.config.assets.paths << root.join("app/assets/dist")
+      app.config.assets.precompile << "turbo_material/tailwind.css"
     end
   end
 end
