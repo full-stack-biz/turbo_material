@@ -11,6 +11,7 @@ module TurboMaterial
         helper TurboMaterial::CheckboxHelper
         helper TurboMaterial::ChipsInputHelper
         helper TurboMaterial::ChipsSelectHelper
+        helper TurboMaterial::ModalHelper
         helper TurboMaterial::RadioHelper
         helper TurboMaterial::SelectHelper
         helper TurboMaterial::SwitchHelper

@@ -1,0 +1,36 @@
+<turbo-frame id="modal">
+  <div class="mdc-dialog" data-controller="material-dialog" data-material-dialog-opened-value="true">
+    <div class="mdc-dialog__container">
+      <div class="mdc-dialog__surface !min-w-[36rem] !min-h-[14rem]"
+             role="alertdialog"
+             aria-modal="true"
+             aria-labelledby="my-dialog-title"
+             aria-describedby="my-dialog-content">
+          <h2 class="mdc-dialog__title bg-secondary">
+            <div class="!text-white flex items-center justify-between">
+              <span>Modal</span>
+              <button type="button" class="mdc-icon-button mdc-dialog__close" data-action="click->material-dialog#close">
+                <div class="mdc-icon-button__ripple"></div>
+                <span class="mdc-icon-button__focus-ring"></span>
+                <i class="material-icons !text-white">close</i>
+              </button>
+            </div>
+          </h2>
+          <div class="mdc-dialog__content">
+            Contents
+          </div>
+          <div class="mdc-dialog__actions">
+            <button type="button" class="mdc-button mdc-dialog__button mdc-dialog__close" data-action="click->material-dialog#close">
+              <div class="mdc-button__ripple"></div>
+              <span class="mdc-button__label">Cancel</span>
+            </button>
+            <button type="button" class="mdc-button mdc-dialog__button" data-controller="material-ripple">
+              <div class="mdc-button__ripple"></div>
+              <span class="mdc-button__label">OK</span>
+            </button>
+          </div>
+        </div>
+    </div>
+    <div class="mdc-dialog__scrim"></div>
+  </div>
+</turbo-frame>
