@@ -15,7 +15,7 @@ That list is based on the project from which this library is being extracted. If
 
 ## Usage
 
-Add following to your `app/javascript/controllers/index.js` After `eagerLoadControllersFrom("controllers", application)` line:
+Add following to your `app/javascript/controllers/index.js` after `eagerLoadControllersFrom("controllers", application)` line:
 
 ```javascript
 eagerLoadControllersFrom("turbo_material", application)
