@@ -1,4 +1,4 @@
-# TurboMaterial
+# Material Components for Hotwire Turbo
 
 This gem implements drop-in implementation for [Material Design](https://material.io/) in [Turbo](https://turbo.hotwire.dev/). It is based on [Material Components for the Web](https://github.com/material-components/material-components-web) as it's being most feature rich implementation at the moment.
 
