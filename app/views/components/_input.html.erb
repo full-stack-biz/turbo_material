@@ -1,13 +1,13 @@
-<%# locals: (form:, custom_controller: nil, custom_css: nil, disabled: false, required: false, name:, label: nil, full_name:, checked: false, frame: nil, provide_hidden: false, value: nil, type: 'text', data: {}, min: nil, max: nil, helper: nil, parent: nil) %>
+<%# locals: (form:, custom_controller: nil, custom_css: nil, disabled: false, required: false, name:, label: nil, id:, checked: false, frame: nil, provide_hidden: false, value: nil, type: 'text', data: {}, min: nil, max: nil, helper: nil, parent: nil) %>
 <label class="mdc-text-field mdc-text-field--filled w-full <%= custom_css %>"
        data-controller="<%= custom_controller || 'material-input' %>" <% if frame %>data-frame="<%= frame %>"<% end %>>
   <span class="mdc-text-field__ripple"></span>
-  <span class="mdc-floating-label" id="<%= full_name %>-label">
+  <span class="mdc-floating-label" id="<%= id %>-label">
     <%= label || name.capitalize %>
   </span>
   <%= form.text_field provide_hidden ? "#{name}_".to_sym : name.to_sym,
                       class: 'mdc-text-field__input', value: value || form&.object&.[](name.to_sym),
-                      id: full_name, 'aria-labelledby' => full_name + '-label',
+                      id: id, 'aria-labelledby' => id + '-label',
                       required: required, disabled: disabled,
                       type: type,  autocomplete: "off", data: { frame: frame, **(data) }.compact,
                       min: min, max: max

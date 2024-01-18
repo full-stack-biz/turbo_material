@@ -7,7 +7,7 @@ class ChipsInputPreview < Lookbook::Preview
   # @param required toggle
   def default(label: 'Input', disabled: false, required: false)
     render 'common/form', helper_name: 'material_chips_input',
-                                   url: '/countries', name: 'countries', label:, full_name: 'Input', disabled:,
+                                   url: '/countries', name: 'countries', label:, id: 'Input', disabled:,
                                    required:,
                                    options: Carmen::Country.all.map { |c| { id: c.alpha_3_code, label: c.name } }
   end

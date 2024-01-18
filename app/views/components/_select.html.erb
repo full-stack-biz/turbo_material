@@ -1,19 +1,19 @@
-<%# locals: (form:, disabled: false, required: false, name:, label: nil, full_name:, checked: false, value: nil, parent: nil, frame: nil, selected_text: nil, fixed: false, options: [], hint: nil, helper: nil) %>
+<%# locals: (form:, disabled: false, required: false, name:, label: nil, id:, checked: false, value: nil, parent: nil, frame: nil, selected_text: nil, fixed: false, options: [], hint: nil, helper: nil) %>
 <div class="mdc-select mdc-select--filled w-full<%= disabled ? ' mdc-select--disabled' : '' %><%= required ? ' mdc-select--required' : '' %>"
-     data-controller="material-select" <% if frame %> data-frame="<%= frame %>"<% end %> id="<%= full_name %>">
+     data-controller="material-select" <% if frame %> data-frame="<%= frame %>"<% end %> id="<%= id %>">
   <%= form.hidden_field name.to_sym, value: value %>
   <div class="mdc-select__anchor"
        role="button"
        aria-haspopup="listbox"
        aria-expanded="false"
-       aria-labelledby="<%= full_name %>-label <%= full_name %>-selected-text"
+       aria-labelledby="<%= id %>-label <%= id %>-selected-text"
        <% if disabled %>aria-disabled="true"<% end %>
        <% if required %>aria-required="true"<% end %>
   >
     <span class="mdc-select__ripple"></span>
-    <span id="<%= full_name %>-label" class="mdc-floating-label"><%= label || name.capitalize %></span>
+    <span id="<%= id %>-label" class="mdc-floating-label"><%= label || name.capitalize %></span>
     <span class="mdc-select__selected-text-container">
-      <span id="<%= full_name %>-selected-text" class="mdc-select__selected-text">
+      <span id="<%= id %>-selected-text" class="mdc-select__selected-text">
         <%= selected_text || value %>
       </span>
     </span>
@@ -38,7 +38,7 @@
     <span class="mdc-line-ripple"></span>
   </div>
 
-  <div class="mdc-select__menu mdc-menu mdc-menu-surface !z-100 <%= fixed ? 'mdc-menu-surface--fixed' : 'mdc-menu-surface--fullwidth' %>" id="<%= full_name %>-surface">
+  <div class="mdc-select__menu mdc-menu mdc-menu-surface !z-100 <%= fixed ? 'mdc-menu-surface--fixed' : 'mdc-menu-surface--fullwidth' %>" id="<%= id %>-surface">
     <ul class="mdc-deprecated-list" role="listbox" aria-label="<%= label %> listbox">
       <% options.each do |option| %>
         <li class="mdc-deprecated-list-item<%= value == option[:value] ? ' mdc-deprecated-list-item--selected' : '' %>" aria-selected="<%= (value == option[:value]).to_s %>" data-value="<%= option[:value] %>" role="option">

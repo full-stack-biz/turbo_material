@@ -1,8 +1,8 @@
-<%# locals: (form:, disabled: false, name:, label: nil, full_name:, checked: false, checked_value: '1', unchecked_value: '0', frame: nil, source_override: nil) %>
+<%# locals: (form:, disabled: false, name:, label: nil, id:, checked: false, checked_value: '1', unchecked_value: '0', frame: nil, source_override: nil) %>
 <div class="mdc-form-field" data-controller="material-checkbox">
   <div class="mdc-checkbox <%= disabled ? 'mdc-checkbox--disabled' : '' %>">
     <%= form.check_box name.to_sym, {
-      id: full_name, class: "mdc-checkbox__native-control",
+      id: id, class: "mdc-checkbox__native-control",
       disabled: disabled,
       checked: checked || form&.object&.[](source_override || name.to_sym),
       data: { frame: frame }.compact
@@ -19,7 +19,7 @@
     <div class="mdc-checkbox__ripple"></div>
     <div class="mdc-checkbox__focus-ring"></div>
   </div>
-  <label for="<%= full_name %>">
+  <label for="<%= id %>">
     <%= label || name.capitalize %>
   </label>
 </div>

@@ -1,4 +1,4 @@
-<%# locals: (form:, custom_controller: nil, custom_css: nil, disabled: false, required: false, name:, label: nil, full_name:, frame: nil, provide_hidden: false, value: nil, type: 'text', data: {}, rows: 8, cols: 40, maxlength: 140, helper: nil, parent: nil) %>
+<%# locals: (form:, custom_controller: nil, custom_css: nil, disabled: false, required: false, name:, label: nil, id:, frame: nil, provide_hidden: false, value: nil, type: 'text', data: {}, rows: 8, cols: 40, maxlength: 140, helper: nil, parent: nil) %>
 <label class="mdc-text-field mdc-text-field--filled mdc-text-field--textarea mdc-text-field--no-label !w-full p-2"
        data-controller="<%= custom_controller || 'material-input' %>" <% if frame %>data-frame="<%= frame %>"<% end %>>
   <span class="mdc-notched-outline">
@@ -8,7 +8,7 @@
 
   <%= form.text_area provide_hidden ? "#{name}_".to_sym : name.to_sym,
                      class: 'mdc-text-field__input', value: value || form&.object&.[](name.to_sym),
-                     id: full_name, 'aria-labelledby' => full_name + '-label', required: required, disabled: disabled,
+                     id: id, 'aria-labelledby' => id + '-label', required: required, disabled: disabled,
                      autocomplete: "off", data: { frame: frame }.compact, rows: rows, cols: cols, maxlength: maxlength
   %>
   <span class="mdc-text-field-character-counter">0 / <%= maxlength %></span>

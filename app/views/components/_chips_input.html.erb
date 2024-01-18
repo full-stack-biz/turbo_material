@@ -1,4 +1,4 @@
-<%# locals: (form:, disabled: false, required: false, name:, label: nil, full_name:, frame: nil, suffix: nil, type: 'text', url: nil, selected: [], options: [], value: nil) %>
+<%# locals: (form:, disabled: false, required: false, name:, label: nil, id:, frame: nil, suffix: nil, type: 'text', url: nil, selected: [], options: [], value: nil) %>
 <%- id = [name, suffix].compact_blank.join('-') -%>
 <div data-controller="material-chips-input"
      data-material-chips-input-url-value="<%= url %>"
@@ -20,7 +20,7 @@
       <%= form.hidden_field name.to_sym, value: value, data: { 'material-chips-input-target': 'hidden' } %>
       <%= form.text_field "#{name}_".to_sym,
                           class: 'mdc-text-field__input', value: value || form&.object&.[](name.to_sym),
-                          id: full_name, 'aria-labelledby' => full_name + '-label',
+                          id: id, 'aria-labelledby' => id + '-label',
                           required: required,
                           disabled: disabled,
                           type: type,  autocomplete: "off",

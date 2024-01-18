@@ -4,7 +4,7 @@ class SelectPreview < Lookbook::Preview
   # @param disabled toggle
   # @param required toggle
   def default(label: 'Select', disabled: false, required: false)
-    render 'common/form', helper_name: 'material_select', label: label, name: 'checkbox', full_name: 'Input', disabled: disabled, required: required, options: [
+    render 'common/form', helper_name: 'material_select', label: label, name: 'checkbox', id: 'Input', disabled: disabled, required: required, options: [
       { value: '', label: '-' },
       { value: 'on', label: 'On' },
       { value: 'off', label: 'Off' }

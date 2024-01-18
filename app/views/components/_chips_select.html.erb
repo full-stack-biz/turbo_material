@@ -1,4 +1,4 @@
-<%# locals: (form:, disabled: false, required: false, name:, label: nil, full_name:, value: nil, url: nil, frame: nil, source_override: nil, options: [], confirmable: false, query_string: nil, modal_name: nil, modal_url: nil, chip_css: nil, fixed: false) %>
+<%# locals: (form:, disabled: false, required: false, name:, label: nil, id:, value: nil, url: nil, frame: nil, source_override: nil, options: [], confirmable: false, query_string: nil, modal_name: nil, modal_url: nil, chip_css: nil, fixed: false) %>
 <div class="mdc-select mdc-select--filled w-full"
      data-controller="material-chips-select"
      data-material-chips-select-selected-value="<%= value %>"
@@ -14,14 +14,14 @@
        aria-haspopup="listbox"
        aria-expanded="false"
        aria-expanded="false"
-       aria-labelledby="<%= full_name %>-label <%= full_name %>-selected-text"
+       aria-labelledby="<%= id %>-label <%= id %>-selected-text"
        <% if disabled %>aria-disabled="true"<% end %>
        <% if required %>aria-required="true"<% end %>
   >
     <span class="mdc-select__ripple"></span>
-    <span id="<%= full_name %>-label" class="mdc-floating-label pb-1"><%= label || name.capitalize %></span>
+    <span id="<%= id %>-label" class="mdc-floating-label pb-1"><%= label || name.capitalize %></span>
     <div class="mdc-chip-set mdc-chip-set--input"></div>
-    <span class="mdc-select__selected-text-container"><span id="<%= full_name %>-selected-text" class="mdc-select__selected-text !hidden"></span></span>
+    <span class="mdc-select__selected-text-container"><span id="<%= id %>-selected-text" class="mdc-select__selected-text !hidden"></span></span>
     <span class="mdc-select__dropdown-icon">
       <svg
         class="mdc-select__dropdown-icon-graphic"
