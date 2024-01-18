@@ -1,5 +1,5 @@
 module TurboMaterial
-  module InputHelper
+module InputHelper
     def material_input(kwargs = {})
       render "components/input", **kwargs
     end
