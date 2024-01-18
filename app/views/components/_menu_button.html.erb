@@ -1,0 +1,15 @@
+<%# locals: (button_text:, menu_contents_partial:) %>
+<div data-controller="material-menu-button" class="!z-100">
+  <button class="mdc-button mdc-button--touch menu-item menu-button"
+          data-action="click->material-menu-button#click">
+    <span class="mdc-button__ripple"></span>
+    <span class="mdc-button__focus-ring"></span>
+    <span class="mdc-button__label flex items-center">
+      <span class="hidden lg:inline"><%= button_text %></span>
+      <span class="material-icons">expand_more</span>
+    </span>
+  </button>
+  <div class="mdc-menu mdc-menu-surface !w-auto">
+    <%= render partial: menu_contents_partial %>
+  </div>
+</div>
