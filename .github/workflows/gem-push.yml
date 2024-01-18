@@ -3,14 +3,17 @@ name: Ruby Gem
 on:
   push:
     branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
 
 jobs:
-  build:
+  docker:
     name: Build + Publish
     runs-on: self-hosted
     permissions:
       contents: read
       packages: write
+
     steps:
     - uses: actions/checkout@v3
     - name: Set up Ruby 3.2
