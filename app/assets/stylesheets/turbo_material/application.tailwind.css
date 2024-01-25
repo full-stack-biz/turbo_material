@@ -1,3 +1,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.mdc-text-field {
+    background-color: transparent !important;
+}
