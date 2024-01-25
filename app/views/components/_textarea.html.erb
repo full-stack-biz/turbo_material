@@ -9,7 +9,7 @@
   <%= form.text_area provide_hidden ? "#{name}_".to_sym : name.to_sym,
                      class: 'mdc-text-field__input', value: value || form&.object&.[](name.to_sym),
                      id: id, 'aria-labelledby' => id + '-label', required: required, disabled: disabled,
-                     autocomplete: "off", data: { frame: frame }.compact, rows: rows, cols: cols, maxlength: maxlength
+                     autocomplete: "new-password", data: { frame: frame }.compact, rows: rows, cols: cols, maxlength: maxlength
   %>
   <span class="mdc-text-field-character-counter">0 / <%= maxlength %></span>
 
