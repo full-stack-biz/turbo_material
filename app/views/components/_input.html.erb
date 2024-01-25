@@ -9,7 +9,7 @@
                       class: 'mdc-text-field__input', value: value || form&.object&.[](name.to_sym),
                       id: id, 'aria-labelledby' => id + '-label',
                       required: required, disabled: disabled,
-                      type: type,  autocomplete: "off", data: { frame: frame, **(data) }.compact,
+                      type: type,  autocomplete: "new-password", data: { frame: frame, **(data) }.compact,
                       min: min, max: max
   %>
   <span class="mdc-line-ripple"></span>
