@@ -211,6 +211,10 @@ aside.mdc-drawer.main-drawer {
 }
 ```
 
+## Tailwind Forms customizations leakage
+
+This gem uses Tailwind for additional customizations, I am noticed that `@tailwindcss/forms` leaking to Material inputs adding partial white backgrounds. For now I would recommend to disable forms plugin while using this gem.
+
 ## Installation
 Add this line to your application's Gemfile:
 
@@ -230,15 +234,13 @@ $ gem install turbo_material
 
 ## Lookbook documentation for components
 
-Gem implements [Lookbook](https://lookbook.build) documentation for all components. I am considering implementing a way to pass it's previews to lookbook in hosting application, but for now, to use it, please checkout gem source code and use it like this:
+Gem implements [Lookbook](https://lookbook.build) documentation for all components. To use it in the application, add `gem 'lookbook'` to your Gemfile and run `bundle install`. Then add following to your `config/application.rb`:
 
-```bash
-bundle install
-cd test/dummy
-foreman start -f Procfile.dev
+```ruby
+config.lookbook.preview_paths = [TurboMaterial::Engine.root.join('lib/lookbook')]
 ```
 
-and then open [http://localhost:3000/lookbook](http://localhost:3000/lookbook) in your browser.
+Or extend your existing config for `lookbook.preview_paths` with same value.
 
 ## Contributing
 This gem is open for new contributions. Use [Material Components for Web documentation](https://github.com/material-components/material-components-web/tree/master/packages) as a references for missing functionality.
