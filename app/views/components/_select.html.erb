@@ -1,5 +1,5 @@
-<%# locals: (form:, disabled: false, required: false, name:, label: nil, id:, checked: false, value: nil, parent: nil, frame: nil, selected_text: nil, fixed: false, options: [], hint: nil, helper: nil, additional_classes: 'w-full') %>
-<div class="mdc-select mdc-select--filled <%= label ? '' : 'mdc-select--no-label' %> <%= disabled ? ' mdc-select--disabled' : '' %><%= required ? ' mdc-select--required' : '' %> <%= additional_classes %>"
+<%# locals: (form:, disabled: false, required: false, name:, label: nil, id:, checked: false, value: nil, parent: nil, frame: nil, selected_text: nil, fixed: false, options: [], hint: nil, helper: nil, additional_classes: 'w-full', outlined: false) %>
+<div class="mdc-select <%= outlined ? 'mdc-select--outlined' : 'mdc-select--filled' %> <%= label ? '' : 'mdc-select--no-label' %> <%= disabled ? ' mdc-select--disabled' : '' %><%= required ? ' mdc-select--required' : '' %> <%= additional_classes %>"
      data-controller="material-select" <% if frame %> data-frame="<%= frame %>"<% end %> id="<%= id %>">
   <%= form.hidden_field name.to_sym, value: value %>
   <div class="mdc-select__anchor"
@@ -10,9 +10,17 @@
        <% if disabled %>aria-disabled="true"<% end %>
        <% if required %>aria-required="true"<% end %>
   >
+    <%- if outlined -%>
     <span class="mdc-select__ripple"></span>
-    <%- if label -%>
-    <span id="<%= id %>-label" class="mdc-floating-label"><%= label || name.capitalize %></span>
+    <%- if label -%><span id="<%= id %>-label" class="mdc-floating-label"><%= label || name.capitalize %></span><%- end -%>
+    <%- else -%>
+      <span class="mdc-notched-outline">
+        <span class="mdc-notched-outline__leading"></span>
+        <span class="mdc-notched-outline__notch">
+          <%- if label -%><span id="outlined-select-label" class="mdc-floating-label"><%= label || name.capitalize %></span><%- end -%>
+        </span>
+        <span class="mdc-notched-outline__trailing"></span>
+      </span>
     <%- end -%>
     <span class="mdc-select__selected-text-container">
       <span id="<%= id %>-selected-text" class="mdc-select__selected-text">
@@ -37,7 +45,7 @@
               </polygon>
             </svg>
           </span>
-    <span class="mdc-line-ripple"></span>
+    <%- unless outlined -%><span class="mdc-line-ripple"></span><%- end -%>
   </div>
 
   <div class="mdc-select__menu mdc-menu mdc-menu-surface !z-100 <%= fixed ? 'mdc-menu-surface--fixed' : 'mdc-menu-surface--fullwidth' %>" id="<%= id %>-surface">
