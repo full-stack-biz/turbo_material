@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    turbo_material (0.1.6)
+    turbo_material (0.1.8)
       importmap-rails (~> 2.0.1)
       rails (~> 7.1, >= 7.1.2)
       stimulus-rails (~> 1.3)
