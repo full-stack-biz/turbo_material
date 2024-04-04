@@ -10,9 +10,9 @@
        <% if disabled %>aria-disabled="true"<% end %>
        <% if required %>aria-required="true"<% end %>
   >
-    <%- if outlined -%>
-    <span class="mdc-select__ripple"></span>
-    <%- if label -%><span id="<%= id %>-label" class="mdc-floating-label"><%= label || name.capitalize %></span><%- end -%>
+    <%- unless outlined -%>
+        <span class="mdc-select__ripple"></span>
+        <%- if label -%><span id="<%= id %>-label" class="mdc-floating-label"><%= label || name.capitalize %></span><%- end -%>
     <%- else -%>
       <span class="mdc-notched-outline">
         <span class="mdc-notched-outline__leading"></span>
