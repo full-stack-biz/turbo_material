@@ -238,6 +238,7 @@ Gem implements [Lookbook](https://lookbook.build) documentation for all componen
 
 ```ruby
 config.lookbook.preview_paths = [TurboMaterial::Engine.root.join('lib/lookbook')]
+config.lookbook.preview_controller = 'TurboMaterial::LookbookController'
 ```
 
 Or extend your existing config for `lookbook.preview_paths` with same value.
