@@ -35,6 +35,7 @@ export default class extends Controller {
 
     addChip(content, value) {
         const chipEl = document.createElement('div');
+        chipEl.role = 'row';
         chipEl.classList.add('mdc-chip');
         if (this.chipCssValue) {
             chipEl.classList.add(this.chipCssValue);
