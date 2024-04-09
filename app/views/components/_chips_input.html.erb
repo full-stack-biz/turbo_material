@@ -1,4 +1,4 @@
-<%# locals: (form:, disabled: false, required: false, name:, label: nil, id:, frame: nil, suffix: nil, type: 'text', url: nil, selected: [], options: [], value: nil) %>
+<%# locals: (form:, disabled: false, required: false, name:, label: nil, id:, frame: nil, suffix: nil, type: 'text', url: nil, selected: [], options: [], value: nil, fixed: false) %>
 <%- id = [name, suffix].compact_blank.join('-') -%>
 <div data-controller="material-chips-input"
      data-material-chips-input-url-value="<%= url %>"
@@ -31,6 +31,6 @@
     <span class="mdc-line-ripple"></span>
   </label>
   <div class="mdc-menu-surface--anchor">
-    <%= render partial: 'components/chips_input_options', locals: { options: options, suffix: suffix, name: name, label: label } %>
+    <%= render partial: 'components/chips_input_options', locals: { options: options, suffix: suffix, name: name, label: label, fixed: fixed } %>
   </div>
 </div>
