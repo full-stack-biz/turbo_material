@@ -22,24 +22,7 @@
     <span id="<%= id %>-label" class="mdc-floating-label pb-1"><%= label || name.capitalize %></span>
     <div class="mdc-chip-set mdc-chip-set--input" role="grid"></div>
     <span class="mdc-select__selected-text-container"><span id="<%= id %>-selected-text" class="mdc-select__selected-text !hidden"></span></span>
-    <span class="mdc-select__dropdown-icon">
-      <svg
-        class="mdc-select__dropdown-icon-graphic"
-        viewBox="7 10 10 5" focusable="false">
-        <polygon
-          class="mdc-select__dropdown-icon-inactive"
-          stroke="none"
-          fill-rule="evenodd"
-          points="7 10 12 15 17 10">
-        </polygon>
-        <polygon
-          class="mdc-select__dropdown-icon-active"
-          stroke="none"
-          fill-rule="evenodd"
-          points="7 15 12 10 17 15">
-        </polygon>
-      </svg>
-    </span>
+    <%= render 'components/select_dropdown_icon' %>
     <span class="mdc-line-ripple"></span>
   </div>
   <%= form.hidden_field name.to_sym, value: value, data: { 'material-chips-select-target': 'hidden' } if form %>
