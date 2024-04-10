@@ -1,4 +1,4 @@
-<div class="flex-col w-full">
+<div class="flex-col w-full p-2">
   <div class="mx-auto px-6 py-3">
     <%= form_with(url: '/', method: :get, html: { novalidate: true }) do |form| %>
       <%= public_send local_assigns.delete(:helper_name).to_sym, **local_assigns.merge(form: form) %>

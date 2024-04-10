@@ -3,7 +3,7 @@ class ChipsSelectPreview < Lookbook::Preview
   # @param label text
   # @param disabled toggle
   # @param required toggle
-  def default(label: 'Input', disabled: false, required: false)
+  def default(label: 'Chips Select', disabled: false, required: false)
     render 'common/form', helper_name: 'material_chips_select', label: label, name: 'checkbox',
                                    id: 'Input', disabled: disabled, value: [],
                                    options: [
