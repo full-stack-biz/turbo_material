@@ -1,10 +1,22 @@
-<%# locals: (form:, custom_controller: nil, custom_css: nil, disabled: false, required: false, name:, label: nil, id:, checked: false, frame: nil, provide_hidden: false, value: nil, type: 'text', data: {}, min: nil, max: nil, helper: nil, parent: nil) %>
-<label class="mdc-text-field mdc-text-field--filled w-full <%= custom_css %>"
+<%# locals: (form:, custom_controller: nil, custom_css: nil, disabled: false, required: false, name:, label: nil, id:, checked: false, frame: nil, provide_hidden: false, value: nil, type: 'text', data: {}, min: nil, max: nil, helper: nil, parent: nil, style: 'filled') %>
+<label class="mdc-text-field <%= style == 'filled' ? 'mdc-text-field--filled' : 'mdc-text-field--outlined' %> w-full <%= custom_css %>"
        data-controller="<%= custom_controller || 'material-input' %>" <% if frame %>data-frame="<%= frame %>"<% end %>>
-  <span class="mdc-text-field__ripple"></span>
-  <span class="mdc-floating-label" id="<%= id %>-label">
-    <%= label || name.capitalize %>
-  </span>
+  <%- if style == 'filled' -%>
+    <span class="mdc-text-field__ripple"></span>
+    <span class="mdc-floating-label" id="<%= id %>-label">
+      <%= label || name.capitalize %>
+    </span>
+  <%- else -%>
+    <span class="mdc-notched-outline">
+      <span class="mdc-notched-outline__leading"></span>
+      <span class="mdc-notched-outline__notch !w-fit">
+        <span class="mdc-floating-label" id="<%= id %>-label">
+          <%= label || name.capitalize %>
+        </span>
+      </span>
+      <span class="mdc-notched-outline__trailing"></span>
+    </span>
+  <% end %>
   <%= form.text_field provide_hidden ? "#{name}_".to_sym : name.to_sym,
                       class: 'mdc-text-field__input', value: value || form&.object&.[](name.to_sym),
                       id: id, 'aria-labelledby' => id + '-label',
@@ -12,10 +24,8 @@
                       type: type,  autocomplete: "new-password", data: { frame: frame, **(data) }.compact,
                       min: min, max: max
   %>
-  <span class="mdc-line-ripple"></span>
-  <%- if provide_hidden -%>
-    <%= form.hidden_field name.to_sym, value: value, data: { frame: frame }.compact %>
-  <%- end -%>
+  <%- if style == 'filled' -%><span class="mdc-line-ripple"></span><%- end -%>
+  <%- if provide_hidden -%><%= form.hidden_field name.to_sym, value: value, data: { frame: frame }.compact %><%- end -%>
 </label>
 <div class="mdc-text-field-helper-line">
   <%- if helper -%>

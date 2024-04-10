@@ -2,6 +2,15 @@
 @tailwind components;
 @tailwind utilities;
 
-.mdc-text-field {
-    background-color: transparent !important;
+.mdc-notched-outline__leading {
+    border-right-style: none !important;
+}
+
+.mdc-notched-outline__notch {
+    border-left-style: none !important;
+    border-right-style: none !important;
+}
+
+.mdc-notched-outline__trailing {
+    border-left-style: none !important;
 }
