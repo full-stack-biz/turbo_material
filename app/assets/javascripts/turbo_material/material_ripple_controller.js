@@ -1,8 +1,9 @@
 import { Controller } from "@hotwired/stimulus";
 
 export default class extends Controller {
+    ripple = undefined;
     connect() {
-        mdc.ripple.MDCRipple.attachTo(this.element);
+        this.ripple = mdc.ripple.MDCRipple.attachTo(this.element);
     }
 
     disconnect() {

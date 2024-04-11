@@ -1,5 +1,4 @@
 import { Controller } from "@hotwired/stimulus";
-import { useClickOutside } from 'stimulus-use';
 
 export default class extends Controller {
     dialog = undefined;
@@ -10,18 +9,18 @@ export default class extends Controller {
 
     connect() {
         this.dialog = mdc.dialog.MDCDialog.attachTo(this.element);
+        this.dialog.listen('MDCDialog:opened', () => {
+            this.element.querySelectorAll('.mdc-icon-button').forEach((button) => {
+                mdc.ripple.MDCRipple.attachTo(button);
+            });
+        });
         if (this.openedValue) {
             this.dialog.open();
         }
-        useClickOutside(this, { element: this.element.querySelector('.mdc-dialog__surface') });
     }
 
     close() {
         this.dialog.close();
-    }
-
-    clickOutside(event) {
-        close();
     }
 
     open() {
