@@ -9,6 +9,7 @@ module TurboMaterial
         helper TurboMaterial::ApplicationHelper
         helper TurboMaterial::InputHelper
         helper TurboMaterial::CheckboxHelper
+        helper TurboMaterial::ChipSetHelper
         helper TurboMaterial::ChipsInputHelper
         helper TurboMaterial::ChipsSelectHelper
         helper TurboMaterial::DataTableHelper
@@ -18,6 +19,7 @@ module TurboMaterial
         helper TurboMaterial::SelectHelper
         helper TurboMaterial::SwitchHelper
         helper TurboMaterial::TextareaHelper
+        helper TurboMaterial::TooltipHelper
       end
     end
 

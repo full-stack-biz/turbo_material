@@ -1,7 +1,11 @@
 module TurboMaterial
   module DataTableHelper
     def material_data_table(kwargs = {})
-      render "components/material_data_table", **kwargs
+      render 'components/data_table', **kwargs
+    end
+
+    def material_data_table_row_checkbox(kwargs = {})
+      render 'components/data_table_row_checkbox', **kwargs
     end
 
     def aria_sort(key, default: false)
