@@ -4,7 +4,11 @@ export default class extends Controller {
   static outlets = [ "material-drawer" ]
 
   connect() {
-    mdc.ripple.MDCRipple.attachTo(this.element);
+    if(!document.querySelector('.mdc-drawer--dismissible.mdc-drawer--right')) {
+      this.element.style.display = 'none';
+    } else {
+      mdc.ripple.MDCRipple.attachTo(this.element);
+    }
   }
 
   click() {

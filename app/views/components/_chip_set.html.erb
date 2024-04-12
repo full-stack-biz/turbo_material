@@ -1,0 +1,8 @@
+<%# locals: (chips: []) %>
+<span class="mdc-chip-set" role="grid" data-controller="material-chipset">
+  <span class="mdc-chip-set__chips" role="presentation">
+    <%- chips.each do |chip| -%>
+      <%= material_chip label: chip[:label] %>
+    <%- end -%>
+  </span>
+</span>

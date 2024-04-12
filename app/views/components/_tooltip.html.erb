@@ -1,0 +1,8 @@
+<%# locals: (id:, content: nil) %>
+<%- if content.present? -%>
+<div id="<%= id %>" class="mdc-tooltip" role="tooltip" aria-hidden="true" data-controller="material-tooltip">
+  <div class="mdc-tooltip__surface mdc-tooltip__surface-animation">
+    <span class="mdc-tooltip__label flex flex-col items-start"><%= content %></span>
+  </div>
+</div>
+<%- end -%>

@@ -9,6 +9,11 @@ export default class extends Controller {
 
     connect() {
         this.dialog = mdc.dialog.MDCDialog.attachTo(this.element);
+        this.dialog.listen('MDCDialog:opened', () => {
+            this.element.querySelectorAll('.mdc-icon-button').forEach((button) => {
+                mdc.ripple.MDCRipple.attachTo(button);
+            });
+        });
         if (this.openedValue) {
             this.dialog.open();
         }
