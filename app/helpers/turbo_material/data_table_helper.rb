@@ -5,7 +5,15 @@ module TurboMaterial
     end
 
     def material_data_table_row_checkbox(kwargs = {})
-      render 'components/data_table_row_checkbox', **kwargs
+      render 'components/data_table/row_checkbox', **kwargs
+    end
+
+    def material_data_table_sortable_header(kwargs = {})
+      render 'components/data_table/sortable_header', **kwargs
+    end
+
+    def material_data_table_header(kwargs = {})
+      render 'components/data_table/header', **kwargs
     end
 
     def aria_sort(key, default: false)

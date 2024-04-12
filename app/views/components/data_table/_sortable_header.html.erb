@@ -1,0 +1,15 @@
+<%# locals: (label:, sort_value:, column_id:) %>
+<th
+  class="mdc-data-table__header-cell mdc-data-table__header-cell--with-sort<%= sort_class(sort_value) %>"
+  role="columnheader"
+  scope="col"
+  aria-sort="<%= sort_value %>"
+  data-column-id="<%= column_id %>"
+>
+  <div class="mdc-data-table__header-cell-wrapper">
+    <div class="mdc-data-table__header-cell-label"><%= label %></div>
+    <button class="mdc-icon-button material-icons mdc-data-table__sort-icon-button"
+            aria-label="Sort by <%= label %>" aria-describedby="<%= column_id %>-label"><%= sort_arrow(sort_value) %></button>
+    <div class="mdc-data-table__sort-status-label" aria-hidden="true" id="<%= column_id %>-label"></div>
+  </div>
+</th>
