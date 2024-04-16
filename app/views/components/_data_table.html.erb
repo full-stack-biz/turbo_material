@@ -1,4 +1,4 @@
-<%# locals: (name:, table_body:, url:, table_params:, records:, pagy:, table_headers_partial:, table_contents_partial:) %>
+<%# locals: (name:, table_body:, url:, table_params:, records:, selected_records:, pagy:, table_headers_partial:, table_contents_partial:) %>
 <div class="mdc-data-table w-full" data-controller="material-data-table"
      data-material-data-table-body-value="<%= table_body %>"
      data-material-data-table-url-value="<%= url %>"
@@ -23,7 +23,7 @@
       </tr>
       </thead>
       <tbody class="mdc-data-table__content">
-      <%= render partial: table_contents_partial, locals: { records: records } %>
+      <%= render partial: table_contents_partial, locals: { records: records, selected_records: selected_records } %>
       </tbody>
     </table>
   </div>
