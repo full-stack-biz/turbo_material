@@ -1,11 +1,11 @@
-import { Controller } from "@hotwired/stimulus";
-import { get } from "@rails/request.js";
-import { useClickOutside } from 'stimulus-use';
+import {Controller} from "@hotwired/stimulus";
+import {get} from "@rails/request.js";
+import {useClickOutside} from 'stimulus-use';
 
 export default class extends Controller {
     opened = false;
-    static targets = [ "input", "hidden", "field", "panel" ];
-    static outlets = [ "material-list" ];
+    static targets = ["input", "hidden", "field", "panel"];
+    static outlets = ["material-list"];
 
     static values = {
         url: String,
@@ -13,11 +13,10 @@ export default class extends Controller {
         name: String
     }
 
-
     connect() {
         this.inputEl = this.element.querySelector(".mdc-text-field");
         this.chipsetEl = this.element.querySelector(".mdc-chip-set");
-        mdc.textField.MDCTextField.attachTo(this.inputEl);
+        this.input = mdc.textField.MDCTextField.attachTo(this.inputEl);
         this.chips = mdc.chips.MDCChipSet.attachTo(this.chipsetEl);
         useClickOutside(this);
     }
@@ -44,9 +43,10 @@ export default class extends Controller {
         event.stopPropagation();
         event.preventDefault();
         const chip = this.element.querySelector(`.mdc-chip[data-value="${event.target.dataset.value}"]`);
-        this.chipsetEl.removeChild(chip);
-        if (this.chipsetEl.children.length === 0) {
-            this.inputEl.foundation.adapter.floatLabel(false);
+        const chipIndex = this.chips.foundation.adapter.getIndexOfChipById(chip.id);
+        this.chips.foundation.adapter.removeChipAtIndex(chipIndex);
+        if (this.chips.foundation.adapter.getChipListCount() === 0) {
+            this.input.foundation.adapter.floatLabel(false);
         }
         this.hiddenTarget.value = this.chips.chipsList.map((chip) => chip.root.dataset.value).join(',');
         this.search();
@@ -72,7 +72,7 @@ export default class extends Controller {
 
         this.opened = false;
         this.panelTarget.classList.remove("mdc-menu-surface--open");
-        if(event) {
+        if (event) {
             event.preventDefault();
             event.stopPropagation();
         }
@@ -97,7 +97,7 @@ export default class extends Controller {
         if (!this.opened) return;
 
         this.materialListOutlet.focusNext();
-        if(event) {
+        if (event) {
             event.preventDefault();
             event.stopPropagation();
         }
@@ -107,7 +107,7 @@ export default class extends Controller {
         if (!this.opened) return;
 
         this.materialListOutlet.focusPrevious();
-        if(event) {
+        if (event) {
             event.preventDefault();
             event.stopPropagation();
         }
@@ -117,7 +117,7 @@ export default class extends Controller {
         if (!this.opened) return;
 
         this.select(this.materialListOutlet.list.listElements[event.detail.index]);
-        if(event) {
+        if (event) {
             event.preventDefault();
             event.stopPropagation();
         }
