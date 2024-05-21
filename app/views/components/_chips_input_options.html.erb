@@ -1,7 +1,7 @@
 <%# locals: (suffix:, options: [], label:, name:, opened: 'false', fixed: false) %>
 <%- id = [name, suffix].compact_blank.join('-') -%>
 <div id="<%= "#{id}-panel" %>"
-     class="mdc-menu-surface <%= (opened != 'true' || options.size.zero?) ? '' : 'mdc-menu-surface--open' %> !z-100 <%= fixed ? 'mdc-menu-surface--fixed' : 'mdc-menu-surface--fullwidth' %>"
+     class="mdc-menu-surface <%= ((opened != 'true') || options.size.zero?) ? '' : 'mdc-menu-surface--open' %> !z-100 <%= fixed ? 'mdc-menu-surface--fixed' : 'mdc-menu-surface--fullwidth' %>"
      data-controller="material-menu-surface"
      data-material-chips-input-target="panel" data-size="<%= options.size %>">
   <ul class="mdc-deprecated-list max-h-64 overflow-y-auto"

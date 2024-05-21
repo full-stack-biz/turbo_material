@@ -22,3 +22,4 @@ gem "lookbook"
 gem "tailwindcss-rails", "~> 2.3"
 
 gem 'carmen'
+
