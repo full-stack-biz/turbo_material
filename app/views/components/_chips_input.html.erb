@@ -1,9 +1,10 @@
-<%# locals: (form:, disabled: false, required: false, name:, label: nil, id:, frame: nil, suffix: nil, type: 'text', url: nil, selected: [], options: [], value: nil, fixed: false) %>
+<%# locals: (form:, disabled: false, required: false, name:, label: nil, id:, frame: nil, suffix: nil, type: 'text', url: nil, selected: [], options: [], value: nil, fixed: false, prefetch: false) %>
 <%- id = [name, suffix].compact_blank.join('-') -%>
 <div data-controller="material-chips-input"
      data-material-chips-input-url-value="<%= url %>"
      data-material-chips-input-name-value="<%= name %>"
      data-material-chips-input-material-list-outlet="#<%= "#{id}-list" %>"
+     data-material-chips-input-prefetch-value="<%= prefetch.to_s %>"
      <% if suffix.present? %>data-material-chips-input-suffix-value="<%= suffix %>"<% end %>
      data-action="keydown.esc->material-chips-input#close keydown.enter->prevent-default country-select-focus->material-chips-input#confirmSelection"
 >

@@ -10,7 +10,8 @@ export default class extends Controller {
     static values = {
         url: String,
         suffix: String,
-        name: String
+        name: String,
+        prefetch: Boolean
     }
 
     connect() {
@@ -18,6 +19,9 @@ export default class extends Controller {
         this.chipsetEl = this.element.querySelector(".mdc-chip-set");
         this.input = mdc.textField.MDCTextField.attachTo(this.inputEl);
         this.chips = mdc.chips.MDCChipSet.attachTo(this.chipsetEl);
+        if (this.prefetchValue) {
+            this.search();
+        }
         useClickOutside(this);
     }
 
