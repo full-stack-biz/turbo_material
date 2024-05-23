@@ -11,7 +11,8 @@ export default class extends Controller {
         url: String,
         suffix: String,
         name: String,
-        prefetch: Boolean
+        prefetch: Boolean,
+        additionalQueryParams: Object,
     }
 
     connect() {
@@ -137,6 +138,9 @@ export default class extends Controller {
         params.append("name", this.nameValue);
         params.append("opened", this.opened);
         params.append("exclude", this.hiddenTarget.value);
+        Object.keys(this.additionalQueryParamsValue).forEach((param) => {
+            params.append(param, this.additionalQueryParamsValue[param]);
+        });
         get(`${this.urlValue}?${params.toString()}`, {
             responseKind: "turbo-stream",
         });
