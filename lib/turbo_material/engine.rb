@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require "importmap-rails"
 
 module TurboMaterial
@@ -11,6 +13,7 @@ module TurboMaterial
         helper TurboMaterial::CheckboxHelper
         helper TurboMaterial::ChipSetHelper
         helper TurboMaterial::ChipsInputHelper
+        helper TurboMaterial::ChipsInputOptionsHelper
         helper TurboMaterial::ChipsSelectHelper
         helper TurboMaterial::DataTableHelper
         helper TurboMaterial::MenuButtonHelper
