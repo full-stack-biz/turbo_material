@@ -1,5 +1,5 @@
-<%# locals: (form:, custom_controller: nil, custom_css: nil, disabled: false, required: false, name:, label: nil, id:, checked: false, frame: nil, provide_hidden: false, value: nil, type: 'text', data: {}, min: nil, max: nil, helper: nil, parent: nil, style: 'filled') %>
-<label class="mdc-text-field rounded-none <%= style == 'filled' ? 'mdc-text-field--filled' : 'mdc-text-field--outlined' %> <%= value || form&.object&.[](name.to_sym) ? 'mdc-text-field--label-floating' : '' %> w-full <%= custom_css %>"
+<%# locals: (form:, custom_controller: nil, custom_css: nil, disabled: false, required: false, name:, label: nil, id:, checked: false, frame: nil, provide_hidden: false, value: nil, type: 'text', data: {}, min: nil, max: nil, helper: nil, parent: nil, style: 'filled', leading_icon: nil, trailing_icon: nil) %>
+<label class="mdc-text-field rounded-none <%= style == 'filled' ? 'mdc-text-field--filled' : 'mdc-text-field--outlined' %> <%= value || form&.object&.[](name.to_sym) ? 'mdc-text-field--label-floating' : '' %> w-full <%= leading_icon ? 'mdc-text-field--with-leading-icon' : '' %> <%= trailing_icon ? 'mdc-text-field--with-trailing-icon' : '' %> <%= custom_css %>"
        data-controller="<%= custom_controller || 'material-input' %>" <% if frame %>data-frame="<%= frame %>"<% end %>>
   <%- if style == 'filled' -%>
     <span class="mdc-text-field__ripple"></span>
@@ -17,6 +17,9 @@
       <span class="mdc-notched-outline__trailing"></span>
     </span>
   <% end %>
+  <%- if leading_icon -%>
+    <i class="material-icons mdc-text-field__icon mdc-text-field__icon--leading" <%- unless trailing_icon -%>tabindex="0" role="button"<%- end -%>><%= leading_icon %></i>
+  <%- end -%>
   <%= form.text_field provide_hidden ? "#{name}_".to_sym : name.to_sym,
                       class: 'mdc-text-field__input', value: value || form&.object&.[](name.to_sym),
                       id: id, 'aria-labelledby' => id + '-label',
@@ -24,6 +27,9 @@
                       type: type,  autocomplete: "new-password", data: { frame: frame, **(data) }.compact,
                       min: min, max: max
   %>
+  <%- if trailing_icon -%>
+    <i class="material-icons mdc-text-field__icon mdc-text-field__icon--trailing" tabindex="0" role="button"><%= trailing_icon %></i>
+  <%- end -%>
   <%- if style == 'filled' -%><span class="mdc-line-ripple"></span><%- end -%>
   <%- if provide_hidden -%><%= form.hidden_field name.to_sym, value: value, data: { frame: frame }.compact %><%- end -%>
 </label>
