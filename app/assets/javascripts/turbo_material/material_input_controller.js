@@ -4,6 +4,7 @@ export default class extends Controller {
     connect() {
         mdc.textField.MDCTextField.attachTo(this.element);
     }
+
     disconnect() {
     }
 }
