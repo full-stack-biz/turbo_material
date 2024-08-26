@@ -43,7 +43,7 @@
             <%= form.hidden_field key, value: params[key] %>
           <%- end -%>
           <%= material_select name: 'per_page', form: form, id: 'per-page', options: per_page_options,
-                              value: pagy.responds_to?(:items) ? pagy.items : pagy.limit , outlined: true, additional_classes: 'mdc-data-table__pagination-rows-per-page-select mdc-data-table__pagination-rows-per-page-select--outlined' %>
+                              value: pagy.respond_to?(:items) ? pagy.items : pagy.limit , outlined: true, additional_classes: 'mdc-data-table__pagination-rows-per-page-select mdc-data-table__pagination-rows-per-page-select--outlined' %>
         <%- end -%>
 
         <div class="mdc-data-table__pagination-navigation">
