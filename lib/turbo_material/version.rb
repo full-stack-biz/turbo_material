@@ -1,3 +1,3 @@
 module TurboMaterial
-  VERSION = "0.2.10"
+  VERSION = "0.2.12"
 end
