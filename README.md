@@ -239,6 +239,17 @@ $ gem install turbo_material
 - [Radio button](#radio-button)
 - [Switch button](#switch-button)
 - [Select](#select)
+- [Chip Set](#chip-set)
+- [Chip](#chip)
+- [Chips Input](#chips-input)
+- [Chips Select](#chips-select)
+- [Data Table](#data-table)
+- [Data Table Row Checkbox](#data-table-row-checkbox)
+- [Data Table Sortable Header](#data-table-sortable-header)
+- [Data Table Header](#data-table-header)
+- [Menu Button](#menu-button)
+- [Modal](#modal)
+- [Tooltip](#tooltip)
 
 ### Input
 
@@ -352,20 +363,211 @@ Implements [Material Design Select](https://github.com/material-components/mater
 | `additional_classes` | String | Additional CSS classes for select |
 | `hint` | String | Hint text to display |
 
+### Chip Set
 
-## Lookbook documentation for components
+Implements [Material Design Chip Set](https://github.com/material-components/material-components-web/tree/master/packages/mdc-chips) component.
 
-Gem implements [Lookbook](https://lookbook.build) documentation for all components. To use it in the application, add `gem 'lookbook'` to your Gemfile and run `bundle install`. Then add following to your `config/application.rb`:
-
-```ruby
-config.lookbook.preview_paths = [TurboMaterial::Engine.root.join('lib/lookbook')]
-config.lookbook.preview_controller = 'TurboMaterial::LookbookController'
+```erb
+<%= material_chip_set chips: [{label: 'Chip 1'}, {label: 'Chip 2'}] %>
 ```
 
-Or extend your existing config for `lookbook.preview_paths` with same value.
+#### Options
 
-## Contributing
-This gem is open for new contributions. Use [Material Components for Web documentation](https://github.com/material-components/material-components-web/tree/master/packages) as a references for missing functionality.
+| Option | Type | Description |
+| --- | --- | --- |
+| `chips` | Array | Array of chips to be included in the chip set |
 
-## License
-The gem is available as open source under the terms of the [MIT License](https://opensource.org/licenses/MIT).
+### Chip
+
+Implements [Material Design Chip](https://github.com/material-components/material-components-web/tree/master/packages/mdc-chips) component.
+
+```erb
+<%= material_chip label: 'Chip' %>
+```
+
+#### Options
+
+| Option | Type | Description |
+| --- | --- | --- |
+| `label` | String | Chip label text |
+
+### Chips Input
+
+Implements [Material Design Chips Input](https://github.com/material-components/material-components-web/tree/master/packages/mdc-chips) component.
+
+```erb
+<%= material_chips_input form: form, name: 'tags', label: 'Tags', selected: [{label: 'Tag 1'}, {label: 'Tag 2'}], options: [{label: 'Option 1'}, {label: 'Option 2'}] %>
+```
+
+#### Options
+
+| Option | Type | Description |
+| --- | --- | --- |
+| `form` | Object | Form object |
+| `disabled` | Boolean | Whether the input is disabled |
+| `required` | Boolean | Whether the input is required |
+| `name` | String | Name of the input |
+| `label` | String | Input label text |
+| `id` | String | ID of the input |
+| `frame` | String | Frame of the input |
+| `suffix` | String | Suffix of the input |
+| `type` | String | Type of the input |
+| `url` | String | URL for fetching options |
+| `selected` | Array | Array of selected chips |
+| `options` | Array | Array of available options |
+| `value` | String | Value of the input |
+| `fixed` | Boolean | Whether the input is fixed |
+| `prefetch` | Boolean | Whether to prefetch options |
+| `additional_query_params` | Hash | Additional query parameters |
+
+### Chips Select
+
+Implements [Material Design Chips Select](https://github.com/material-components/material-components-web/tree/master/packages/mdc-chips) component.
+
+```erb
+<%= material_chips_select form: form, name: 'tags', label: 'Tags', options: [{label: 'Option 1', value: '1'}, {label: 'Option 2', value: '2'}] %>
+```
+
+#### Options
+
+| Option | Type | Description |
+| --- | --- | --- |
+| `form` | Object | Form object |
+| `disabled` | Boolean | Whether the select is disabled |
+| `required` | Boolean | Whether the select is required |
+| `name` | String | Name of the select |
+| `label` | String | Select label text |
+| `id` | String | ID of the select |
+| `value` | String | Value of the select |
+| `url` | String | URL for fetching options |
+| `frame` | String | Frame of the select |
+| `source_override` | String | Source override for the select |
+| `options` | Array | Array of available options |
+| `confirmable` | Boolean | Whether the select is confirmable |
+| `query_string` | String | Query string for fetching options |
+| `modal_name` | String | Name of the modal |
+| `modal_url` | String | URL of the modal |
+| `chip_css` | String | CSS class for the chip |
+| `fixed` | Boolean | Whether the select is fixed |
+
+### Data Table
+
+Implements [Material Design Data Table](https://github.com/material-components/material-components-web/tree/master/packages/mdc-data-table) component.
+
+```erb
+<%= material_data_table name: 'Users', table_body: 'users-table-body', url: users_path, table_params: params, records: @users, selected_records: @selected_users, pagy: @pagy, table_headers_partial: 'users/table_headers', table_contents_partial: 'users/table_contents' %>
+```
+
+#### Options
+
+| Option | Type | Description                      |
+| --- | --- |----------------------------------|
+| `name` | String | Name of the data table           |
+| `table_body` | String | ID of the table body             |
+| `url` | String | URL for fetching table data      |
+| `table_params` | Hash | Parameters for the table         |
+| `records` | Array | Array of records to be displayed |
+| `selected_records` | Array | Array of selected records        |
+| `pagy` | Object | Pagy object for pagination       |
+| `table_headers_partial` | String | Partial name for table headers   |
+| `table_contents_partial` | String | Partial name for table contents  |
+
+### Data Table Row Checkbox
+
+Implements [Material Design Data Table Row Checkbox](https://github.com/material-components/material-components-web/tree/master/packages/mdc-data-table) component.
+
+```erb
+<%= material_data_table_row_checkbox id: record.id, checked: @selected_users.include?(record.id.to_s) %>
+```
+
+#### Options
+
+| Option | Type | Description                      |
+| --- | --- |----------------------------------|
+| `id` | String | ID of the row checkbox           |
+| `checked` | Boolean | Whether the row checkbox is checked |
+
+### Data Table Sortable Header
+
+Implements [Material Design Data Table Sortable Header](https://github.com/material-components/material-components-web/tree/master/packages/mdc-data-table) component.
+
+```erb
+<%= material_data_table_sortable_header label: 'First Name', sort_value: aria_sort('first_name'), column_id: 'first_name' %>
+```
+
+#### Options
+
+| Option | Type | Description                      |
+| --- | --- |----------------------------------|
+| `label` | String | Label of the sortable header   |
+| `sort_value` | String | Value of the sortable header  |
+| `column_id` | String | ID of the sortable header     |
+
+##### aria_sort Helper
+
+`aria_sort` helper is used to generate sort value for the header. It accepts one argument, which is the column name. It returns `descending` or `ascending` value depending on the current values of `params[:order]` and `params[:reverse]`.
+
+```erb
+<%= aria_sort('first_name') %>
+```
+
+
+### Data Table Header
+
+Implements [Material Design Data Table Header](https://github.com/material-components/material-components-web/tree/master/packages/mdc-data-table) component.
+
+```erb
+<%= material_data_table_header %>
+```
+
+#### Options
+
+| Option | Type | Description                      |
+| --- | --- |----------------------------------|
+| `label` | String | Label of the header            |
+| `column_id` | String | ID of the header              |
+
+### Menu Button
+
+Implements [Material Design Menu Button](https://github.com/material-components/material-components-web/tree/master/packages/mdc-menu) component.
+
+```erb
+<%= material_menu_button button_text: 'Menu', menu_contents_partial: 'common/menu_contents' %>
+```
+
+#### Options
+
+| Option | Type | Description |
+| --- | --- | --- |
+| `button_text` | String | Text of the menu button |
+| `menu_contents_partial` | String | Partial for menu contents |
+
+### Modal
+
+Implements [Material Design Modal](https://github.com/material-components/material-components-web/tree/master/packages/mdc-dialog) component.
+
+```erb
+<%= material_modal title: 'Modal Title' %>
+```
+
+#### Options
+
+| Option | Type | Description |
+| --- | --- | --- |
+| `title` | String | Title of the modal |
+
+### Tooltip
+
+Implements [Material Design Tooltip](https://github.com/material-components/material-components-web/tree/master/packages/mdc-tooltip) component.
+
+```erb
+<%= material_tooltip id: dom_id(record) do %>
+  Tooltip content
+<% end %>
+```
+
+#### Options
+
+| Option | Type | Description                          |
+| --- | --- |--------------------------------------|
+| `id` | String | DOM ID of the element we displaying the tooltip for |
