@@ -254,8 +254,32 @@ Implements [Material Design Checkbox](https://github.com/material-components/mat
 * `unchecked_value` - checkbox unchecked value
 * `source_override` - use this to populate checkbox value from another form field
 
+### Input
 
+Implements [Material Design Textfield](https://github.com/material-components/material-components-web/tree/master/packages/mdc-textfield) component.
 
+```erb
+<%= material_input label: 'New password', name: 'password', required: true, parent: resource,
+                   id: "user-password", form: form, type: 'password',
+                   value: resource.password %>
+```
+
+#### Options
+
+* `label` - text
+* `name` - name of the input
+* `required` - boolean
+* `disabled` - boolean
+* `parent` - parent object
+* `id` - id of the input
+* `form` - form object
+* `type` - type of the input conforming to HTML input type specification (text, password)
+* `value` - value of the input
+* `style` - style of the input (filled, outlined)
+* `custom_css` - custom css class
+* `custom_controller` - custom Stimulus controller
+* `leading_icon` - icon to be displayed before the input
+* `trailing_icon` - icon to be displayed after the input
 
 ## Lookbook documentation for components
 
