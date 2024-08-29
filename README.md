@@ -234,6 +234,12 @@ $ gem install turbo_material
 
 ## Available components
 
+- [Input](#input)
+- [Checkbox](#checkbox)
+- [Radio button](#radio-button)
+- [Switch button](#switch-button)
+- [Select](#select)
+
 ### Input
 
 Implements [Material Design Textfield](https://github.com/material-components/material-components-web/tree/master/packages/mdc-textfield) component.
