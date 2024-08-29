@@ -232,6 +232,31 @@ Or install it yourself as:
 $ gem install turbo_material
 ```
 
+## Available components
+
+### Checkbox
+
+Implements [Material Design Checkbox](https://github.com/material-components/material-components-web/tree/master/packages/mdc-checkbox) component.
+
+```erb
+<%= material_checkbox name: 'remember_me', id: 'remember-me', form: form, label: 'Remember me' %>
+```
+
+#### Options
+
+* `name` - checkbox name
+* `id` - checkbox id
+* `form` - form object
+* `label` - checkbox label
+* `disabled` - checkbox disabled
+* `checked` - checkbox checked
+* `checked_value` - checkbox checked value
+* `unchecked_value` - checkbox unchecked value
+* `source_override` - use this to populate checkbox value from another form field
+
+
+
+
 ## Lookbook documentation for components
 
 Gem implements [Lookbook](https://lookbook.build) documentation for all components. To use it in the application, add `gem 'lookbook'` to your Gemfile and run `bundle install`. Then add following to your `config/application.rb`:
