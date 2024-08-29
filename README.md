@@ -460,41 +460,57 @@ Implements [Material Design Data Table](https://github.com/material-components/m
 
 #### Options
 
-| Option | Type | Description |
-| --- | --- | --- |
-| `name` | String | Name of the data table |
-| `table_body` | String | ID of the table body |
-| `url` | String | URL for fetching table data |
-| `table_params` | Hash | Parameters for the table |
+| Option | Type | Description                      |
+| --- | --- |----------------------------------|
+| `name` | String | Name of the data table           |
+| `table_body` | String | ID of the table body             |
+| `url` | String | URL for fetching table data      |
+| `table_params` | Hash | Parameters for the table         |
 | `records` | Array | Array of records to be displayed |
-| `selected_records` | Array | Array of selected records |
-| `pagy` | Object | Pagy object for pagination |
-| `table_headers_partial` | String | Partial for table headers |
-| `table_contents_partial` | String | Partial for table contents |
+| `selected_records` | Array | Array of selected records        |
+| `pagy` | Object | Pagy object for pagination       |
+| `table_headers_partial` | String | Partial name for table headers   |
+| `table_contents_partial` | String | Partial name for table contents  |
 
 ### Data Table Row Checkbox
 
 Implements [Material Design Data Table Row Checkbox](https://github.com/material-components/material-components-web/tree/master/packages/mdc-data-table) component.
 
 ```erb
-<%= material_data_table_row_checkbox %>
+<%= material_data_table_row_checkbox id: record.id, checked: @selected_users.include?(record.id.to_s) %>
 ```
 
 #### Options
 
-No options available.
+| Option | Type | Description                      |
+| --- | --- |----------------------------------|
+| `id` | String | ID of the row checkbox           |
+| `checked` | Boolean | Whether the row checkbox is checked |
 
 ### Data Table Sortable Header
 
 Implements [Material Design Data Table Sortable Header](https://github.com/material-components/material-components-web/tree/master/packages/mdc-data-table) component.
 
 ```erb
-<%= material_data_table_sortable_header %>
+<%= material_data_table_sortable_header label: 'First Name', sort_value: aria_sort('first_name'), column_id: 'first_name' %>
 ```
 
 #### Options
 
-No options available.
+| Option | Type | Description                      |
+| --- | --- |----------------------------------|
+| `label` | String | Label of the sortable header   |
+| `sort_value` | String | Value of the sortable header  |
+| `column_id` | String | ID of the sortable header     |
+
+##### aria_sort Helper
+
+`aria_sort` helper is used to generate sort value for the header. It accepts one argument, which is the column name. It returns `descending` or `ascending` value depending on the current values of `params[:order]` and `params[:reverse]`.
+
+```erb
+<%= aria_sort('first_name') %>
+```
+
 
 ### Data Table Header
 
@@ -506,7 +522,10 @@ Implements [Material Design Data Table Header](https://github.com/material-compo
 
 #### Options
 
-No options available.
+| Option | Type | Description                      |
+| --- | --- |----------------------------------|
+| `label` | String | Label of the header            |
+| `column_id` | String | ID of the header              |
 
 ### Menu Button
 
@@ -542,13 +561,13 @@ Implements [Material Design Modal](https://github.com/material-components/materi
 Implements [Material Design Tooltip](https://github.com/material-components/material-components-web/tree/master/packages/mdc-tooltip) component.
 
 ```erb
-<%= material_tooltip do %>
+<%= material_tooltip id: dom_id(record) do %>
   Tooltip content
 <% end %>
 ```
 
 #### Options
 
-| Option | Type | Description |
-| --- | --- | --- |
-| `content` | String | Content of the tooltip |
+| Option | Type | Description                          |
+| --- | --- |--------------------------------------|
+| `id` | String | DOM ID of the element we displaying the tooltip for |
