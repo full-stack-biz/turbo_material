@@ -246,20 +246,21 @@ Implements [Material Design Textfield](https://github.com/material-components/ma
 
 #### Options
 
-* `label` - text
-* `name` - name of the input
-* `required` - boolean
-* `disabled` - boolean
-* `parent` - parent object
-* `id` - id of the input
-* `form` - form object
-* `type` - type of the input conforming to HTML input type specification (text, password)
-* `value` - value of the input
-* `style` - style of the input (filled, outlined)
-* `custom_css` - custom css class
-* `custom_controller` - custom Stimulus controller
-* `leading_icon` - icon to be displayed before the input
-* `trailing_icon` - icon to be displayed after the input
+| Option | Type | Description |
+| --- | --- | --- |
+| `label` | String | Input label text |
+| `name` | String | Name of the input |
+| `required` | Boolean | Whether the input is required |
+| `disabled` | Boolean | Whether the input is disabled |
+| `parent` | Object | Parent object |
+| `id` | String | ID of the input |
+| `form` | Object | Form object |
+| `type` | String | Type of the input conforming to HTML input type specification (e.g., text, password) |
+| `value` | String | Value of the input |
+| `style` | String | Style of the input (filled, outlined) |
+| `custom_css` | String | Custom CSS class |
+| `custom_controller` | String | Custom Stimulus controller |
+
 
 ### Checkbox
 
@@ -271,15 +272,17 @@ Implements [Material Design Checkbox](https://github.com/material-components/mat
 
 #### Options
 
-* `name` - checkbox name
-* `id` - checkbox id
-* `form` - form object
-* `label` - checkbox label
-* `disabled` - checkbox disabled
-* `checked` - checkbox checked
-* `checked_value` - checkbox checked value
-* `unchecked_value` - checkbox unchecked value
-* `source_override` - use this to populate checkbox value from another form field
+| Option | Type | Description |
+| --- | --- | --- |
+| `name` | String | Checkbox name |
+| `id` | String | Checkbox ID |
+| `form` | Object | Form object |
+| `label` | String | Checkbox label |
+| `disabled` | Boolean | Whether the checkbox is disabled |
+| `checked` | Boolean | Whether the checkbox is checked |
+| `checked_value` | String | Value when the checkbox is checked |
+| `unchecked_value` | String | Value when the checkbox is unchecked |
+| `source_override` | String | Used to populate checkbox value from another form field |
 
 ### Radio button
 
@@ -291,13 +294,15 @@ Implements [Material Design Radio button](https://github.com/material-components
 
 #### Options
 
-* `name` - radio button name
-* `id` - radio button id
-* `form` - form object
-* `label` - radio button label
-* `disabled` - radio button disabled
-* `value` - radio button value
-* `parent` - radio button parent
+| Option | Type | Description |
+| --- | --- | --- |
+| `name` | String | Radio button name |
+| `id` | String | Radio button ID |
+| `form` | Object | Form object |
+| `label` | String | Radio button label |
+| `disabled` | Boolean | Whether the radio button is disabled |
+| `value` | String | Radio button value |
+| `parent` | Object | Radio button parent |
 
 ### Switch button
 
@@ -309,11 +314,38 @@ Implements [Material Design Switch button](https://github.com/material-component
 
 #### Options
 
-* `label` - text
-* `disabled` - toggle
-* `required` - toggle
-* `true_label` - text that displays when switch is on
-* `false_label` - text that displays when switch is off
+| Option | Type | Description |
+| --- | --- | --- |
+| `label` | String | Switch button label text |
+| `disabled` | Boolean | Whether the switch is disabled |
+| `required` | Boolean | Whether the switch is required |
+| `true_label` | String | Text that displays when switch is on |
+| `false_label` | String | Text that displays when switch is off |
+
+### Select
+
+Implements [Material Design Select](https://github.com/material-components/material-components-web/tree/master/packages/mdc-select) component.
+
+```erb
+<%= material_select name: 'country', id: 'country', form: form, options: Carmen::Country.all, selected_text: 'Select country' %>
+```
+
+#### Options
+
+| Option | Type | Description |
+| --- | --- | --- |
+| `name` | String | Select name |
+| `id` | String | Select ID |
+| `disabled` | Boolean | Whether the select is disabled |
+| `required` | Boolean | Whether the select is required |
+| `form` | Object | Form object |
+| `options` | Array | Select options |
+| `selected_text` | String | Text that displays when nothing is selected |
+| `fixed` | Boolean | Whether select uses `mdc-menu-surface--fixed` or `mdc-menu-surface--fullwidth` |
+| `outlined` | Boolean | Whether the select is outlined |
+| `additional_classes` | String | Additional CSS classes for select |
+| `hint` | String | Hint text to display |
+
 
 ## Lookbook documentation for components
 
