@@ -571,3 +571,20 @@ Implements [Material Design Tooltip](https://github.com/material-components/mate
 | Option | Type | Description                          |
 | --- | --- |--------------------------------------|
 | `id` | String | DOM ID of the element we displaying the tooltip for |
+
+## Lookbook documentation for components
+
+Gem implements [Lookbook](https://lookbook.build) documentation for all components. To use it in the application, add `gem 'lookbook'` to your Gemfile and run `bundle install`. Then add following to your `config/application.rb`:
+
+```ruby
+config.lookbook.preview_paths = [TurboMaterial::Engine.root.join('lib/lookbook')]
+config.lookbook.preview_controller = 'TurboMaterial::LookbookController'
+```
+
+Or extend your existing config for `lookbook.preview_paths` with same value.
+
+## Contributing
+This gem is open for new contributions. Use [Material Components for Web documentation](https://github.com/material-components/material-components-web/tree/master/packages) as a references for missing functionality.
+
+## License
+The gem is available as open source under the terms of the [MIT License](https://opensource.org/licenses/MIT).
