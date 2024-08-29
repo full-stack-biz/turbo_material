@@ -234,26 +234,6 @@ $ gem install turbo_material
 
 ## Available components
 
-### Checkbox
-
-Implements [Material Design Checkbox](https://github.com/material-components/material-components-web/tree/master/packages/mdc-checkbox) component.
-
-```erb
-<%= material_checkbox name: 'remember_me', id: 'remember-me', form: form, label: 'Remember me' %>
-```
-
-#### Options
-
-* `name` - checkbox name
-* `id` - checkbox id
-* `form` - form object
-* `label` - checkbox label
-* `disabled` - checkbox disabled
-* `checked` - checkbox checked
-* `checked_value` - checkbox checked value
-* `unchecked_value` - checkbox unchecked value
-* `source_override` - use this to populate checkbox value from another form field
-
 ### Input
 
 Implements [Material Design Textfield](https://github.com/material-components/material-components-web/tree/master/packages/mdc-textfield) component.
@@ -280,6 +260,60 @@ Implements [Material Design Textfield](https://github.com/material-components/ma
 * `custom_controller` - custom Stimulus controller
 * `leading_icon` - icon to be displayed before the input
 * `trailing_icon` - icon to be displayed after the input
+
+### Checkbox
+
+Implements [Material Design Checkbox](https://github.com/material-components/material-components-web/tree/master/packages/mdc-checkbox) component.
+
+```erb
+<%= material_checkbox name: 'remember_me', id: 'remember-me', form: form, label: 'Remember me' %>
+```
+
+#### Options
+
+* `name` - checkbox name
+* `id` - checkbox id
+* `form` - form object
+* `label` - checkbox label
+* `disabled` - checkbox disabled
+* `checked` - checkbox checked
+* `checked_value` - checkbox checked value
+* `unchecked_value` - checkbox unchecked value
+* `source_override` - use this to populate checkbox value from another form field
+
+### Radio button
+
+Implements [Material Design Radio button](https://github.com/material-components/material-components-web/tree/master/packages/mdc-radio) component.
+
+```erb
+<%= material_radio name: 'option', id: 'option-1', form: form, label: 'Option 1' %>
+```
+
+#### Options
+
+* `name` - radio button name
+* `id` - radio button id
+* `form` - form object
+* `label` - radio button label
+* `disabled` - radio button disabled
+* `value` - radio button value
+* `parent` - radio button parent
+
+### Switch button
+
+Implements [Material Design Switch button](https://github.com/material-components/material-components-web/tree/master/packages/mdc-switch) component.
+
+```erb
+<%= material_switch label: 'Switch', true_label: 'On', false_label: 'Off' %>
+```
+
+#### Options
+
+* `label` - text
+* `disabled` - toggle
+* `required` - toggle
+* `true_label` - text that displays when switch is on
+* `false_label` - text that displays when switch is off
 
 ## Lookbook documentation for components
 
