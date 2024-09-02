@@ -547,14 +547,27 @@ Implements [Material Design Menu Button](https://github.com/material-components/
 Implements [Material Design Modal](https://github.com/material-components/material-components-web/tree/master/packages/mdc-dialog) component.
 
 ```erb
-<%= material_modal title: 'Modal Title' %>
+<%= material_modal title: 'Modal Title', contents_partial: 'common/modal_contents' %>
+```
+or with block
+```erb
+<%= material_modal title: 'Modal Title' do %>
+  Contents
+<% end %>
 ```
 
 #### Options
 
-| Option | Type | Description |
-| --- | --- | --- |
+| Option | Type | Description               |
+| --- | --- |-------------------------------------------------------------------------|
 | `title` | String | Title of the modal |
+| `contents_partial` | String | Partial for modal contents |
+| `cancel_button_text` | String | Text of the cancel button |
+| `ok_button_text` | String | Text of the ok button     |
+| `opened` | Boolean | Whether the modal is opened |
+| `dialog_surface_custom_css` | String | Custom CSS class for the dialog surface |
+| `close_action_url` | String | URL for navigating to on modal close |
+| `form` | Object | Form object for form-centric modals, replaces ok button with form submit |
 
 ### Tooltip
 

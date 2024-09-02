@@ -1,9 +1,9 @@
 <%# locals: (form:, custom_controller: nil, custom_css: nil, disabled: false, required: false, name:, label: nil, id:, frame: nil, provide_hidden: false, value: nil, type: 'text', data: {}, min: nil, max: nil, helper: nil, parent: nil, style: 'filled', leading_icon: nil, trailing_icon: nil, leading_icon_data: {}, trailing_icon_data: {}) %>
-<label class="mdc-text-field rounded-none <%= style == 'filled' ? 'mdc-text-field--filled' : 'mdc-text-field--outlined' %> <%= value || form&.object&.[](name.to_sym) ? 'mdc-text-field--label-floating' : '' %> w-full <%= leading_icon ? 'mdc-text-field--with-leading-icon' : '' %> <%= trailing_icon ? 'mdc-text-field--with-trailing-icon' : '' %> <%= custom_css %>"
+<label class="mdc-text-field rounded-none <%= style == 'filled' ? 'mdc-text-field--filled' : 'mdc-text-field--outlined' %> <%= (value || form&.object&.[](name.to_sym)).present? ? 'mdc-text-field--label-floating' : '' %> w-full <%= leading_icon ? 'mdc-text-field--with-leading-icon' : '' %> <%= trailing_icon ? 'mdc-text-field--with-trailing-icon' : '' %> <%= custom_css %>"
        data-controller="<%= custom_controller || 'material-input' %>" <% if frame %>data-frame="<%= frame %>"<% end %>>
   <%- if style == 'filled' -%>
     <span class="mdc-text-field__ripple"></span>
-    <span class="mdc-floating-label <%= value || form&.object&.[](name.to_sym) ? 'mdc-floating-label--float-above' : '' %>" id="<%= id %>-label">
+    <span class="mdc-floating-label <%= (value || form&.object&.[](name.to_sym)).present? ? 'mdc-floating-label--float-above' : '' %>" id="<%= id %>-label">
       <%= label || name.capitalize %>
     </span>
   <%- else -%>

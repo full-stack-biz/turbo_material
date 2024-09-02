@@ -1,7 +1,9 @@
 module TurboMaterial
   module ModalHelper
-    def material_modal(kwargs = {})
-      render "components/modal", **kwargs
+    def material_modal(kwargs = {}, &block)
+      render "components/modal", **kwargs do
+        capture(&block) if block_given?
+      end
     end
   end
 end

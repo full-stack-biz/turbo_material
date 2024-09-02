@@ -1,37 +1,48 @@
-<%# locals: (title:) %>
-<turbo-frame id="modal">
-  <div class="mdc-dialog" data-controller="material-dialog" data-material-dialog-opened-value="true">
-    <div class="mdc-dialog__container">
-      <div class="mdc-dialog__surface !min-w-[36rem] !min-h-[14rem]"
-             role="alertdialog"
-             aria-modal="true"
-             aria-labelledby="my-dialog-title"
-             aria-describedby="my-dialog-content">
-          <h2 class="mdc-dialog__title">
-            <div class="flex items-center justify-between">
-              <span><%= title %></span>
-              <button type="button" class="mdc-icon-button mdc-dialog__close" data-mdc-ripple-is-unbounded data-action="click->material-dialog#close">
-                <div class="mdc-icon-button__ripple"></div>
-                <span class="mdc-icon-button__focus-ring"></span>
-                <i class="material-icons !text-white">close</i>
-              </button>
-            </div>
-          </h2>
-          <div class="mdc-dialog__content">
-            Contents
-          </div>
-          <div class="mdc-dialog__actions">
-            <button type="button" class="mdc-button mdc-dialog__button mdc-dialog__close" data-action="click->material-dialog#close">
-              <div class="mdc-button__ripple"></div>
-              <span class="mdc-button__label">Cancel</span>
-            </button>
-            <button type="button" class="mdc-button mdc-dialog__button" data-controller="material-ripple">
-              <div class="mdc-button__ripple"></div>
-              <span class="mdc-button__label">OK</span>
-            </button>
-          </div>
+<%# locals: (title:, contents_partial: nil, cancel_button_text: 'Cancel', ok_button_text: 'OK', opened: true, dialog_surface_custom_css: '!min-w-[36rem] !min-h-[14rem]', close_action_url: nil, form: nil) %>
+<div class="mdc-dialog" data-controller="material-dialog" data-material-dialog-opened-value="<%= opened %>"
+     data-material-dialog-close-action-url-value="<%= close_action_url %>">
+  <div class="mdc-dialog__container">
+    <div class="mdc-dialog__surface <%= dialog_surface_custom_css %>"
+         role="alertdialog"
+         aria-modal="true"
+         aria-labelledby="my-dialog-title"
+         aria-describedby="my-dialog-content">
+      <h2 class="mdc-dialog__title bg-secondary">
+        <div class="!text-white flex items-center justify-between">
+          <span><%= title %></span>
+          <button type="button" class="mdc-icon-button mdc-dialog__close" data-mdc-ripple-is-unbounded data-action="click->material-dialog#close">
+            <div class="mdc-icon-button__ripple"></div>
+            <span class="mdc-icon-button__focus-ring"></span>
+            <i class="material-icons !text-white">close</i>
+          </button>
         </div>
+      </h2>
+      <div class="mdc-dialog__content">
+        <%- if block_given? -%>
+          <%= yield %>
+        <%- else -%>
+          <%= render partial: contents_partial, locals: { form: form } %>
+        <% end %>
+      </div>
+      <div class="mdc-dialog__actions">
+        <button type="button" class="mdc-button mdc-dialog__button mdc-dialog__close" data-action="click->material-dialog#close">
+          <div class="mdc-button__ripple"></div>
+          <span class="mdc-button__label"><%= cancel_button_text %></span>
+        </button>
+        <%- if form.present? -%>
+          <%= form.button type: :submit, class: "mdc-button mdc-dialog__button", data: { controller: 'material-ripple' } do %>
+            <div class="mdc-button__ripple"></div>
+            <span class="mdc-button__label"><%= ok_button_text %></span>
+          <% end %>
+        <%- else -%>
+          <button type="button" class="mdc-button mdc-dialog__button" data-controller="material-ripple">
+            <div class="mdc-button__ripple"></div>
+            <span class="mdc-button__label"><%= ok_button_text %></span>
+          </button>
+        <%- end -%>
+      </div>
     </div>
-    <div class="mdc-dialog__scrim"></div>
   </div>
-</turbo-frame>
+  <div class="mdc-dialog__scrim"></div>
+</div>
+
