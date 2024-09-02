@@ -4,7 +4,8 @@ export default class extends Controller {
     dialog = undefined;
 
     static values = {
-        opened: Boolean
+        opened: Boolean,
+        closeActionUrl: String
     }
 
     connect() {
@@ -21,6 +22,9 @@ export default class extends Controller {
 
     close() {
         this.dialog.close();
+        if (this.closeActionUrlValue) {
+            window.location.href = this.closeActionUrlValue;
+        }
     }
 
     open() {
