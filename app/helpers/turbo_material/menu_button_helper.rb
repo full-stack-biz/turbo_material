@@ -1,7 +1,9 @@
 module TurboMaterial
-module MenuButtonHelper
-    def material_menu_button(kwargs = {})
-      render "components/menu_button", **kwargs
+  module MenuButtonHelper
+    def material_menu_button(kwargs = {}, &block)
+      render "components/menu_button", **kwargs do
+        capture(&block) if block_given?
+      end
     end
   end
 end

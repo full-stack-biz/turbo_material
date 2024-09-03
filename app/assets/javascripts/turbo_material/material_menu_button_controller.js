@@ -1,7 +1,9 @@
 import { Controller } from "@hotwired/stimulus";
-import { useClickOutside } from 'stimulus-use';
+import { destroy } from "@rails/request.js";
+
 export default class extends Controller {
     menu = undefined;
+    static values = { logoutPath: String };
 
     connect() {
         mdc.ripple.MDCRipple.attachTo(this.element);
@@ -10,13 +12,12 @@ export default class extends Controller {
         this.menu.setAnchorElement(button);
         this.menu.setAnchorCorner(mdc.menu.Corner.BOTTOM_START);
         this.menu.setFixedPosition(true);
-        useClickOutside(this);
     }
 
     disconnect() {
     }
 
-    click(event) {
+    toggleMenu(event) {
         if (this.menu.open) {
             this.close();
         } else {
@@ -32,12 +33,10 @@ export default class extends Controller {
         this.menu.open = false;
     }
 
-    clickOutside(event) {
-        if (!this.menu.open) {
-            return;
-        } else {
-            event.preventDefault();
-            this.close();
+    async logout() {
+        const response = await destroy(this.logoutPathValue);
+        if (response.ok) {
+            window.location.reload();
         }
     }
 }

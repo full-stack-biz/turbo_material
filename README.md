@@ -534,6 +534,12 @@ Implements [Material Design Menu Button](https://github.com/material-components/
 ```erb
 <%= material_menu_button button_text: 'Menu', menu_contents_partial: 'common/menu_contents' %>
 ```
+or with block
+```erb
+<%= material_menu_button button_text: 'Menu' do %>
+  Contents
+<% end %>
+```
 
 #### Options
 
@@ -541,6 +547,9 @@ Implements [Material Design Menu Button](https://github.com/material-components/
 | --- | --- | --- |
 | `button_text` | String | Text of the menu button |
 | `menu_contents_partial` | String | Partial for menu contents |
+| `logout_path` | String | Path for logout |
+| `custom_css` | String | Custom CSS class |
+| `custom_surface_css` | String | Custom CSS class for the menu surface |
 
 ### Modal
 
