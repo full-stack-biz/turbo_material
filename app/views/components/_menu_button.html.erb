@@ -1,7 +1,8 @@
-<%# locals: (button_text:, menu_contents_partial:) %>
-<div data-controller="material-menu-button" class="!z-100">
+<%# locals: (button_text:, menu_contents_partial: nil, logout_path: nil, custom_css: '!z-100', custom_surface_css: '') %>
+<div data-controller="material-menu-button" class="<%= custom_css %>"
+     data-material-menu-button-logout-path-value="<%= logout_path  %>">
   <button class="mdc-button mdc-button--touch menu-item menu-button"
-          data-action="click->material-menu-button#click">
+          data-action="click->material-menu-button#toggleMenu">
     <span class="mdc-button__ripple"></span>
     <span class="mdc-button__focus-ring"></span>
     <span class="mdc-button__label flex items-center">
@@ -9,7 +10,11 @@
       <span class="material-icons">expand_more</span>
     </span>
   </button>
-  <div class="mdc-menu mdc-menu-surface !w-auto">
-    <%= render partial: menu_contents_partial %>
+  <div class="mdc-menu mdc-menu-surface <%= custom_surface_css %>">
+    <%- if block_given? -%>
+      <%= yield %>
+    <%- else -%>
+      <%= render partial: menu_contents_partial %>
+    <% end %>
   </div>
 </div>
