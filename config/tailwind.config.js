@@ -7,8 +7,9 @@ module.exports = {
         },
     ],
     content: [
-        './app/assets/stylesheets/**/*.css',
-        './app/views/**/*.html.erb'
+        './app/views/**/*.html.erb',
+        './app/helpers/**/*.rb',
+        './app/assets/javascripts/**/*.js'
     ],
     theme: {
         extend: {
