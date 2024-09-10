@@ -49,8 +49,8 @@ module TurboMaterial
     end
 
     config.after_initialize do
-      Rails.application.config.assets.tailwind_roots << TurboMaterial::Engine.root if Rails.application.config.assets.respond_to?(:tailwind_roots)
-      Rails.application.config.assets.tailwind_custom_paths << TurboMaterial::Engine.root.join('app/assets/javascripts/**/*.js') if Rails.application.config.assets.respond_to?(:tailwind_custom_paths)
+      # Rails.application.config.assets.tailwind_roots << TurboMaterial::Engine.root if Rails.application.config.assets.respond_to?(:tailwind_roots)
+      # Rails.application.config.assets.tailwind_custom_paths << TurboMaterial::Engine.root.join('app/assets/javascripts/**/*.js') if Rails.application.config.assets.respond_to?(:tailwind_custom_paths)
     end
   end
 end
