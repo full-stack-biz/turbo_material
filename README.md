@@ -15,6 +15,8 @@ That list is based on the project from which this library is being extracted. If
 
 ## Usage
 
+Run `rails turbo_material:install` to install the gem and add necessary files to your project. Alternatively, you can follow the steps below.
+
 Add following to your `app/javascript/controllers/index.js` after `eagerLoadControllersFrom("controllers", application)` line:
 
 ```javascript
@@ -26,7 +28,6 @@ Add following to your `app/view/layouts/application.html.erb` in `<head>` sectio
 <link href="//cdn.jsdelivr.net/npm/material-components-web@latest/dist/material-components-web.min.css" rel="stylesheet">
 <script src="//cdn.jsdelivr.net/npm/material-components-web@latest/dist/material-components-web.min.js"></script>
 <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-<%= stylesheet_link_tag "turbo_material/tailwind.css" %>
 ```
 
 ### Material Components for Web customizations

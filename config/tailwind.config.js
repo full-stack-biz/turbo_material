@@ -6,20 +6,22 @@ module.exports = {
             pattern: /prose/,
         },
     ],
-    content: [
-        './app/assets/stylesheets/**/*.css',
-        './app/views/**/*.html.erb'
-    ],
-    theme: {
-        extend: {
-            fontFamily: {
-                sans: ['Inter var', ...defaultTheme.fontFamily.sans],
-            },
-        },
+  content: [
+    './public/*.html',
+    './app/helpers/**/*.rb',
+    './app/assets/javascript/**/*.js',
+    './app/views/**/*.{erb,haml,html,slim}'
+  ],
+  theme: {
+    extend: {
+      fontFamily: {
+        sans: ['Inter var', ...defaultTheme.fontFamily.sans],
+      },
     },
-    plugins: [
-        require('@tailwindcss/aspect-ratio'),
-        require('@tailwindcss/typography'),
-        require('@tailwindcss/container-queries'),
-    ]
+  },
+  plugins: [
+    require('@tailwindcss/aspect-ratio'),
+    require('@tailwindcss/typography'),
+    require('@tailwindcss/container-queries'),
+  ]
 }
