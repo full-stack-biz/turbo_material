@@ -19,10 +19,13 @@ module TurboMaterial
       css_content = File.read(tailwind_css_path)
       css_content.gsub!(/\/\*.*?\*\//m, '')
       css_content.gsub!(/\{[^}]*}/m, '{}')
+      css_content.gsub!('>:not([hidden])~:not([hidden])', '')
       css_content.gsub!(/\\\[/, '[')
       css_content.gsub!( /\\\]/, ']')
+      css_content.gsub!( /\\\//, '/')
+      css_content.gsub!( /\\:/, ':')
 
-      class_regex = /\.\\?(!?[-_a-zA-Z0-9\[\]]+)(?=[^}]*\{)/
+      class_regex = /\.\\?(!?[-_a-zA-Z0-9\[\]\/:]+)(?=[^}]*\{)/
       classes = css_content.scan(class_regex).flatten.uniq.sort
 
       tailwind_config_path = Rails.root.join('config/tailwind.config.js')
