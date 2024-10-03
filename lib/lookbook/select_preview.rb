@@ -1,5 +1,6 @@
-class SelectPreview < Lookbook::Preview
+# frozen_string_literal: true
 
+class SelectPreview < Lookbook::Preview
   # @param label text
   # @param disabled toggle
   # @param required toggle
