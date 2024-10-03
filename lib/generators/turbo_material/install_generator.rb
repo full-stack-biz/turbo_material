@@ -31,23 +31,23 @@ module TurboMaterial
       tailwind_config_path = Rails.root.join('config/tailwind.config.js')
 
       return unless tailwind_config_path.exist?
-        content_config = <<~CONFIG.strip_heredoc
-          #{START_MARKER}
-          { raw: '<div class="#{classes.join(' ')}"></div>', extension: 'html' },
-          #{END_MARKER} #{TurboMaterial::VERSION}
-        CONFIG
+  
+      content_config = <<~CONFIG.strip_heredoc
+        #{START_MARKER}
+        { raw: '<div class="#{classes.join(' ')}"></div>', extension: 'html' },
+        #{END_MARKER} #{TurboMaterial::VERSION}
+      CONFIG
 
-        if File.read(tailwind_config_path.to_s).include?(START_MARKER)
-          gsub_file tailwind_config_path, 
+      if File.read(tailwind_config_path.to_s).include?(START_MARKER)
+        gsub_file tailwind_config_path,
 /#{Regexp.escape(START_MARKER)}.*?#{Regexp.escape(END_MARKER)}.*?$/m do |_match|
-            content_config.strip
-          end
-        else
-          insert_into_file tailwind_config_path, after: "content: [" do
-            "\n" + content_config.strip
-          end
+          content_config.strip
         end
-      
+      else
+        insert_into_file tailwind_config_path, after: "content: [" do
+          "\n" + content_config.strip
+        end
+      end
     end
 
     def add_turbo_material_js_controllers
@@ -77,9 +77,9 @@ end
             HEAD_LINKS
           end
         end
-      
-        
-      
+
+
+
     end
   end
 end
