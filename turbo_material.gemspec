@@ -17,11 +17,11 @@ Gem::Specification.new do |spec|
   spec.metadata['source_code_uri'] = 'https://github.com/full-stack-biz/turbo_material'
   # spec.metadata["changelog_uri"] = "https://github.com/full-stack-biz/turbo_material"
 
-  spec.post_install_message = '
-  My test post-install message.
+  spec.post_install_message = <<~MSG
+    Installing `turbo_material` gem. Please, follow the instructions in the README.md file.
 
-  Another post-install message a few lines down.
-  '
+    After that, please, run `bin/rails turbo_material:install` to install the gem and add necessary files and configurations to your project.
+  MSG
 
   spec.files = Dir.chdir(File.expand_path(__dir__)) do
     Dir['{app,config,db,lib}/**/*', 'MIT-LICENSE', 'Rakefile', 'README.md']
