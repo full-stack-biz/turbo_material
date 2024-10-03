@@ -16,21 +16,11 @@ module TurboMaterial
     CLASS_REGEX = %r(\.\\?(!?[-_a-zA-Z0-9\[\]/:]+)(?=[^}]*\{)).freeze
 
     def update_tailwind_config
-      tailwind_css_path = TurboMaterial::Engine.root.join('app/assets/dist/turbo_material/tailwind.css')
-      css_content = File.read(tailwind_css_path)
-      css_content.gsub!(%r{/\*.*?\*/}m, '')
-      css_content.gsub!(/\{[^}]*}/m, '{}')
-      css_content.gsub!('>:not([hidden])~:not([hidden])', '')
-      css_content.gsub!(/\\\[/, '[')
-      css_content.gsub!(/\\\]/, ']')
-      css_content.gsub!(%r{\\/}, '/')
-      css_content.gsub!(/\\:/, ':')
-
-      classes = css_content.scan(CLASS_REGEX).flatten.uniq.sort
-
       tailwind_config_path = Rails.root.join('config/tailwind.config.js')
 
       return unless tailwind_config_path.exist?
+
+      classes = extract_tailwind_classes
 
       content_config = <<~CONFIG.strip_heredoc
         #{START_MARKER}
@@ -78,6 +68,21 @@ module TurboMaterial
           HEAD_LINKS
         end
       end
+    end
+
+    private
+
+    def extract_tailwind_classes
+      tailwind_css_path = TurboMaterial::Engine.root.join('app/assets/dist/turbo_material/tailwind.css')
+      css_content = File.read(tailwind_css_path)
+      css_content.gsub!(%r{/\*.*?\*/}m, '')
+      css_content.gsub!(/\{[^}]*}/m, '{}')
+      css_content.gsub!('>:not([hidden])~:not([hidden])', '')
+      css_content.gsub!(/\\\[/, '[')
+      css_content.gsub!(/\\\]/, ']')
+      css_content.gsub!(%r{\\/}, '/')
+      css_content.gsub!(/\\:/, ':')
+      css_content.scan(CLASS_REGEX).flatten.uniq.sort
     end
   end
 end
