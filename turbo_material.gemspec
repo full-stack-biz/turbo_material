@@ -24,7 +24,6 @@ Gem::Specification.new do |spec|
   MSG
 
   Gem.post_install do
-
   end
 
   spec.files = Dir.chdir(File.expand_path(__dir__)) do

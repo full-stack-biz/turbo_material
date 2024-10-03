@@ -25,4 +25,6 @@ gem 'tailwindcss-rails', '~> 2.3'
 
 gem 'carmen'
 
-gem 'rubocop'
+group :development do
+  gem 'rubocop'
+end
