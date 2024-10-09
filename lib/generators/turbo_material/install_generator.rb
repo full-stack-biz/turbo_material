@@ -37,13 +37,13 @@ module TurboMaterial
         #{END_MARKER} #{TurboMaterial::VERSION}
       CONFIG
 
-      if File.read(tailwind_config_path.to_s).include?(START_MARKER)
-        gsub_file tailwind_config_path,
+      if File.read(TAILWIND_CONFIG_PATH.to_s).include?(START_MARKER)
+        gsub_file TAILWIND_CONFIG_PATH,
                   /#{Regexp.escape(START_MARKER)}.*?#{Regexp.escape(END_MARKER)}.*?$/m do |_match|
           content_config.strip
         end
       else
-        insert_into_file tailwind_config_path, after: 'content: [' do
+        insert_into_file TAILWIND_CONFIG_PATH, after: 'content: [' do
           "\n#{content_config.strip}"
         end
       end
@@ -93,7 +93,7 @@ module TurboMaterial
     end
 
     def extract_tailwind_classes
-      tailwind_css_path = TurboMaterial::Engine.root.join('app/assets/dist/turbo_material/tailwind.css')
+      tailwind_css_path = Engine.root.join('app/assets/dist/turbo_material/tailwind.css')
       css_content = File.read(tailwind_css_path)
       css_content.gsub!(%r{/\*.*?\*/}m, '')
       css_content.gsub!(/\{[^}]*}/m, '{}')

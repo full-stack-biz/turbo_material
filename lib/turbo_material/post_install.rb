@@ -2,7 +2,7 @@
 
 module TurboMaterial
   def self.post_install
-    system('bin/rails turbo_material:update_tailwind')
+    puts 'TurboMaterial: Running post install tasks...'
   rescue StandardError => e
     puts "TurboMaterial: Failed to update Tailwind configuration. Error: #{e.message}"
     puts "You may need to run 'bin/rails turbo_material:install' manually to complete the setup."
