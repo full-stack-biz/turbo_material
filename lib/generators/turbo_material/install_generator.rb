@@ -14,11 +14,19 @@ module TurboMaterial
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">#{' '}
     HTML
     CLASS_REGEX = %r(\.\\?(!?[-_a-zA-Z0-9\[\]/:]+)(?=[^}]*\{)).freeze
+    TAILWIND_CONFIG_PATH = Rails.root.join('config/tailwind.config.js')
+
+    class_option :update_tailwind_only,
+                 type: :boolean,
+                 default: false,
+                 desc: 'Only update Tailwind configuration'
 
     def update_tailwind_config
-      tailwind_config_path = Rails.root.join('config/tailwind.config.js')
-
-      return unless tailwind_config_path.exist?
+      return unless TAILWIND_CONFIG_PATH.exist?
+      if tailwind_config_up_to_date?
+        puts 'Tailwind config is up to date'
+        return
+      end
 
       classes = extract_tailwind_classes
 
@@ -41,6 +49,8 @@ module TurboMaterial
     end
 
     def add_turbo_material_js_controllers
+      return if options[:update_tailwind_only]
+
       controllers_path = Rails.root.join('app/javascript/controllers/index.js')
       if controllers_path.exist? && controllers_path.read.include?('eagerLoadControllersFrom("controllers", application)')
         if controllers_path.read.include?('eagerLoadControllersFrom("turbo_material", application)')
@@ -56,6 +66,8 @@ module TurboMaterial
     end
 
     def add_material_components_web_to_app_layout
+      return if options[:update_tailwind_only]
+
       layout_path = Rails.root.join('app/views/layouts/application.html.erb')
       unless layout_path.exist? && layout_path.read.include?('<%= csp_meta_tag %>')
         raise '`app/views/layouts/application.html.erb` does not exist or does not contain `<%= csp_meta_tag %>`'
@@ -71,6 +83,13 @@ module TurboMaterial
     end
 
     private
+
+    def tailwind_config_up_to_date?
+      return false unless TAILWIND_CONFIG_PATH.exist?
+
+      content = File.read(TAILWIND_CONFIG_PATH)
+      content.include?("#{END_MARKER} #{TurboMaterial::VERSION}")
+    end
 
     def extract_tailwind_classes
       tailwind_css_path = TurboMaterial::Engine.root.join('app/assets/dist/turbo_material/tailwind.css')
