@@ -23,6 +23,7 @@ module TurboMaterial
 
     def update_tailwind_config
       return unless TAILWIND_CONFIG_PATH.exist?
+
       if tailwind_config_up_to_date?
         puts 'Tailwind config is up to date'
         return
@@ -43,7 +44,7 @@ module TurboMaterial
         end
       else
         insert_into_file tailwind_config_path, after: 'content: [' do
-          "\n" + content_config.strip
+          "\n#{content_config.strip}"
         end
       end
     end
