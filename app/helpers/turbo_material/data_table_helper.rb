@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module TurboMaterial
   module DataTableHelper
     def material_data_table(kwargs = {})

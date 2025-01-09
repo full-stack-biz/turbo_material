@@ -1,6 +1,8 @@
-require "turbo_material/version"
-require "turbo_material/engine"
-require "turbo_material/configuration"
+# frozen_string_literal: true
+
+require 'turbo_material/version'
+require 'turbo_material/engine'
+require 'turbo_material/configuration'
 
 module TurboMaterial
   class << self
