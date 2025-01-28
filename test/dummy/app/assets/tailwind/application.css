@@ -1,6 +1,17 @@
 @import 'tailwindcss' source(none);
-@source "../../javascript/**/*.js";
-@source "../../../views/**/*.{erb,haml,html,slim}";
+@source "../../../../../app/assets/javascript/**/*.js";
+@source "../../../../../app/views/**/*.{erb,haml,html,slim}";
+@source "../../views/**/*.{erb,haml,html,slim}";
+
+/*
+
+@layer components {
+  .btn-primary {
+    @apply py-2 px-4 bg-blue-200;
+  }
+}
+
+*/
 
 /*
   The default border color has changed to `currentColor` in Tailwind CSS v4,
@@ -18,17 +29,4 @@
   ::file-selector-button {
     border-color: var(--color-gray-200, currentColor);
   }
-}
-
-.mdc-notched-outline__leading {
-    border-right-style: none !important;
-}
-
-.mdc-notched-outline__notch {
-    border-left-style: none !important;
-    border-right-style: none !important;
-}
-
-.mdc-notched-outline__trailing {
-    border-left-style: none !important;
 }
