@@ -1,6 +1,6 @@
 @import 'tailwindcss' source(none);
-@source "../../javascript/**/*.js";
-@source "../../../views/**/*.{erb,haml,html,slim}";
+@source "../../../javascript/**/*.js";
+@source "../../../../views/**/*.{erb,haml,html,slim}";
 
 /*
   The default border color has changed to `currentColor` in Tailwind CSS v4,
