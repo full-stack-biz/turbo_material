@@ -26,6 +26,13 @@ module TurboMaterial
       end
     end
 
+    initializer 'turbo_material.tailwindcss' do |app|
+      ActiveSupport.on_load(:tailwindcss_rails) do
+        config.tailwindcss_rails.engines << TurboMaterial::Engine.engine_name
+      end
+    end
+
+
     initializer 'turbo_material.importmap', before: 'importmap' do |app|
       # NOTE: this will add pins from this engine to the main app
       # https://github.com/rails/importmap-rails#composing-import-maps
