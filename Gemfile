@@ -21,7 +21,7 @@ gem 'stimulus-rails', '~> 1.3'
 
 gem 'lookbook'
 
-gem 'tailwindcss-rails', github: 'bopm/tailwindcss-rails', branch: 'feature/engines-convention-over-configuration-support'
+gem 'tailwindcss-rails', '4.3.0.rc1'
 
 gem 'carmen'
 

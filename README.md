@@ -17,6 +17,11 @@ That list is based on the project from which this library is being extracted. If
 
 Run `rails turbo_material:install` to install the gem and add necessary files to your project. Alternatively, you can follow the steps below.
 
+Add following to your `app/assets/tailwind/application.css` after `@import "tailwindcss";`:
+```css
+@import "../builds/tailwind/turbo_material.css";
+```
+
 Add following to your `app/javascript/controllers/index.js` after `eagerLoadControllersFrom("controllers", application)` line:
 
 ```javascript
@@ -30,9 +35,11 @@ Add following to your `app/view/layouts/application.html.erb` in `<head>` sectio
 <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 ```
 
+Follow `test/dummy` in this project for examples.
+
 ### Material Components for Web customizations
 
-For supporting custom styling for you components, consider including following in your application stylesheet:
+For supporting custom styling for you components, consider including following in your application Tailwind CSS stylesheet:
 
 ```css
 @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,600;1,400;1,600&display=swap');
@@ -211,10 +218,6 @@ aside.mdc-drawer.main-drawer {
     color: white !important;
 }
 ```
-
-## Tailwind Forms customizations leakage
-
-This gem uses Tailwind for additional customizations, I am noticed that `@tailwindcss/forms` leaking to Material inputs adding partial white backgrounds. For now I would recommend to disable forms plugin while using this gem.
 
 ## Installation
 Add this line to your application's Gemfile:
