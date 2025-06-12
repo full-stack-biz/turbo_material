@@ -1,4 +1,4 @@
-# `turbo_maerial` Changelog
+# `turbo_material` Changelog
 
 ## v0.3.0
 
