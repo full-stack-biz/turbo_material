@@ -1,6 +1,6 @@
 # `turbo_maerial` Changelog
 
-## v0.30.0
+## v0.3.0
 
 ### Upgrade to Tailwind CSS v4
 
