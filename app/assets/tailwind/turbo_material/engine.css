@@ -1,0 +1,210 @@
+@import 'tailwindcss' source(none);
+@source "../../../javascript/**/*.js";
+@source "../../../../views/**/*.{erb,haml,html,slim}";
+
+/*
+  The default border color has changed to `currentColor` in Tailwind CSS v4,
+  so we've added these compatibility styles to make sure everything still
+  looks the same as it did with Tailwind CSS v3.
+
+  If we ever want to remove these styles, we need to add an explicit border
+  color utility to any element that depends on these defaults.
+*/
+@layer base {
+  *,
+  ::after,
+  ::before,
+  ::backdrop,
+  ::file-selector-button {
+    border-color: var(--color-gray-200, currentColor);
+  }
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,600;1,400;1,600&display=swap');
+
+html, body, label {
+    font-family: 'Roboto', sans-serif;
+}
+
+html, body {
+    scroll-behavior: smooth;
+}
+
+html [id], body [id] {
+    scroll-margin: 120px !important;
+}
+
+:root {
+    --real-primary: #5d7dd4;
+    --real-secondary: #607D8B;
+    --real-warn: rgb(244, 67, 54);
+
+    --mdc-theme-primary: var(--real-primary);
+    --mdc-theme-secondary: var(--real-secondary);
+    --mdc-dialog-z-index: 100;
+    --mdc-ripple-color: white;
+}
+
+.turbo-progress-bar {
+    background-color: #77a1d6;
+    filter: brightness(90%);
+}
+
+.mdc-button.menu-item {
+    --mdc-theme-primary: white;
+}
+
+.mdc-button--accent:not(.mdc-button--raised):not([disabled]) {
+    color: #77a1d6;
+    color: var(--mdc-theme-secondary, #77a1d6);
+}
+
+.mdc-button--accent.mdc-button--raised:not([disabled]) {
+    background-color: #77a1d6;
+    background-color: var(--mdc-theme-secondary, #77a1d6);
+}
+
+.mdc-button.mdc-button--accent .mdc-button__ripple::before, .mdc-button.mdc-button--accent .mdc-button__ripple::after {
+    background-color: #77a1d6;
+    background-color: var(--mdc-theme-secondary, #77a1d6);
+}
+
+.mdc-button--warn:not(.mdc-button--raised):not([disabled]) {
+    color: rgb(244, 67, 54);
+    color: var(--real-warn, rgb(244, 67, 54));
+}
+
+.mdc-button--warn.mdc-button--raised:not([disabled]) {
+    background-color: rgb(244, 67, 54);
+    background-color: var(--real-warn, rgb(244, 67, 54));
+}
+
+.mdc-button.mdc-button--warn .mdc-button__ripple::before, .mdc-button.mdc-button--warn .mdc-button__ripple::after {
+    background-color: rgb(244, 67, 54);
+    background-color: var(--real-warn, rgb(244, 67, 54));
+}
+
+.mdc-button--white:not(.mdc-button--raised):not([disabled]) {
+    color: white;
+}
+
+.mdc-button--white.mdc-button--raised:not([disabled]) {
+    background-color: white;
+}
+
+.mdc-button.mdc-button--white .mdc-button__ripple::before, .mdc-button.mdc-button--white .mdc-button__ripple::after {
+    background-color: white;
+}
+
+.mdc-text-field:not(.mdc-text-field--label-floating) .iti__flag-container {
+    display: none !important;
+}
+
+.mdc-drawer .mdc-deprecated-list-item {
+    margin: 0;
+    border-radius: 0;
+}
+
+aside.mdc-drawer:not(.mdc-drawer--right) {
+    box-shadow: 0px 5px 5px -3px rgb(0 0 0 / 20%), 0px 8px 10px 1px rgb(0 0 0 / 14%), 0px 3px 14px 2px rgb(0 0 0 / 12%);
+}
+
+aside.mdc-drawer.main-drawer {
+    background-color: #2d323e;
+}
+
+.mdc-drawer--right.mdc-drawer--dismissible {
+    right: 0 !important;
+    left: initial !important;
+}
+
+.mdc-drawer--right.mdc-drawer.mdc-drawer--open:not(.mdc-drawer--closing) + .mdc-drawer-app-content {
+    margin-right: 16rem !important;
+    margin-left: 0 !important;
+}
+
+.mdc-drawer--right.mdc-drawer.mdc-drawer--open.mdc-drawer--closing + .mdc-drawer-app-content {
+    transition: margin-right 200ms 15ms linear;
+}
+
+.mdc-drawer--right.mdc-drawer.mdc-drawer--open.mdc-drawer--openening.mdc-drawer--closing + .mdc-drawer-app-content {
+    transition: margin-right 200ms 15ms linear;
+}
+
+.mdc-drawer--right.mdc-drawer--animate {
+    transform: translateX(100%) !important;
+}
+
+.mdc-drawer--right.mdc-drawer--closing {
+    transform: translateX(100%) !important;
+}
+
+.mdc-drawer--right.mdc-drawer--opening {
+    transform: translateX(0) !important;
+}
+
+.mdc-dialog__title::before {
+    content: none !important;
+}
+
+.mdc-dialog__title {
+    padding-top: 1rem;
+}
+
+.clip-path-bottom {
+    clip-path: inset(-8px -8px 0px -8px);
+}
+
+.clip-path-top {
+    clip-path: inset(0px -8px -8px -8px);
+}
+
+.mdc-drawer.mdc-drawer--open:not(.mdc-drawer--closing) + .mdc-drawer-app-content .mdc-top-app-bar {
+    width: calc(100vw - 16rem);
+}
+
+.mdc-text-field .field_with_errors {
+    width: 100%;
+}
+
+.bg-secondary .mdc-tab-indicator .mdc-tab-indicator__content--underline {
+    border-color: white !important;
+}
+
+.bg-secondary .mdc-tab--active .mdc-tab__text-label {
+    color: white !important;
+}
+
+.bg-secondary .mdc-tab .mdc-tab__icon {
+    color: white !important;
+}
+
+.bg-secondary .mdc-tab--active .mdc-tab__icon {
+    color: white !important;
+}
+
+.bg-secondary .mdc-tab:not(.mdc-tab--active) .mdc-tab__text-label {
+    color: white !important;
+}
+
+.mdc-chip.red {
+    background-color: #f44336 !important;
+    color: white !important;
+}
+
+.mdc-chip.red .mdc-chip__icon {
+    color: white !important;
+}
+
+.mdc-notched-outline__leading {
+    border-right-style: none !important;
+}
+
+.mdc-notched-outline__notch {
+    border-left-style: none !important;
+    border-right-style: none !important;
+}
+
+.mdc-notched-outline__trailing {
+    border-left-style: none !important;
+}
