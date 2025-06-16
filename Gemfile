@@ -21,7 +21,7 @@ gem 'stimulus-rails', '~> 1.3'
 
 gem 'lookbook'
 
-gem 'tailwindcss-rails', '4.3.0.rc1'
+gem 'tailwindcss-rails', '4.3.0.rc2'
 
 gem 'carmen'
 
