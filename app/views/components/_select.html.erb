@@ -31,7 +31,7 @@
     <%- unless outlined -%><span class="mdc-line-ripple"></span><%- end -%>
   </div>
 
-  <div class="mdc-select__menu mdc-menu mdc-menu-surface !z-100 <%= fixed ? 'mdc-menu-surface--fixed' : 'mdc-menu-surface--fullwidth' %>" id="<%= id %>-surface">
+  <div class="mdc-select__menu mdc-menu mdc-menu-surface z-100! <%= fixed ? 'mdc-menu-surface--fixed' : 'mdc-menu-surface--fullwidth' %>" id="<%= id %>-surface">
     <ul class="mdc-deprecated-list" role="listbox" aria-label="<%= label %> listbox">
       <% options.each do |option| %>
         <li class="mdc-deprecated-list-item<%= value == option[:value] ? ' mdc-deprecated-list-item--selected' : '' %>" aria-selected="<%= (value == option[:value]).to_s %>" data-value="<%= option[:value] %>" role="option">
