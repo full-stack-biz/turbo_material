@@ -9,10 +9,10 @@
      <% if suffix.present? %>data-material-chips-input-suffix-value="<%= suffix %>"<% end %>
      data-action="keydown.esc->material-chips-input#close keydown.enter->prevent-default country-select-focus->material-chips-input#confirmSelection"
 >
-  <label class="mdc-text-field mdc-text-field--filled w-full !h-max !h-full">
+  <label class="mdc-text-field mdc-text-field--filled w-full h-max! h-full!">
     <span class="mdc-text-field__ripple"></span>
-    <span class="mdc-floating-label !top-6"><%= label %></span>
-    <div class="mdc-chip-set mdc-chip-set--input !pt-8 w-full" role="grid">
+    <span class="mdc-floating-label top-6!"><%= label %></span>
+    <div class="mdc-chip-set mdc-chip-set--input pt-8! w-full" role="grid">
       <%- selected.each do |chip| -%>
         <div class="mdc-chip">
           <div class="mdc-chip__text"><%= chip[:label] %></div>

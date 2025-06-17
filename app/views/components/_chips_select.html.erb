@@ -9,7 +9,7 @@
      data-material-chips-select-modal-url-value="<%= modal_url %>"
      data-material-chips-select-chip-css-value="<%= chip_css %>"
 >
-  <div class="mdc-select__anchor !h-fit !flex-row !flex-wrap"
+  <div class="mdc-select__anchor h-fit! flex-row! flex-wrap!"
        role="button"
        aria-haspopup="listbox"
        aria-expanded="false"
@@ -19,10 +19,10 @@
        <% if required %>aria-required="true"<% end %>
   >
     <span class="mdc-select__ripple"></span>
-    <span id="<%= id %>-label" class="mdc-floating-label !relative !w-full"><%= label || name.capitalize %></span>
-    <div class="mdc-chip-set !grow !flex-wrap" role="grid"></div>
+    <span id="<%= id %>-label" class="mdc-floating-label relative! w-full!"><%= label || name.capitalize %></span>
+    <div class="mdc-chip-set grow! flex-wrap!" role="grid"></div>
     <%= render 'components/select_dropdown_icon' %>
-    <span class="mdc-select__selected-text-container !grow-0 !max-h-0"><span id="<%= id %>-selected-text" class="mdc-select__selected-text !hidden"></span></span>
+    <span class="mdc-select__selected-text-container grow-0! max-h-0!"><span id="<%= id %>-selected-text" class="mdc-select__selected-text hidden!"></span></span>
     <span class="mdc-line-ripple"></span>
   </div>
   <%= form.hidden_field name.to_sym, value: value, data: { 'material-chips-select-target': 'hidden' } if form %>
