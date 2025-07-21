@@ -1,0 +1,21 @@
+<div class="space-y-6 p-4">
+  <%= form_with(url: '/', method: :get, html: { novalidate: true }) do |form| %>
+    <div>
+      <h4 class="text-lg font-medium mb-2">Valid Input</h4>
+      <%= material_input(form: form, label: 'Valid Input', name: 'valid_input', id: 'valid_input', value: 'Valid value') %>
+    </div>
+    
+    <div>
+      <h4 class="text-lg font-medium mb-2">Required Input (Empty)</h4>
+      <%= material_input(form: form, label: 'Required Input', name: 'required_input', id: 'required_input', required: true) %>
+    </div>
+    
+    <div>
+      <h4 class="text-lg font-medium mb-2">Disabled Input</h4>
+      <%= material_input(form: form, label: 'Disabled Input', name: 'disabled_input', id: 'disabled_input', disabled: true, value: 'Cannot edit') %>
+    </div>
+    
+    <div>
+      <h4 class="text-lg font-medium mb-2">Input with Error</h4>
+      <%= material_input(form: form, label: 'Email Address', name: 'error_input', id: 'error_input', value: 'invalid-email', type: 'email') %>
+      <p class="text-red-600 text-sm mt-1">Please enter a valid email address</p>\n    </div>\n  <% end %>\n</div>

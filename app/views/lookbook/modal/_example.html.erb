@@ -1,0 +1,14 @@
+<div class="p-8">
+  <button class="mdc-button mdc-button--raised" onclick="document.getElementById('example-modal').style.display='block'">
+    <span class="mdc-button__label">Open Modal</span>
+  </button>
+  
+  <div id="example-modal" style="<%= opened ? 'display: block;' : 'display: none;' %>">
+    <%= material_modal(title: title, opened: opened) do %>
+      <div class="p-4">
+        <p>This is the modal content. It can contain any HTML elements.</p>
+        <p>The modal has proper focus management and keyboard accessibility.</p>
+      </div>
+    <% end %>
+  </div>
+</div>

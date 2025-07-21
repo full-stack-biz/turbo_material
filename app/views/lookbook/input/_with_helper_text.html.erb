@@ -1,0 +1,19 @@
+<div class="p-4">
+  <%= form_with(url: '/', method: :get, html: { novalidate: true }) do |form| %>
+    <div class="space-y-6">
+      <div>
+        <h4 class="text-lg font-medium mb-2">Input with Helper Text</h4>
+        <%= material_input(form: form, label: 'Username', name: 'username_helper', id: 'username_helper') %>
+        <p class="text-gray-600 text-sm mt-1 <%= persistent_helper ? 'opacity-100' : 'opacity-0 focus-within:opacity-100' %>">
+          <%= helper_text %>
+        </p>
+      </div>
+      
+      <div>
+        <h4 class="text-lg font-medium mb-2">Input with Character Counter</h4>
+        <%= material_input(form: form, label: 'Bio', name: 'bio_counter', id: 'bio_counter') %>
+        <p class="text-gray-600 text-sm mt-1 text-right">0 / 150 characters</p>
+      </div>
+    </div>
+  <% end %>
+</div>

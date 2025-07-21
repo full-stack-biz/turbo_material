@@ -1,0 +1,13 @@
+<div class="p-8 flex justify-center">
+  <div class="flex items-center gap-2">
+    <span>Need help?</span>
+    <button class="mdc-icon-button material-icons" id="help-button" aria-describedby="help-tooltip">
+      help
+    </button>
+    <%= material_tooltip(id: 'help-tooltip') do %>
+      <div class="max-w-xs">
+        Click this button to get assistance with your account settings and preferences.
+      </div>
+    <% end %>
+  </div>
+</div>

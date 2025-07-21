@@ -1,0 +1,11 @@
+<div class="p-8 flex justify-center">
+  <button class="mdc-button mdc-button--raised" id="rich-tooltip-button" aria-describedby="rich-tooltip">
+    <span class="mdc-button__label">Rich Content Tooltip</span>
+  </button>
+  <%= material_tooltip(id: 'rich-tooltip') do %>
+    <div class="text-left">
+      <strong class="block">User Profile</strong>
+      <span class="text-sm">Click to view details</span>
+    </div>
+  <% end %>
+</div>

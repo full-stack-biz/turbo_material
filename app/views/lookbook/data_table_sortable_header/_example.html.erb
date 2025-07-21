@@ -1,0 +1,24 @@
+<%
+  # Mock helper methods for preview
+  def sort_class(sort_value)
+    sort_value == 'none' ? '' : ' mdc-data-table__header-cell--sorted'
+  end
+  
+  def sort_arrow(sort_value)
+    sort_value == 'descending' ? 'arrow_downward' : 'arrow_upward'
+  end
+%>
+
+<div class="p-4">
+  <table class="mdc-data-table__table">
+    <thead>
+      <tr class="mdc-data-table__header-row">
+        <%= material_data_table_sortable_header(
+          label: label,
+          sort_value: sort_value,
+          column_id: column_id
+        ) %>
+      </tr>
+    </thead>
+  </table>
+</div>

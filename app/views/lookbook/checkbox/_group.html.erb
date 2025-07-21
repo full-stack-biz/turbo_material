@@ -1,0 +1,16 @@
+<div class="p-4">
+  <%= form_with(url: '/', method: :get, html: { novalidate: true }) do |form| %>
+    <div>
+      <h4 class="text-lg font-medium mb-4"><%= group_label %></h4>
+      <div class="space-y-2">
+        <%- (1..option_count).each do |i| -%>
+          <%= material_checkbox(form: form, 
+                                label: \"Option #{i}\", 
+                                name: \"group_option_#{i}\", 
+                                id: \"group_option_#{i}\",
+                                checked: i <= 2) %>
+        <%- end -%>
+      </div>
+    </div>
+  <% end %>
+</div>

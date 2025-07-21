@@ -1,0 +1,111 @@
+<%
+  # Define mock data directly to avoid dependency issues
+  user_skills = [
+    { label: 'Problem Solving', value: 'problem_solving' },
+    { label: 'Communication', value: 'communication' },
+    { label: 'Leadership', value: 'leadership' },
+    { label: 'Teamwork', value: 'teamwork' },
+    { label: 'Creativity', value: 'creativity' },
+    { label: 'Time Management', value: 'time_management' }
+  ]
+  
+  departments = [
+    { label: 'Engineering', value: 'engineering' },
+    { label: 'Design', value: 'design' },
+    { label: 'Marketing', value: 'marketing' },
+    { label: 'Sales', value: 'sales' },
+    { label: 'HR', value: 'hr' },
+    { label: 'Finance', value: 'finance' },
+    { label: 'Operations', value: 'operations' },
+    { label: 'Support', value: 'support' }
+  ]
+%>
+
+<div class="p-6 max-w-4xl mx-auto">
+  <div class="bg-white rounded-lg shadow-lg">
+    <!-- Header -->
+    <div class="px-6 py-4 border-b border-gray-200">
+      <h1 class="text-2xl font-bold text-gray-900">User Profile Settings</h1>
+      <p class="text-gray-600">Manage your account information and preferences</p>
+    </div>
+    
+    <!-- Form Content -->
+    <div class="p-6">
+      <%= form_with(url: '#', method: :patch, html: { novalidate: true, class: 'space-y-8' }) do |form| %>
+        
+        <!-- Personal Information Section -->
+        <section>
+          <h2 class="text-lg font-semibold text-gray-900 mb-4">Personal Information</h2>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div>
+              <%= material_input(form: form, label: 'First Name', name: 'first_name', id: 'first_name', 
+                                value: 'John', required: true) %>
+            </div>
+            <div>
+              <%= material_input(form: form, label: 'Last Name', name: 'last_name', id: 'last_name', 
+                                value: 'Doe', required: true) %>
+            </div>
+            <div class="md:col-span-2">
+              <%= material_input(form: form, label: 'Email Address', name: 'email', id: 'email', 
+                                type: 'email', value: 'john.doe@example.com', required: true) %>
+            </div>
+            <div>
+              <%= material_input(form: form, label: 'Phone Number', name: 'phone', id: 'phone', 
+                                type: 'tel', value: '+1 (555) 123-4567') %>
+            </div>
+            <div>
+              <%= material_select(form: form, label: 'Department', name: 'department', id: 'department',
+                                 options: departments, value: 'engineering') %>
+            </div>
+          </div>
+        </section>
+
+        <!-- Bio Section -->
+        <section>
+          <h2 class="text-lg font-semibold text-gray-900 mb-4">About</h2>
+          <%= material_textarea(form: form, label: 'Bio', name: 'bio', id: 'bio', 
+                               value: 'Experienced software developer with a passion for creating innovative solutions.') %>
+        </section>
+
+        <!-- Skills Section -->
+        <section>
+          <h2 class="text-lg font-semibold text-gray-900 mb-4">Skills & Expertise</h2>
+          <%= material_chips_select(form: form, label: 'Skills', name: 'skills', id: 'skills',
+                                   options: user_skills.map { |skill| { label: skill[:label], value: skill[:value] } }) %>
+        </section>
+
+        <!-- Preferences Section -->
+        <section>
+          <h2 class="text-lg font-semibold text-gray-900 mb-4">Preferences</h2>
+          <div class="space-y-4">
+            <%= material_switch(label: 'Email Notifications', true_label: 'On', false_label: 'Off') %>
+            <%= material_switch(label: 'Dark Mode', true_label: 'Enabled', false_label: 'Disabled') %>
+            
+            <div class="space-y-2">
+              <h3 class="text-base font-medium text-gray-900">Communication</h3>
+              <%= material_checkbox(form: form, label: 'Product updates', name: 'updates', id: 'updates', checked: true) %>
+              <%= material_checkbox(form: form, label: 'Marketing emails', name: 'marketing', id: 'marketing') %>
+              <%= material_checkbox(form: form, label: 'Security alerts', name: 'security', id: 'security', checked: true) %>
+            </div>
+          </div>
+        </section>
+
+        <!-- Action Buttons -->
+        <div class="flex justify-between pt-6 border-t border-gray-200">
+          <button type="button" class="mdc-button mdc-button--outlined">
+            <span class="mdc-button__label">Cancel Changes</span>
+          </button>
+          
+          <div class="space-x-3">
+            <button type="button" class="mdc-button">
+              <span class="mdc-button__label">Preview</span>
+            </button>
+            <button type="submit" class="mdc-button mdc-button--raised">
+              <span class="mdc-button__label">Save Changes</span>
+            </button>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

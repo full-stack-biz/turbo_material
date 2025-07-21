@@ -1,0 +1,13 @@
+<%- records.each do |record| -%>
+  <tr class="mdc-data-table__row">
+    <%= material_data_table_row_checkbox(id: "row_#{record[:id]}", checked: selected_records.include?(record[:id].to_s)) %>
+    <td class="mdc-data-table__cell"><%= record[:first_name] %></td>
+    <td class="mdc-data-table__cell"><%= record[:last_name] %></td>
+    <td class="mdc-data-table__cell"><%= record[:email] %></td>
+    <td class="mdc-data-table__cell">
+      <span class="<%= record[:role] == 'Admin' ? 'bg-blue-100 text-blue-800' : 'bg-gray-100 text-gray-800' %> px-2 py-1 rounded-full text-xs">
+        <%= record[:role] %>
+      </span>
+    </td>
+  </tr>
+<%- end -%>

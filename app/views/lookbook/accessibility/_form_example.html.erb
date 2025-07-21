@@ -1,0 +1,103 @@
+<%
+  # Load mock data helper
+  require_relative '../../../../../../lib/lookbook/mock_data_helper' unless defined?(MockDataHelper)
+%>
+
+<div class="p-6 max-w-2xl mx-auto">
+  <h2 class="text-2xl font-bold mb-6">Accessible User Registration Form</h2>
+  
+  <%= form_with(url: '#', method: :post, html: { 
+    novalidate: true, 
+    'aria-label': 'User registration form',
+    role: 'form'
+  }) do |form| %>
+    <fieldset class="space-y-6">
+      <legend class="text-lg font-semibold mb-4">Personal Information</legend>
+      
+      <div>
+        <%= material_input(
+          form: form, 
+          label: 'Full Name', 
+          name: 'full_name', 
+          id: 'user_full_name',
+          required: true,
+          data: { 'aria-describedby': 'full_name_help' }
+        ) %>
+        <p id="full_name_help" class="text-sm text-gray-600 mt-1">
+          Enter your first and last name as they appear on your ID
+        </p>
+      </div>
+      
+      <div>
+        <%= material_input(
+          form: form, 
+          label: 'Email Address', 
+          name: 'email', 
+          id: 'user_email',
+          type: 'email',
+          required: true,
+          data: { 'aria-describedby': 'email_help email_error' }
+        ) %>
+        <p id="email_help" class="text-sm text-gray-600 mt-1">
+          We'll use this to send you important updates
+        </p>
+        <p id="email_error" class="text-sm text-red-600 mt-1" role="alert" aria-live="polite">
+          <!-- Error messages will appear here -->
+        </p>
+      </div>
+      
+      <div>
+        <%= material_select(
+          form: form,
+          label: 'Country/Region',
+          name: 'country',
+          id: 'user_country',
+          required: true,
+          options: [
+            { label: 'Select country...', value: '' },
+            { label: 'United States', value: 'US' },
+            { label: 'Canada', value: 'CA' },
+            { label: 'United Kingdom', value: 'GB' },
+            { label: 'Germany', value: 'DE' },
+            { label: 'France', value: 'FR' }
+          ],
+          data: { 'aria-describedby': 'country_help' }
+        ) %>
+        <p id="country_help" class="text-sm text-gray-600 mt-1">
+          Select your country of residence
+        </p>
+      </div>
+      
+      <fieldset>
+        <legend class="text-base font-medium mb-3">Communication Preferences</legend>
+        <div class="space-y-2">
+          <%= material_checkbox(
+            form: form,
+            label: 'Email notifications',
+            name: 'notifications_email',
+            id: 'notifications_email',
+            data: { 'aria-describedby': 'notifications_help' }
+          ) %>
+          <%= material_checkbox(
+            form: form,
+            label: 'Product updates',
+            name: 'notifications_updates',
+            id: 'notifications_updates'
+          ) %>
+        </div>
+        <p id="notifications_help" class="text-sm text-gray-600 mt-2">
+          You can change these preferences anytime in your account settings
+        </p>
+      </fieldset>
+      
+      <div class="pt-4">
+        <button type="submit" class="mdc-button mdc-button--raised w-full" aria-describedby="submit_help">
+          <span class="mdc-button__label">Create Account</span>
+        </button>
+        <p id="submit_help" class="text-sm text-gray-600 mt-2 text-center">
+          By creating an account, you agree to our terms of service
+        </p>
+      </div>
+    </fieldset>
+  <% end %>
+</div>

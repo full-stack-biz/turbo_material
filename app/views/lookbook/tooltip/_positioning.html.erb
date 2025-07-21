@@ -1,0 +1,22 @@
+<div class="p-12 grid grid-cols-3 gap-8">
+  <div class="text-center">
+    <button class="mdc-button mdc-button--outlined" id="tooltip-left-button" aria-describedby="tooltip-left">
+      <span class="mdc-button__label">Left</span>
+    </button>
+    <%= material_tooltip(id: 'tooltip-left') do %>Tooltip on the left<% end %>
+  </div>
+  
+  <div class="text-center">
+    <button class="mdc-button mdc-button--outlined" id="tooltip-top-button" aria-describedby="tooltip-top">
+      <span class="mdc-button__label">Top</span>
+    </button>
+    <%= material_tooltip(id: 'tooltip-top') do %>Tooltip on top<% end %>
+  </div>
+  
+  <div class="text-center">
+    <button class="mdc-button mdc-button--outlined" id="tooltip-right-button" aria-describedby="tooltip-right">
+      <span class="mdc-button__label">Right</span>
+    </button>
+    <%= material_tooltip(id: 'tooltip-right') do %>Tooltip on the right<% end %>
+  </div>
+</div>

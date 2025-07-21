@@ -1,0 +1,18 @@
+<div class="p-4">
+  <table class="mdc-data-table__table">
+    <tbody>
+      <tr class="mdc-data-table__row">
+        <%= material_data_table_row_checkbox(id: 'unchecked_row', checked: false) %>
+        <td class="mdc-data-table__cell">Unchecked row</td>
+      </tr>
+      <tr class="mdc-data-table__row mdc-data-table__row--selected">
+        <%= material_data_table_row_checkbox(id: 'checked_row', checked: true) %>
+        <td class="mdc-data-table__cell">Checked row</td>
+      </tr>
+      <tr class="mdc-data-table__row">
+        <%= material_data_table_row_checkbox(id: 'another_unchecked', checked: false) %>
+        <td class="mdc-data-table__cell">Another unchecked row</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

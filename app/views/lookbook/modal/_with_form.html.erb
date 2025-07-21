@@ -1,0 +1,23 @@
+<div class="p-8">
+  <button class="mdc-button mdc-button--raised" onclick="document.getElementById('form-modal').style.display='block'">
+    <span class="mdc-button__label">Open Form Modal</span>
+  </button>
+  
+  <div id="form-modal" style="display: none;">
+    <%= form_with(url: '#', method: :post, html: { novalidate: true }) do |form| %>
+      <%= material_modal(title: 'Add New Item', form: form) do %>
+        <div class="p-4 space-y-4">
+          <%= material_input(form: form, label: 'Item Name', name: 'item_name', id: 'item_name', required: true) %>
+          <%= material_textarea(form: form, label: 'Description', name: 'description', id: 'description') %>
+          <%= material_select(form: form, label: 'Category', name: 'category', id: 'category',
+                             options: [
+                               { value: '', label: 'Select category...' },
+                               { value: 'work', label: 'Work' },
+                               { value: 'personal', label: 'Personal' },
+                               { value: 'urgent', label: 'Urgent' }
+                             ]) %>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
+</div>

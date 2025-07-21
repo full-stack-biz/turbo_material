@@ -1,0 +1,22 @@
+<div class="p-4">
+  <%= form_with(url: '/', method: :get, html: { novalidate: true }) do |form| %>
+    <div class="space-y-4">
+      <div>
+        <h4 class="text-lg font-medium mb-2">Search Input with Leading Icon</h4>
+        <div class="relative">
+          <span class="material-icons absolute left-3 top-3 text-gray-500"><%= icon_name %></span>
+          <%= material_input(form: form, label: 'Search', name: 'search_input', id: 'search_input', 
+                            custom_css: icon_position == 'leading' ? 'pl-10' : 'pr-10') %>
+        </div>
+      </div>
+      
+      <div>
+        <h4 class="text-lg font-medium mb-2">Input with Trailing Icon</h4>
+        <div class="relative">
+          <%= material_input(form: form, label: 'Password', name: 'password_input', id: 'password_input', type: 'password') %>
+          <span class="material-icons absolute right-3 top-3 text-gray-500 cursor-pointer">visibility</span>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>

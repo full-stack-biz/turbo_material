@@ -1,0 +1,8 @@
+<div class="p-8 flex justify-center">
+  <button class="mdc-button mdc-button--raised" id="tooltip-example-button" aria-describedby="tooltip-example">
+    <span class="mdc-button__label">Hover for tooltip</span>
+  </button>
+  <%= material_tooltip(id: 'tooltip-example') do %>
+    <%= tooltip_text %>
+  <% end %>
+</div>

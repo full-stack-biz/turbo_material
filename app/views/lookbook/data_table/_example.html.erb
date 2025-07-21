@@ -1,0 +1,20 @@
+<%
+  # Mock helper methods for preview
+  def per_page_options
+    [5, 10, 25, 50].map { |n| { label: n.to_s, value: n } }
+  end
+%>
+
+<div class="p-4">
+  <%= material_data_table(
+    name: local_assigns[:name] || 'Mock Table',
+    table_body: 'preview-table-body',
+    url: '#',
+    table_params: {},
+    records: local_assigns[:records] || [],
+    selected_records: local_assigns[:selected_records] || [],
+    pagy: local_assigns[:pagy] || OpenStruct.new(from: 1, to: 3, count: 3, page: 1, last: 1, prev: nil, next: nil, items: 10),
+    table_headers_partial: 'lookbook/data_table/headers',
+    table_contents_partial: 'lookbook/data_table/contents'
+  ) %>
+</div>

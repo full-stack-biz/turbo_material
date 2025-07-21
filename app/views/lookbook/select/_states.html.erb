@@ -1,0 +1,43 @@
+<div class="p-4">
+  <%= form_with(url: '/', method: :get, html: { novalidate: true }) do |form| %>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div>
+        <h4 class="text-lg font-medium mb-2">Filled Select</h4>
+        <%= material_select(form: form, label: 'Choose Option', name: 'filled_select', id: 'filled_select', 
+                           options: [
+                             { value: '', label: 'Select...' },
+                             { value: 'option1', label: 'Option 1' },
+                             { value: 'option2', label: 'Option 2' }
+                           ], outlined: false) %>
+      </div>
+      
+      <div>
+        <h4 class="text-lg font-medium mb-2">Outlined Select</h4>
+        <%= material_select(form: form, label: 'Choose Option', name: 'outlined_select', id: 'outlined_select',
+                           options: [
+                             { value: '', label: 'Select...' },
+                             { value: 'option1', label: 'Option 1' },
+                             { value: 'option2', label: 'Option 2' }
+                           ], outlined: true) %>
+      </div>
+      
+      <div>
+        <h4 class="text-lg font-medium mb-2">Disabled Select</h4>
+        <%= material_select(form: form, label: 'Disabled', name: 'disabled_select', id: 'disabled_select',
+                           options: [
+                             { value: 'readonly', label: 'Read Only Value' }
+                           ], disabled: true) %>
+      </div>
+      
+      <div>
+        <h4 class="text-lg font-medium mb-2">Required Select</h4>
+        <%= material_select(form: form, label: 'Required Field', name: 'required_select', id: 'required_select',
+                           options: [
+                             { value: '', label: 'Must select...' },
+                             { value: 'required1', label: 'Required Option 1' },
+                             { value: 'required2', label: 'Required Option 2' }
+                           ], required: true) %>
+      </div>
+    </div>
+  <% end %>
+</div>

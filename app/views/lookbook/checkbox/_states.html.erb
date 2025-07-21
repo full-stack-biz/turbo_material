@@ -1,0 +1,15 @@
+<div class="p-4">
+  <%= form_with(url: '/', method: :get, html: { novalidate: true }) do |form| %>
+    <div class="space-y-4">
+      <div>
+        <h4 class="text-lg font-medium mb-2">Checkbox States</h4>
+        <div class="space-y-2">
+          <%= material_checkbox(form: form, label: 'Unchecked', name: 'unchecked', id: 'unchecked', checked: false) %>
+          <%= material_checkbox(form: form, label: 'Checked', name: 'checked', id: 'checked', checked: true) %>
+          <%= material_checkbox(form: form, label: 'Disabled Unchecked', name: 'disabled_unchecked', id: 'disabled_unchecked', disabled: true, checked: false) %>
+          <%= material_checkbox(form: form, label: 'Disabled Checked', name: 'disabled_checked', id: 'disabled_checked', disabled: true, checked: true) %>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>
