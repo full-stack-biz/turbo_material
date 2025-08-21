@@ -1,11 +1,11 @@
 PATH
   remote: .
   specs:
-    turbo_material (0.3.2)
+    turbo_material (0.3.3)
       importmap-rails (~> 2.0.1)
       rails (>= 7.1.2, < 9.0)
       stimulus-rails (~> 1.3)
-      tailwindcss-rails (= 4.3.0.rc2)
+      tailwindcss-rails (>= 4.3.0)
 
 GEM
   remote: https://rubygems.org/
@@ -244,12 +244,12 @@ GEM
     stimulus-rails (1.3.3)
       railties (>= 6.0.0)
     stringio (3.1.6)
-    tailwindcss-rails (4.3.0.rc2)
+    tailwindcss-rails (4.3.0)
       railties (>= 7.0.0)
       tailwindcss-ruby (~> 4.0)
-    tailwindcss-ruby (4.1.10-aarch64-linux-gnu)
-    tailwindcss-ruby (4.1.10-arm64-darwin)
-    tailwindcss-ruby (4.1.10-x86_64-linux-gnu)
+    tailwindcss-ruby (4.1.12-aarch64-linux-gnu)
+    tailwindcss-ruby (4.1.12-arm64-darwin)
+    tailwindcss-ruby (4.1.12-x86_64-linux-gnu)
     thor (1.3.2)
     timeout (0.4.1)
     turbo-rails (1.5.0)
@@ -282,7 +282,7 @@ DEPENDENCIES
   sprockets-rails
   sqlite3
   stimulus-rails (~> 1.3)
-  tailwindcss-rails (= 4.3.0.rc2)
+  tailwindcss-rails (>= 4.3.0)
   turbo-rails
   turbo_material!
 
