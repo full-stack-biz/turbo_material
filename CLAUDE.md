@@ -4,90 +4,36 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-TurboMaterial is a Ruby gem that provides Material Design components for Hotwire Turbo applications. It integrates Material Components for the Web with Rails applications using Turbo, Stimulus, and Tailwind CSS.
+TurboMaterial is a Rails engine gem providing Material Design components (Material Components for the Web, loaded via CDN) for Hotwire apps using Turbo, Stimulus, Importmaps and Tailwind CSS.
 
-## Common Commands
+## Commands
 
-### Development Setup
-- `bundle install` - Install gem dependencies
-- `bin/rails turbo_material:install` - Install the gem and add necessary files to the host application
+- `bundle install`
+- `bundle exec rake test` — run tests (engine tests run against `test/dummy`)
+- `bin/rails test test/integration/navigation_test.rb:LINE` — run a single test/file
+- `bundle exec rubocop` — lint (config inherits `.rubocop_todo.yml`)
+- `bin/dev` (root `Procfile.dev`) — dummy app server on port 3200 + `app:tailwindcss:watch`
+- `cd test/dummy && bin/rails console` — console in the dummy app
+- `bin/tailwindcss-builder` — legacy standalone Tailwind watch build into `app/assets/dist` (uses `config/tailwind.config.js`)
+- `gem build turbo_material.gemspec` / `gem push turbo_material-*.gem` — release
 
-### Testing
-- `bundle exec rake test` - Run the test suite
-- `cd test/dummy && bin/rails server` - Start the test/dummy Rails application for development
+Test coverage is minimal; components are verified visually via Lookbook previews in the dummy app (`lib/lookbook/*_preview.rb`).
 
-### Gem Management
-- `gem build turbo_material.gemspec` - Build the gem
-- `gem push turbo_material-*.gem` - Publish gem to RubyGems
+## Architecture
 
-### Development with Dummy App
-The `test/dummy` directory contains a full Rails application used for testing and development:
-- `cd test/dummy && bin/rails console` - Rails console in dummy app
-- `cd test/dummy && bin/rails server` - Start dummy app server
-- `cd test/dummy && bin/dev` - Start development server with hot reloading (if Procfile.dev exists)
+A component is spread across four places, all sharing the component name:
+- `app/helpers/turbo_material/<name>_helper.rb` — public helper (`material_<name>(options)`), normalizes options and renders the partial
+- `app/views/components/_<name>.html.erb` — markup
+- `app/assets/javascripts/turbo_material/material_<name>_controller.js` — Stimulus controller that instantiates the MDC JS object
+- `lib/lookbook/<name>_preview.rb` — preview/docs
 
-## Code Architecture
+Adding a component also requires registering its helper in `lib/turbo_material/engine.rb` (helpers are added explicitly, not autoloaded into host controllers). JS needs no pin: `config/importmap.rb` uses `pin_all_from app/assets/javascripts`.
 
-### Engine Structure
-This is a Rails engine (`lib/turbo_material/engine.rb`) that:
-- Isolates namespace under `TurboMaterial`
-- Registers view helpers for all Material components
-- Integrates with Tailwind CSS and Importmap
-- Adds asset paths and precompilation for JavaScript and CSS
+Engine wiring (`lib/turbo_material/engine.rb`):
+- Adds `config/importmap.rb` to the host's importmap; host loads controllers via `eagerLoadControllersFrom("turbo_material", application)`
+- Registers itself with `tailwindcss-rails` engines; Tailwind source is `app/assets/tailwind/turbo_material/engine.css`, compiled output in `app/assets/dist/turbo_material/tailwind.css`
+- Host app imports it with `@import "../builds/tailwind/turbo_material.css";`
 
-### Component Organization
-- **Views**: `app/views/components/` - ERB templates for Material components
-- **Helpers**: `app/helpers/turbo_material/` - One helper per component type
-- **JavaScript Controllers**: `app/assets/javascripts/turbo_material/` - Stimulus controllers
-- **Styles**: `app/assets/stylesheets/turbo_material/` and `app/assets/tailwind/turbo_material/`
-- **Lookbook Previews**: `lib/lookbook/` - Component documentation and previews
+Install generator (`lib/generators/turbo_material/install_generator.rb`, invoked by `rails turbo_material:install`; `turbo_material:update_tailwind` runs it with `--update-tailwind-only`) adds MDC CDN links to the layout, the Tailwind import, and the Stimulus import.
 
-### Key Components
-The gem provides 17+ Material Design components including:
-- Form components (input, checkbox, radio, switch, select, textarea)
-- Data components (chips, data tables)
-- UI components (modals, tooltips, menu buttons)
-- Each component has corresponding helper, view template, and Stimulus controller
-
-### Installation Generator
-`lib/generators/turbo_material/install_generator.rb` automates:
-- Adding Material Components Web CDN links to application layout
-- Adding Tailwind import for turbo_material.css
-- Configuring Stimulus controllers import
-
-### Dependencies
-- **Rails**: 7.1.2+ required
-- **Stimulus**: For JavaScript interactivity
-- **Turbo**: Required for server-based components like chips
-- **Tailwind CSS**: For styling integration
-- **Importmaps**: For JavaScript module loading
-- **Material Components Web**: Loaded via CDN
-
-### Development Dependencies
-- **Lookbook**: Component documentation system
-- **Carmen**: Country data (for select examples)
-- **RuboCop**: Code linting
-
-## Helper Methods Pattern
-
-Each component follows a consistent helper pattern:
-- Helper method takes options hash and optional block
-- Returns rendered partial with processed options
-- Common options: `form`, `name`, `id`, `label`, `disabled`, `required`
-- Complex components may have additional options like `url`, `options`, `selected`
-
-## Stimulus Controllers
-
-Controllers are prefixed with `material_` and follow naming convention:
-- `material_input_controller.js`
-- `material_checkbox_controller.js` 
-- etc.
-
-Controllers initialize Material Components Web JavaScript for interactive behavior.
-
-## Asset Management
-
-- CSS assets compiled to `app/assets/dist/`
-- JavaScript assets in `app/assets/javascripts/turbo_material/`
-- Tailwind config integrates engine assets
-- Engine manifest loaded via `turbo_material_manifest.js`
+Server-backed components (chips input/select) depend on Turbo and a server endpoint (`url`) that renders the options HTML.
