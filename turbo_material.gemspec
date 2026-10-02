@@ -16,6 +16,7 @@ Gem::Specification.new do |spec|
   spec.metadata['homepage_uri'] = spec.homepage
   spec.metadata['source_code_uri'] = 'https://github.com/full-stack-biz/turbo_material'
   spec.metadata['changelog_uri'] = 'https://github.com/full-stack-biz/turbo_material/blob/main/CHANGELOG.md'
+  spec.metadata['rubygems_mfa_required'] = 'true'
 
   spec.post_install_message = <<~MSG
     Installing `turbo_material` gem. Please, follow the instructions in the README.md file.
