@@ -25,9 +25,6 @@ gem 'tailwindcss-rails', '>= 4.3.0'
 
 gem 'carmen'
 
-# json 3 breaks to_json with options on Rails 7.1 (unknown local: quirks_mode)
-gem 'json', '< 3'
-
 group :development do
   gem 'rubocop'
 end
