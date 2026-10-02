@@ -5,7 +5,7 @@ export default class extends Controller {
         this.list = mdc.list.MDCList.attachTo(this.element);
         this.list.listen('MDCList:action', (event) => {
             this.focusElement(event.detail.index);
-            this.element.dispatchEvent(new CustomEvent('country-select-focus', {
+            this.element.dispatchEvent(new CustomEvent('material-list:action', {
                 bubbles: true,
                 cancelable: true,
                 detail: {
@@ -53,5 +53,6 @@ export default class extends Controller {
     }
 
     disconnect() {
+        this.list?.destroy();
     }
 }

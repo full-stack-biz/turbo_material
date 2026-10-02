@@ -21,19 +21,23 @@ export default class extends Controller {
         if (this.selectedValue.length > 0) {
             this.select.foundation.adapter.floatLabel(true);
             this.selectedValue.forEach(item => {
-                let listItem = this.element.querySelector(`.mdc-deprecated-list-item[data-value="${item}"]`);
-                this.addChip(this.chipTemplate(listItem.dataset.label, listItem.dataset.value, listItem.dataset.confirmed), listItem.dataset.value);
+                let listItem = this.listItem(item);
+                this.addChip(listItem.dataset.label, listItem.dataset.value, listItem.dataset.confirmed);
                 listItem.classList.add('!hidden');
             });
         }
         this.select.listen('MDCSelect:change', (event) => {
-            const selected = this.element.querySelector(`.mdc-deprecated-list-item[data-value="${event.detail.value}"]`);
+            const selected = this.listItem(event.detail.value);
             selected.classList.add('!hidden');
-            this.addChip(this.chipTemplate(selected.dataset.label, selected.dataset.value, selected.dataset.confirmed), selected.dataset.value);
+            this.addChip(selected.dataset.label, selected.dataset.value, selected.dataset.confirmed);
         });
     }
 
-    addChip(content, value) {
+    listItem(value) {
+        return this.element.querySelector(`.mdc-deprecated-list-item[data-value="${CSS.escape(value)}"]`);
+    }
+
+    addChip(label, value, confirmed) {
         const chipEl = document.createElement('div');
         chipEl.role = 'row';
         chipEl.classList.add('mdc-chip');
@@ -41,7 +45,18 @@ export default class extends Controller {
             chipEl.classList.add(this.chipCssValue);
         }
         chipEl.dataset.value = value;
-        chipEl.innerHTML = content;
+        const text = document.createElement('div');
+        text.className = 'mdc-chip__text';
+        text.dataset.action = 'click->material-chips-select#toggle';
+        text.textContent = (confirmed === 'false' && this.confirmableValue) ? `${label} (unconfirmed)` : label;
+        const icon = document.createElement('i');
+        icon.className = 'material-icons mdc-chip__icon mdc-chip__icon--trailing';
+        icon.tabIndex = 0;
+        icon.setAttribute('role', 'button');
+        icon.dataset.action = 'click->material-chips-select#removeChip';
+        icon.dataset.value = value;
+        icon.textContent = 'cancel';
+        chipEl.append(text, icon);
         this.chipsetEl.appendChild(chipEl);
         this.materialChipset.addChip(chipEl);
         if (this.hasHiddenTarget) {
@@ -60,12 +75,12 @@ export default class extends Controller {
     removeChip(event) {
         event.stopPropagation();
         event.preventDefault();
-        const chip = this.element.querySelector(`.mdc-chip[data-value="${event.target.dataset.value}"]`);
+        const chip = this.element.querySelector(`.mdc-chip[data-value="${CSS.escape(event.target.dataset.value)}"]`);
         this.chipsetEl.removeChild(chip);
         if (this.hasHiddenTarget) {
             this.hiddenTarget.value = this.materialChipset.chipsList.map((chip) => chip.root.dataset.value).join(',');
         }
-        const selected = this.element.querySelector(`.mdc-deprecated-list-item[data-value="${event.target.dataset.value}"]`);
+        const selected = this.listItem(event.target.dataset.value);
         selected.classList.remove('!hidden');
         if (this.urlValue) {
             destroy(`${this.urlValue}/${event.target.dataset.value}`, {
@@ -81,7 +96,7 @@ export default class extends Controller {
         if (this.confirmableValue) {
             event.stopPropagation();
             event.preventDefault();
-            const item = this.element.querySelector(`.mdc-deprecated-list-item[data-value="${event.target.parentElement.dataset.value}"]`);
+            const item = this.listItem(event.target.parentElement.dataset.value);
             item.dataset.confirmed = item.dataset.confirmed === 'true' ? 'false' : 'true';
             if (item.dataset.confirmed === 'true') {
                 let params = new URLSearchParams(this.queryStringValue);
@@ -102,11 +117,8 @@ export default class extends Controller {
         }
     }
 
-    chipTemplate(label, value, confirmed) {
-        const confirm_label = (confirmed === 'false' && this.confirmableValue) ? '&nbsp;(unconfirmed)' : '';
-        return `<div class="mdc-chip__text" data-action="click->material-chips-select#toggle">${label}${confirm_label}</div><i data-action="click->material-chips-select#removeChip" data-value="${value}" class="material-icons mdc-chip__icon mdc-chip__icon--trailing" tabindex="0" role="button">cancel</i>`;
-    }
-
     disconnect() {
+        this.materialChipset?.destroy();
+        this.select?.destroy();
     }
 }

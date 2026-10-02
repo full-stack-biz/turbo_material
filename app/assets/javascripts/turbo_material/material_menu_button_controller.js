@@ -6,7 +6,7 @@ export default class extends Controller {
     static values = { logoutPath: String };
 
     connect() {
-        mdc.ripple.MDCRipple.attachTo(this.element);
+        this.ripple = mdc.ripple.MDCRipple.attachTo(this.element);
         this.menu = mdc.menu.MDCMenu.attachTo(this.element.querySelector('.mdc-menu-surface'));
         const button = this.element.querySelector('.menu-button');
         this.menu.setAnchorElement(button);
@@ -15,6 +15,8 @@ export default class extends Controller {
     }
 
     disconnect() {
+        this.menu?.destroy();
+        this.ripple?.destroy();
     }
 
     toggleMenu(event) {

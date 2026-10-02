@@ -7,20 +7,18 @@ module TurboMaterial
     HEAD_LINKS = <<-HTML.rstrip.freeze
 
 
-    <link href="//cdn.jsdelivr.net/npm/material-components-web@latest/dist/material-components-web.min.css" rel="stylesheet">
-    <script src="//cdn.jsdelivr.net/npm/material-components-web@latest/dist/material-components-web.min.js"></script>
+    <link href="//cdn.jsdelivr.net/npm/material-components-web@#{MDC_VERSION}/dist/material-components-web.min.css" rel="stylesheet">
+    <script src="//cdn.jsdelivr.net/npm/material-components-web@#{MDC_VERSION}/dist/material-components-web.min.js"></script>
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">#{' '}
     HTML
 
-    IMPORT = '@import "../builds/tailwind/turbo_material.css";'.freeze
+    IMPORT = '@import "../builds/tailwind/turbo_material.css";'
 
     def add_turbo_material_tailwind
       return if options[:update_tailwind_only]
 
       tailwind_path = Rails.root.join('app/assets/tailwind/application.css')
-      unless tailwind_path.exist?
-        raise '`app/assets/tailwind/application.css` does not exist'
-      end
+      raise '`app/assets/tailwind/application.css` does not exist' unless tailwind_path.exist?
 
       if tailwind_path.read.include?(IMPORT)
         puts "`app/assets/tailwind/application.css` already contains `#{IMPORT}`"
@@ -56,7 +54,7 @@ module TurboMaterial
         raise '`app/views/layouts/application.html.erb` does not exist or does not contain `<%= csp_meta_tag %>`'
       end
 
-      if layout_path.read.include?('<link href="//cdn.jsdelivr.net/npm/material-components-web@latest/dist/material-components-web.min.css" rel="stylesheet">')
+      if layout_path.read.include?('//cdn.jsdelivr.net/npm/material-components-web@')
         puts '`app/views/layouts/application.html.erb` head already contains material components web links'
       else
         insert_into_file layout_path, after: '<%= csp_meta_tag %>' do

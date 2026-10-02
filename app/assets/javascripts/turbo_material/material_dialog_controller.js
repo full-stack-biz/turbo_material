@@ -2,6 +2,7 @@ import { Controller } from "@hotwired/stimulus";
 
 export default class extends Controller {
     dialog = undefined;
+    ripples = [];
 
     static values = {
         opened: Boolean,
@@ -12,7 +13,7 @@ export default class extends Controller {
         this.dialog = mdc.dialog.MDCDialog.attachTo(this.element);
         this.dialog.listen('MDCDialog:opened', () => {
             this.element.querySelectorAll('.mdc-icon-button').forEach((button) => {
-                mdc.ripple.MDCRipple.attachTo(button);
+                this.ripples.push(mdc.ripple.MDCRipple.attachTo(button));
             });
         });
         if (this.openedValue) {
@@ -32,5 +33,7 @@ export default class extends Controller {
     }
 
     disconnect() {
+        this.ripples.forEach((ripple) => ripple.destroy());
+        this.dialog?.destroy();
     }
 }

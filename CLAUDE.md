@@ -27,7 +27,7 @@ A component is spread across four places, all sharing the component name:
 - `app/assets/javascripts/turbo_material/material_<name>_controller.js` — Stimulus controller that instantiates the MDC JS object
 - `lib/lookbook/<name>_preview.rb` — preview/docs
 
-Adding a component also requires registering its helper in `lib/turbo_material/engine.rb` (helpers are added explicitly, not autoloaded into host controllers). JS needs no pin: `config/importmap.rb` uses `pin_all_from app/assets/javascripts`.
+`lib/turbo_material/engine.rb` registers every `app/helpers/turbo_material/*_helper.rb` into host controllers automatically. JS needs no pin: `config/importmap.rb` uses `pin_all_from app/assets/javascripts`.
 
 Engine wiring (`lib/turbo_material/engine.rb`):
 - Adds `config/importmap.rb` to the host's importmap; host loads controllers via `eagerLoadControllersFrom("turbo_material", application)`
