@@ -2,9 +2,9 @@ import { Controller } from "@hotwired/stimulus";
 
 export default class extends Controller {
   connect() {
-    const select = mdc.select.MDCSelect.attachTo(this.element);
-    select.listen("MDCSelect:change", () => {
-      select.root.dispatchEvent(
+    this.select = mdc.select.MDCSelect.attachTo(this.element);
+    this.select.listen("MDCSelect:change", () => {
+      this.select.root.dispatchEvent(
         new CustomEvent("submit-now", {
           bubbles: true,
           cancelable: true,
@@ -13,5 +13,7 @@ export default class extends Controller {
     });
   }
 
-  disconnect() {}
+  disconnect() {
+    this.select?.destroy();
+  }
 }

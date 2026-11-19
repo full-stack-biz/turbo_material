@@ -15,7 +15,8 @@ Gem::Specification.new do |spec|
 
   spec.metadata['homepage_uri'] = spec.homepage
   spec.metadata['source_code_uri'] = 'https://github.com/full-stack-biz/turbo_material'
-  spec.metadata["changelog_uri"] = "https://github.com/full-stack-biz/turbo_material/blob/main/CHANGELOG.md"
+  spec.metadata['changelog_uri'] = 'https://github.com/full-stack-biz/turbo_material/blob/main/CHANGELOG.md'
+  spec.metadata['rubygems_mfa_required'] = 'true'
 
   spec.post_install_message = <<~MSG
     Installing `turbo_material` gem. Please, follow the instructions in the README.md file.
@@ -34,7 +35,7 @@ Gem::Specification.new do |spec|
     Dir['{app,config,db,lib}/**/*', 'MIT-LICENSE', 'Rakefile', 'README.md']
   end
 
-  spec.add_dependency 'importmap-rails', '~> 2.0.1'
+  spec.add_dependency 'importmap-rails', '~> 2.0'
   spec.add_dependency 'rails', '>= 7.1.2', '< 9.0'
   spec.add_dependency 'stimulus-rails', '~> 1.3'
   spec.add_dependency 'tailwindcss-rails', '>= 4.3.0'

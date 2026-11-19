@@ -26,18 +26,21 @@ export default class extends Controller {
         useClickOutside(this);
     }
 
-    chipTemplate(label, value) {
-        return `<div class="mdc-chip__text">${label}</div><i data-action="click->material-chips-input#removeChip" data-value="${value}" class="material-icons mdc-chip__icon mdc-chip__icon--trailing" tabindex="0" role="button">cancel</i>`;
-    }
-
-    addChip(content, value) {
+    addChip(label, value) {
         const chipEl = document.createElement('div');
         chipEl.classList.add('mdc-chip');
-        if (this.chipCssValue) {
-            chipEl.classList.add(this.chipCssValue);
-        }
         chipEl.dataset.value = value;
-        chipEl.innerHTML = content;
+        const text = document.createElement('div');
+        text.className = 'mdc-chip__text';
+        text.textContent = label;
+        const icon = document.createElement('i');
+        icon.className = 'material-icons mdc-chip__icon mdc-chip__icon--trailing';
+        icon.tabIndex = 0;
+        icon.setAttribute('role', 'button');
+        icon.dataset.action = 'click->material-chips-input#removeChip';
+        icon.dataset.value = value;
+        icon.textContent = 'cancel';
+        chipEl.append(text, icon);
         this.chipsetEl.insertBefore(chipEl, this.hiddenTarget);
         this.chips.addChip(chipEl);
         this.hiddenTarget.value = this.chips.chipsList.map((chip) => chip.root.dataset.value).join(',');
@@ -47,7 +50,7 @@ export default class extends Controller {
     removeChip(event) {
         event.stopPropagation();
         event.preventDefault();
-        const chip = this.element.querySelector(`.mdc-chip[data-value="${event.target.dataset.value}"]`);
+        const chip = this.element.querySelector(`.mdc-chip[data-value="${CSS.escape(event.target.dataset.value)}"]`);
         const chipIndex = this.chips.foundation.adapter.getIndexOfChipById(chip.id);
         this.chips.foundation.adapter.removeChipAtIndex(chipIndex);
         if (this.chips.foundation.adapter.getChipListCount() === 0) {
@@ -95,7 +98,7 @@ export default class extends Controller {
     select(user) {
         this.close();
         this.inputTarget.value = "";
-        this.addChip(this.chipTemplate(user.dataset.name, user.dataset.value), user.dataset.value);
+        this.addChip(user.dataset.name, user.dataset.value);
     }
 
     focusNext(event) {
@@ -129,6 +132,8 @@ export default class extends Controller {
     }
 
     disconnect() {
+        this.chips?.destroy();
+        this.input?.destroy();
     }
 
     search() {

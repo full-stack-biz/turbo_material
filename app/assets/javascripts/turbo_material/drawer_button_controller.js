@@ -7,7 +7,7 @@ export default class extends Controller {
     if(!document.querySelector('.mdc-drawer--dismissible.mdc-drawer--right')) {
       this.element.style.display = 'none';
     } else {
-      mdc.ripple.MDCRipple.attachTo(this.element);
+      this.ripple = mdc.ripple.MDCRipple.attachTo(this.element);
     }
   }
 
@@ -16,5 +16,6 @@ export default class extends Controller {
   }
 
   disconnect() {
+    this.ripple?.destroy();
   }
 }

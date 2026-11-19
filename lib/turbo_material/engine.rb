@@ -7,31 +7,17 @@ module TurboMaterial
     isolate_namespace TurboMaterial
 
     initializer 'local_helper.action_controller' do
+      helper_paths = Dir[root.join('app/helpers/turbo_material/*_helper.rb')]
       ActiveSupport.on_load :action_controller do
-        helper TurboMaterial::ApplicationHelper
-        helper TurboMaterial::InputHelper
-        helper TurboMaterial::CheckboxHelper
-        helper TurboMaterial::ChipSetHelper
-        helper TurboMaterial::ChipsInputHelper
-        helper TurboMaterial::ChipsInputOptionsHelper
-        helper TurboMaterial::ChipsSelectHelper
-        helper TurboMaterial::DataTableHelper
-        helper TurboMaterial::MenuButtonHelper
-        helper TurboMaterial::ModalHelper
-        helper TurboMaterial::RadioHelper
-        helper TurboMaterial::SelectHelper
-        helper TurboMaterial::SwitchHelper
-        helper TurboMaterial::TextareaHelper
-        helper TurboMaterial::TooltipHelper
+        helper_paths.each { |path| helper "TurboMaterial::#{File.basename(path, '.rb').camelize}".constantize }
       end
     end
 
-    initializer 'turbo_material.tailwindcss' do |app|
+    initializer 'turbo_material.tailwindcss' do
       ActiveSupport.on_load(:tailwindcss_rails) do
         config.tailwindcss_rails.engines << TurboMaterial::Engine.engine_name
       end
     end
-
 
     initializer 'turbo_material.importmap', before: 'importmap' do |app|
       # NOTE: this will add pins from this engine to the main app

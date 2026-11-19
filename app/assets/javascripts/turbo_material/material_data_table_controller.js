@@ -20,10 +20,7 @@ export default class extends Controller {
     params.delete("reverse");
     params.append("order", event.detail.columnId);
     params.append("reverse", event.detail.sortValue === "descending" ? "true" : "false");
-    let frame = this.element.querySelector('turbo-frame#pupils-table-data');
     Turbo.visit(`${this.urlValue}?${params.toString()}`);
-    //   , { action: 'advance', frame: this.bodyValue }
-    // FIXME: get this back as soon as https://github.com/hotwired/turbo/issues/489 is fixed
   }
 
   select(event) {
@@ -52,5 +49,6 @@ export default class extends Controller {
   }
 
   disconnect() {
+    this.dataTable?.destroy();
   }
 }

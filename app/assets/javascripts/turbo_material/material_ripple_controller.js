@@ -7,5 +7,6 @@ export default class extends Controller {
     }
 
     disconnect() {
+        this.ripple?.destroy();
     }
 }

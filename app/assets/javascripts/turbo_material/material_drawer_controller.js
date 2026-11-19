@@ -76,5 +76,6 @@ export default class extends Controller {
   }
 
   disconnect() {
+    this.drawer?.destroy();
   }
 }
