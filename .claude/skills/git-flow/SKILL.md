@@ -14,7 +14,9 @@ description: >-
 `develop` is the development branch. Never commit to `main` directly.
 
 A push to `main` triggers `.github/workflows/gem-push.yml`, which runs `gem build` and `gem push`
-to rubygems.org with the `RUBYGEMS_AUTH_TOKEN` secret. Pushing `main` is publishing the gem:
+to rubygems.org with the `RUBYGEMS_AUTH_TOKEN` secret, on a GitHub-hosted runner: the org's
+self-hosted runner groups don't serve public repositories, and v0.3.4's run sat queued on
+`self-hosted` until cancelled. Pushing `main` is publishing the gem:
 a published version cannot be re-used, so a fix is the next version. Host apps (lite-crm,
 full_stack_biz) pick it up with `bundle update turbo_material`.
 
