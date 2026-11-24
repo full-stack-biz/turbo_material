@@ -1,5 +1,14 @@
 # `turbo_material` Changelog
 
+## v0.3.6
+
+### Fixed
+
+- Data table again uses the host's `per_page_options` helper when `per_page_options:` is not passed; 0.3.5 replaced it with 10/25/50/100
+- Chips input: `selected:` chips given as `{ value:, label: }` lost their value in 0.3.5, and `value: ''` kept the selected ids out of the hidden field; both work again
+- Chips input and select no longer put empty values in the hidden field
+- `material-live-form` keeps its state in `window.materialLiveForm`, so it no longer shares state with a host `live-form` controller
+
 ## v0.3.5
 
 ### Breaking
