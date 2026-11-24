@@ -6,8 +6,8 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
-    <link href="//cdn.jsdelivr.net/npm/material-components-web@latest/dist/material-components-web.min.css" rel="stylesheet">
-    <script src="//cdn.jsdelivr.net/npm/material-components-web@latest/dist/material-components-web.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/material-components-web@<%= TurboMaterial::MDC_VERSION %>/dist/material-components-web.min.css" rel="stylesheet" integrity="<%= TurboMaterial::MDC_CSS_SRI %>" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/material-components-web@<%= TurboMaterial::MDC_VERSION %>/dist/material-components-web.min.js" integrity="<%= TurboMaterial::MDC_JS_SRI %>" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 
     <%= stylesheet_link_tag "tailwind", "data-turbo-track": "reload" %>

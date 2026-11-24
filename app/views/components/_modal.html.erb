@@ -18,11 +18,12 @@
         </div>
       </h2>
       <div id="<%= id %>-content" class="mdc-dialog__content">
-        <%- if block_given? -%>
-          <%= yield %>
-        <%- else -%>
+        <%# block_given? is always true in a partial, so branch on the local %>
+        <%- if contents_partial -%>
           <%= render partial: contents_partial, locals: { form: form } %>
-        <% end %>
+        <%- else -%>
+          <%= yield %>
+        <%- end -%>
       </div>
       <div class="mdc-dialog__actions">
         <button type="button" class="mdc-button mdc-dialog__button mdc-dialog__close" data-action="click->material-dialog#close">

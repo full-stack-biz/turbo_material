@@ -30,10 +30,12 @@ eagerLoadControllersFrom("turbo_material", application)
 Add following to your `app/view/layouts/application.html.erb` in `<head>` section:
 
 ```erb
-<link href="//cdn.jsdelivr.net/npm/material-components-web@14.0.0/dist/material-components-web.min.css" rel="stylesheet">
-<script src="//cdn.jsdelivr.net/npm/material-components-web@14.0.0/dist/material-components-web.min.js"></script>
+<link href="https://cdn.jsdelivr.net/npm/material-components-web@14.0.0/dist/material-components-web.min.css" rel="stylesheet" integrity="sha256-YPguGDqg55HB8+tbrJBbWuiF9J+XCK7sjscaiwFMTxI=" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/material-components-web@14.0.0/dist/material-components-web.min.js" integrity="sha256-8DHMt+TYs1kVcO+R+oZYTrHYIYwHUOChiQsqKb2BT3g=" crossorigin="anonymous"></script>
 <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 ```
+
+The `integrity` hashes match MDC 14.0.0 (`TurboMaterial::MDC_VERSION`); they are also available as `TurboMaterial::MDC_CSS_SRI` and `TurboMaterial::MDC_JS_SRI`.
 
 Follow `test/dummy` in this project for examples.
 
@@ -310,19 +312,24 @@ Implements [Material Design Checkbox](https://github.com/material-components/mat
 Implements [Material Design Radio button](https://github.com/material-components/material-components-web/tree/master/packages/mdc-radio) component.
 
 ```erb
-<%= material_radio name: 'option', id: 'option-1', form: form, label: 'Option 1' %>
+<%= material_radio name: 'size', id: 'size', form: form, label: 'Size', value: 'm',
+                   options: [{ value: 's', label: 'Small' }, { value: 'm', label: 'Medium' }] %>
 ```
+
+Renders one radio per option. Without `options` it renders Yes/No (`'true'`/`'false'`), and a blank `value` selects No.
 
 #### Options
 
 | Option | Type | Description |
 | --- | --- | --- |
-| `name` | String | Radio button name |
-| `id` | String | Radio button ID |
+| `name` | String | Field name |
+| `id` | String | ID prefix; each radio gets `<id>-1`, `<id>-2`, … |
 | `form` | Object | Form object |
-| `label` | String | Radio button label |
-| `disabled` | Boolean | Whether the radio button is disabled |
-| `value` | String | Radio button value |
+| `label` | String | Group label |
+| `options` | Array | `[{ value:, label: }]`, defaults to Yes/No |
+| `value` | String | Currently selected value |
+| `disabled` | Boolean | Whether the radios are disabled |
+| `required` | Boolean | Whether a choice is required |
 | `parent` | Object | Radio button parent |
 
 ### Switch button
@@ -330,16 +337,19 @@ Implements [Material Design Radio button](https://github.com/material-components
 Implements [Material Design Switch button](https://github.com/material-components/material-components-web/tree/master/packages/mdc-switch) component.
 
 ```erb
-<%= material_switch label: 'Switch', true_label: 'On', false_label: 'Off' %>
+<%= material_switch form: form, name: 'notify', id: 'notify', label: 'Switch', true_label: 'On', false_label: 'Off' %>
 ```
 
 #### Options
 
 | Option | Type | Description |
 | --- | --- | --- |
+| `form` | Object | Form object |
+| `name` | String | Field name (submitted through a hidden field) |
+| `id` | String | Switch button ID, also used by its label |
+| `value` | Boolean | Current state |
 | `label` | String | Switch button label text |
 | `disabled` | Boolean | Whether the switch is disabled |
-| `required` | Boolean | Whether the switch is required |
 | `true_label` | String | Text that displays when switch is on |
 | `false_label` | String | Text that displays when switch is off |
 
@@ -400,8 +410,11 @@ Implements [Material Design Chip](https://github.com/material-components/materia
 Implements [Material Design Chips Input](https://github.com/material-components/material-components-web/tree/master/packages/mdc-chips) component.
 
 ```erb
-<%= material_chips_input form: form, name: 'tags', label: 'Tags', selected: [{label: 'Tag 1'}, {label: 'Tag 2'}], options: [{label: 'Option 1'}, {label: 'Option 2'}] %>
+<%= material_chips_input form: form, name: 'tags', id: 'tags', label: 'Tags', url: tags_path,
+                         selected: [{ id: 1, label: 'Tag 1' }, { id: 2, label: 'Tag 2' }] %>
 ```
+
+The hidden `name` field holds the comma-separated `id`s of the chips. Each `selected` and `options` entry needs an `id` and a `label`. The `url` endpoint receives `query`, `exclude` (current ids), `suffix`, `name` and `opened`, and responds with a Turbo Stream that re-renders `material_chips_input_options`.
 
 #### Options
 
@@ -417,9 +430,9 @@ Implements [Material Design Chips Input](https://github.com/material-components/
 | `suffix` | String | Suffix of the input |
 | `type` | String | Type of the input |
 | `url` | String | URL for fetching options |
-| `selected` | Array | Array of selected chips |
-| `options` | Array | Array of available options |
-| `value` | String | Value of the input |
+| `selected` | Array | Selected chips, `[{ id:, label: }]` |
+| `options` | Array | Available options, `[{ id:, label: }]` |
+| `value` | String | Initial hidden value; defaults to the `selected` ids |
 | `fixed` | Boolean | Whether the input is fixed |
 | `prefetch` | Boolean | Whether to prefetch options |
 | `additional_query_params` | Hash | Additional query parameters |
@@ -475,6 +488,9 @@ Implements [Material Design Data Table](https://github.com/material-components/m
 | `pagy` | Object | Pagy object for pagination       |
 | `table_headers_partial` | String | Partial name for table headers   |
 | `table_contents_partial` | String | Partial name for table contents  |
+| `per_page_options` | Array | Rows-per-page choices, `[{ value:, label: }]`; default 10/25/50/100 |
+
+The rows-per-page form uses the gem's `material-live-form` Stimulus controller: it submits on change (debounced 2s for text input, configurable with `data-material-live-form-delay-value`) and keeps focus and caret position across the Turbo re-render. Rows need `data-row-id`. Selecting rows sends `PUT <url>/<row id>/select` and `PUT <url>/select_all`; sorting visits `<url>?order=<column>&reverse=<bool>`.
 
 ### Data Table Row Checkbox
 
@@ -597,6 +613,31 @@ Implements [Material Design Tooltip](https://github.com/material-components/mate
 | Option | Type | Description                          |
 | --- | --- |--------------------------------------|
 | `id` | String | DOM ID of the element we displaying the tooltip for |
+
+### Drawer
+
+Stimulus controllers for the [Material Design Drawer](https://github.com/material-components/material-components-web/tree/master/packages/mdc-drawer); the markup is yours.
+
+```erb
+<button data-controller="drawer-button" data-drawer-button-material-drawer-outlet="#drawer"
+        data-action="click->drawer-button#click">menu</button>
+<aside id="drawer" class="mdc-drawer mdc-drawer--dismissible mdc-drawer--right"
+       data-controller="material-drawer"
+       data-material-drawer-opened-value="true"
+       data-material-drawer-name-value="sidebar"
+       data-material-drawer-open-url-value="<%= drawer_open_path %>"
+       data-material-drawer-close-url-value="<%= drawer_close_path %>">
+  <div class="mdc-drawer__content">...</div>
+</aside>
+```
+
+| Value | Description |
+| --- | --- |
+| `opened` | Initial state. When `true`, the drawer also opens at ≥1024px and closes below it as the viewport changes. Leave it out to keep MDC's default and send no request on load |
+| `open-url`, `close-url` | Optional; receive `PUT` with `{ name }` whenever the drawer opens or closes, e.g. to remember the state in the session |
+| `name` | Sent with those requests |
+
+`drawer-button` hides itself unless the page has a `.mdc-drawer--dismissible.mdc-drawer--right` drawer.
 
 ## Lookbook documentation for components
 

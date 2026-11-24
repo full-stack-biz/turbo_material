@@ -42,6 +42,11 @@ class ComponentsHelperTest < ActionView::TestCase
     assert_match(/type="hidden"[^>]*value="7,9"|value="7,9"[^>]*type="hidden"/, html)
   end
 
+  test 'menu button and modal render their partial when no block is given' do
+    assert_match 'My Profile', view.material_menu_button(button_text: 'Menu', menu_contents_partial: 'common/menu_contents')
+    assert_match 'My Profile', view.material_modal(title: 'Hi', id: 'dlg', contents_partial: 'common/menu_contents')
+  end
+
   test 'switch uses the given id' do
     html = view.material_switch(form:, name: 'on', id: 'notify', label: 'Notify')
     assert_match 'id="notify"', html

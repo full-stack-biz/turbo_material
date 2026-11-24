@@ -1,0 +1,7 @@
+<%# locals: (text:) %>
+<div class="p-6">
+  <button class="mdc-button" id="tooltip-anchor" aria-describedby="preview-tooltip" data-tooltip-id="preview-tooltip">
+    <span class="mdc-button__label">Hover me</span>
+  </button>
+  <%= material_tooltip(id: 'preview-tooltip') { text } %>
+</div>

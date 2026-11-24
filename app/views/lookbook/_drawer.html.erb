@@ -1,0 +1,16 @@
+<%# locals: (opened:) %>
+<div class="flex">
+  <div class="grow p-4">
+    <button class="mdc-icon-button material-icons" id="drawer-toggle"
+            data-controller="drawer-button" data-drawer-button-material-drawer-outlet="#drawer"
+            data-action="click->drawer-button#click">menu</button>
+  </div>
+  <aside id="drawer" class="mdc-drawer mdc-drawer--dismissible mdc-drawer--right"
+         data-controller="material-drawer"
+         data-material-drawer-opened-value="<%= opened %>"
+         data-material-drawer-name-value="preview"
+         data-material-drawer-open-url-value="/drawer/open"
+         data-material-drawer-close-url-value="/drawer/close">
+    <div class="mdc-drawer__content p-4">Drawer content</div>
+  </aside>
+</div>

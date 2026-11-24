@@ -11,10 +11,11 @@
     </span>
   </button>
   <div class="mdc-menu mdc-menu-surface <%= custom_surface_css %>">
-    <%- if block_given? -%>
-      <%= yield %>
-    <%- else -%>
+    <%# block_given? is always true in a partial, so branch on the local %>
+    <%- if menu_contents_partial -%>
       <%= render partial: menu_contents_partial %>
-    <% end %>
+    <%- else -%>
+      <%= yield %>
+    <%- end -%>
   </div>
 </div>

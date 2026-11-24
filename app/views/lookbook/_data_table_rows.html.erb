@@ -1,0 +1,6 @@
+<%- records.each do |record| -%>
+  <tr class="mdc-data-table__row" data-row-id="<%= record[:id] %>">
+    <%= material_data_table_row_checkbox id: "row-#{record[:id]}", checked: selected_records.include?(record[:id]) %>
+    <td class="mdc-data-table__cell" id="row-<%= record[:id] %>"><%= record[:name] %></td>
+  </tr>
+<%- end -%>
