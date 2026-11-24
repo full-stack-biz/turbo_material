@@ -13,3 +13,4 @@
 /.idea/
 /vendor/javascript/
 /.ai/
+.playwright-mcp/
