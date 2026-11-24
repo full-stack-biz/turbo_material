@@ -15,9 +15,9 @@ TurboMaterial is a Rails engine gem providing Material Design components (Materi
 - `bin/dev` (root `Procfile.dev`) — dummy app server on port 3200 + `app:tailwindcss:watch`
 - `cd test/dummy && bin/rails console` — console in the dummy app
 - `bin/tailwindcss-builder` — legacy standalone Tailwind watch build into `app/assets/dist` (uses `config/tailwind.config.js`)
-- `gem build turbo_material.gemspec` / `gem push turbo_material-*.gem` — release
+- Release: git-flow (`release/vX.Y.Z` from `develop` → `main`, tag `vX.Y.Z`; see the `git-flow` skill). Pushing `main` triggers `.github/workflows/gem-push.yml`, which builds and pushes the gem to RubyGems — don't `gem push` by hand.
 
-Test coverage is minimal; components are verified visually via Lookbook previews in the dummy app (`lib/lookbook/*_preview.rb`).
+Test coverage is minimal: `test/helpers/components_helper_test.rb` is a smoke test that renders every `material_*` helper with minimal locals — add an assertion there for each new component. Otherwise components are verified visually via Lookbook previews in the dummy app (`lib/lookbook/*_preview.rb`).
 
 ## Architecture
 
