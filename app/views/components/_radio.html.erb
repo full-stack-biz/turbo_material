@@ -1,28 +1,24 @@
-<%# locals: (form:, disabled: false, required: false, name:, label: nil, id:, checked: false, value: nil, parent: nil) %>
+<%# locals: (form:, disabled: false, required: false, name:, label: nil, id:, checked: false, value: nil, parent: nil, options: [{ value: 'true', label: 'Yes' }, { value: 'false', label: 'No' }]) %>
+<%# ponytail: nil value selects 'false' so the default Yes/No keeps treating a blank boolean as No %>
+<%- current = value.nil? ? 'false' : value.to_s -%>
 <div class="mdc-form-field flex flex-col">
   <label>
     <%= label || name.capitalize %>
   </label>
   <div class="flex flex-row items-center w-full">
-    <div class="mdc-radio <%= disabled ? 'mdc-radio--disabled' : '' %>" data-controller="material-radio">
-      <%= form.radio_button name.to_sym, 'true', class: 'mdc-radio__native-control', id: id + '-1', checked: value, disabled: disabled %>
-      <div class="mdc-radio__background">
-        <div class="mdc-radio__outer-circle"></div>
-        <div class="mdc-radio__inner-circle"></div>
+    <%- options.each_with_index do |option, idx| -%>
+      <%- option_id = "#{id}-#{idx + 1}" -%>
+      <div class="mdc-radio <%= disabled ? 'mdc-radio--disabled' : '' %>" data-controller="material-radio">
+        <%= form.radio_button name.to_sym, option[:value], class: 'mdc-radio__native-control', id: option_id,
+                              checked: option[:value].to_s == current, disabled: disabled, required: required %>
+        <div class="mdc-radio__background">
+          <div class="mdc-radio__outer-circle"></div>
+          <div class="mdc-radio__inner-circle"></div>
+        </div>
+        <div class="mdc-radio__ripple"></div>
+        <div class="mdc-radio__focus-ring"></div>
       </div>
-      <div class="mdc-radio__ripple"></div>
-      <div class="mdc-radio__focus-ring"></div>
-    </div>
-    <label for="<%= id %>-1">Yes</label>
-    <div class="mdc-radio <%= disabled ? 'mdc-radio--disabled' : '' %>">
-      <%= form.radio_button name.to_sym, 'false', class: 'mdc-radio__native-control', id: id + '-2', checked: !value, disabled: disabled %>
-      <div class="mdc-radio__background">
-        <div class="mdc-radio__outer-circle"></div>
-        <div class="mdc-radio__inner-circle"></div>
-      </div>
-      <div class="mdc-radio__ripple"></div>
-      <div class="mdc-radio__focus-ring"></div>
-    </div>
-    <label for="<%= id %>-2">No</label>
+      <label for="<%= option_id %>"><%= option[:label] %></label>
+    <%- end -%>
   </div>
 </div>

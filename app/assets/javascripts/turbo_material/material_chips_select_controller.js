@@ -22,6 +22,7 @@ export default class extends Controller {
             this.select.foundation.adapter.floatLabel(true);
             this.selectedValue.forEach(item => {
                 let listItem = this.listItem(item);
+                if (!listItem) return; // selected value not among options
                 this.addChip(listItem.dataset.label, listItem.dataset.value, listItem.dataset.confirmed);
                 listItem.classList.add('!hidden');
             });
@@ -59,9 +60,7 @@ export default class extends Controller {
         chipEl.append(text, icon);
         this.chipsetEl.appendChild(chipEl);
         this.materialChipset.addChip(chipEl);
-        if (this.hasHiddenTarget) {
-            this.hiddenTarget.value = this.materialChipset.chipsList.map((chip) => chip.root.dataset.value).join(',');
-        }
+        this.syncHidden();
         if (this.urlValue) {
             post(this.urlValue, {
                 body: {
@@ -77,11 +76,8 @@ export default class extends Controller {
         event.preventDefault();
         const chip = this.element.querySelector(`.mdc-chip[data-value="${CSS.escape(event.target.dataset.value)}"]`);
         this.chipsetEl.removeChild(chip);
-        if (this.hasHiddenTarget) {
-            this.hiddenTarget.value = this.materialChipset.chipsList.map((chip) => chip.root.dataset.value).join(',');
-        }
-        const selected = this.listItem(event.target.dataset.value);
-        selected.classList.remove('!hidden');
+        this.syncHidden();
+        this.listItem(event.target.dataset.value)?.classList.remove('!hidden');
         if (this.urlValue) {
             destroy(`${this.urlValue}/${event.target.dataset.value}`, {
                 responseKind: "turbo-stream",
@@ -90,6 +86,12 @@ export default class extends Controller {
         if (this.chipsetEl.children.length === 0) {
             this.select.foundation.adapter.floatLabel(false);
         }
+    }
+
+    // Read chips from the DOM: MDCChipSet.chipsList keeps chips removed with removeChild.
+    syncHidden() {
+        if (!this.hasHiddenTarget) return;
+        this.hiddenTarget.value = Array.from(this.chipsetEl.querySelectorAll('.mdc-chip[data-value]'), (chip) => chip.dataset.value).join(',');
     }
 
     toggle(event) {

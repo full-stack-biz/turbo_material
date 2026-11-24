@@ -24,13 +24,6 @@ Gem::Specification.new do |spec|
     After that, please, run `bin/rails turbo_material:install` to install the gem and add necessary files and configurations to your project.
   MSG
 
-  Gem.post_install do |installer|
-    if installer.spec.name == 'turbo_material'
-      require_relative 'lib/turbo_material/post_install'
-      TurboMaterial.post_install
-    end
-  end
-
   spec.files = Dir.chdir(File.expand_path(__dir__)) do
     Dir['{app,config,db,lib}/**/*', 'MIT-LICENSE', 'Rakefile', 'README.md']
   end

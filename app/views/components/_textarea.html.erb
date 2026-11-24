@@ -22,7 +22,7 @@
     <div class="mdc-text-field-helper-text" aria-hidden="true"><%= helper %></div>
   <%- end -%>
   <%- parent&.errors&.[](name.to_sym)&.each do |msg| -%>
-    <div class="mdc-text-field-helper-text--validation-msg text-sm text-red-500" aria-hidden="true">
+    <div class="mdc-text-field-helper-text--validation-msg text-sm text-red-500" role="alert">
       <%= msg %>
     </div>
   <%- end -%>

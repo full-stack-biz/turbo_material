@@ -43,7 +43,7 @@ export default class extends Controller {
         chipEl.append(text, icon);
         this.chipsetEl.insertBefore(chipEl, this.hiddenTarget);
         this.chips.addChip(chipEl);
-        this.hiddenTarget.value = this.chips.chipsList.map((chip) => chip.root.dataset.value).join(',');
+        this.syncHidden();
         this.search();
     }
 
@@ -51,13 +51,18 @@ export default class extends Controller {
         event.stopPropagation();
         event.preventDefault();
         const chip = this.element.querySelector(`.mdc-chip[data-value="${CSS.escape(event.target.dataset.value)}"]`);
-        const chipIndex = this.chips.foundation.adapter.getIndexOfChipById(chip.id);
-        this.chips.foundation.adapter.removeChipAtIndex(chipIndex);
-        if (this.chips.foundation.adapter.getChipListCount() === 0) {
+        // ponytail: chips have no ids, so MDC's getIndexOfChipById("") would hit the first chip
+        chip.remove();
+        this.syncHidden();
+        if (!this.hiddenTarget.value) {
             this.input.foundation.adapter.floatLabel(false);
         }
-        this.hiddenTarget.value = this.chips.chipsList.map((chip) => chip.root.dataset.value).join(',');
         this.search();
+    }
+
+    // Read chips from the DOM so server-rendered `selected` chips count too.
+    syncHidden() {
+        this.hiddenTarget.value = Array.from(this.chipsetEl.querySelectorAll('.mdc-chip[data-value]'), (chip) => chip.dataset.value).join(',');
     }
 
     open() {

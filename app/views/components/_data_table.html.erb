@@ -1,14 +1,14 @@
-<%# locals: (name:, table_body:, url:, table_params:, records:, selected_records:, pagy:, table_headers_partial:, table_contents_partial:) %>
+<%# locals: (name:, table_body:, url:, table_params:, records:, selected_records:, pagy:, table_headers_partial:, table_contents_partial:, per_page_options: [10, 25, 50, 100].map { |n| { value: n, label: n.to_s } }) %>
 <div class="mdc-data-table w-full" data-controller="material-data-table"
      data-material-data-table-body-value="<%= table_body %>"
      data-material-data-table-url-value="<%= url %>"
      data-material-data-table-query-string-value="<%= table_params.to_query %>">
   <div class="mdc-data-table__table-container">
-    <table class="mdc-data-table__table w-[calc(100vw - 16rem)]" aria-label="<%= name %>">
+    <table class="mdc-data-table__table w-[calc(100vw_-_16rem)]" aria-label="<%= name %>">
       <thead>
       <tr class="mdc-data-table__header-row">
         <th class="mdc-data-table__header-cell mdc-data-table__header-cell--checkbox" role="columnheader" scope="col">
-          <div class="mdc-checkbox mdc-data-table__header-row-checkbox mdc-checkbox--selected">
+          <div class="mdc-checkbox mdc-data-table__header-row-checkbox">
             <input type="checkbox" class="mdc-checkbox__native-control" aria-label="Toggle all rows"/>
             <div class="mdc-checkbox__background">
               <svg class="mdc-checkbox__checkmark" viewBox="0 0 24 24">
@@ -37,8 +37,8 @@
         <%= form_with(url: url, method: :get, data: {
           turbo_frame: table_body,
           turbo_action: 'advance',
-          controller: 'live-form',
-          action: 'input->live-form#submit submit-now->live-form#submitNow' }, autocomplete: 'off') do |form| %>
+          controller: 'material-live-form',
+          action: 'input->material-live-form#submit submit-now->material-live-form#submitNow' }, autocomplete: 'off') do |form| %>
           <% params.keys.select { |k| k.starts_with?('ransack') }.each do |key| -%>
             <%= form.hidden_field key, value: params[key] %>
           <%- end -%>

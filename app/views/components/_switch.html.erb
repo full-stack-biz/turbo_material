@@ -1,6 +1,6 @@
 <%# locals: (form:, disabled: false, name:, label: nil, id:, value: nil, true_label: nil, false_label: nil, frame: nil) %>
 <div data-controller="material-switch" <% if frame %> data-frame="<%= frame %>"<% end %>>
-  <button id="selected-switch" class="mdc-switch <%= cast_boolean(value) ? 'mdc-switch--selected' : '' %>"
+  <button id="<%= id %>"class="mdc-switch <%= cast_boolean(value) ? 'mdc-switch--selected' : '' %>"
           type="button" role="switch" aria-checked="<%= cast_boolean(value) ? 'true' : 'false' %>" <% if disabled %>disabled<% end %>>
     <div class="mdc-switch__track"></div>
     <div class="mdc-switch__handle-track">
@@ -23,7 +23,7 @@
               <div class="mdc-switch__focus-ring"></div>
             </span>
   </button>
-  <label for="selected-switch">
+  <label for="<%= id %>">
     <% if cast_boolean(value) %>
       <%= true_label || label %>
     <% else %>

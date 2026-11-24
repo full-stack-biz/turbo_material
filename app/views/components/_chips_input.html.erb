@@ -14,14 +14,15 @@
     <span id="<%= id %>-label" class="mdc-floating-label top-6!"><%= label %></span>
     <div class="mdc-chip-set mdc-chip-set--input pt-8! w-full" role="grid">
       <%- selected.each do |chip| -%>
-        <div class="mdc-chip">
+        <div class="mdc-chip" data-value="<%= chip[:id] %>">
           <div class="mdc-chip__text"><%= chip[:label] %></div>
-          <!--        <i class="material-icons mdc-chip__icon mdc-chip__icon--trailing" tabindex="0" role="button">cancel</i>-->
+          <i class="material-icons mdc-chip__icon mdc-chip__icon--trailing" tabindex="0" role="button"
+             data-action="click->material-chips-input#removeChip" data-value="<%= chip[:id] %>">cancel</i>
         </div>
       <%- end -%>
-      <%= form.hidden_field name.to_sym, value: value, data: { 'material-chips-input-target': 'hidden' } %>
+      <%= form.hidden_field name.to_sym, value: value || selected.map { |chip| chip[:id] }.join(','), data: { 'material-chips-input-target': 'hidden' } %>
       <%= form.text_field "#{name}_".to_sym,
-                          class: 'mdc-text-field__input', value: value || form&.object&.[](name.to_sym),
+                          class: 'mdc-text-field__input', value: nil,
                           id: id, 'aria-labelledby' => id + '-label',
                           required: required,
                           disabled: disabled,

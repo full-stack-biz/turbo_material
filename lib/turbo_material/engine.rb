@@ -29,16 +29,12 @@ module TurboMaterial
       app.config.importmap.cache_sweepers << root.join('app/assets/javascripts')
     end
 
-    # NOTE: add engine manifest to precompile assets in production
+    # The manifest links every engine JS and CSS file for production precompile.
     initializer 'turbo_material.assets' do |app|
-      app.config.assets.precompile += %w[turbo_material_manifest]
-    end
+      next unless app.config.respond_to?(:assets) # no asset pipeline in the host
 
-    initializer 'turbo_material.precompile' do |app|
-      app.config.assets.paths << root.join('app/assets/javascripts')
-      app.config.assets.precompile << 'turbo_material/application.js'
-      app.config.assets.paths << root.join('app/assets/dist')
-      app.config.assets.precompile << 'turbo_material/tailwind.css'
+      app.config.assets.paths << root.join('app/assets/javascripts') << root.join('app/assets/dist')
+      app.config.assets.precompile += %w[turbo_material_manifest] if app.config.assets.precompile # Sprockets only
     end
   end
 end

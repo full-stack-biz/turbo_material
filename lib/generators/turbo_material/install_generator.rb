@@ -7,8 +7,8 @@ module TurboMaterial
     HEAD_LINKS = <<-HTML.rstrip.freeze
 
 
-    <link href="//cdn.jsdelivr.net/npm/material-components-web@#{MDC_VERSION}/dist/material-components-web.min.css" rel="stylesheet">
-    <script src="//cdn.jsdelivr.net/npm/material-components-web@#{MDC_VERSION}/dist/material-components-web.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/material-components-web@#{MDC_VERSION}/dist/material-components-web.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/material-components-web@#{MDC_VERSION}/dist/material-components-web.min.js"></script>
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">#{' '}
     HTML
 

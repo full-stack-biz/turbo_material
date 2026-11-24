@@ -11,7 +11,7 @@ export default class extends Controller {
 
   connect() {
     this.drawer = mdc.drawer.MDCDrawer.attachTo(this.element);
-    if (this.openedValue !== undefined) {
+    if (this.hasOpenedValue) {
       if (this.openedValue) {
         this.open();
       } else {
@@ -26,16 +26,6 @@ export default class extends Controller {
   }
 
   lgChanged({ name, media, matches, event }) {
-    if (this.openedValue) {
-      if(matches) {
-        this.open();
-      } else {
-        this.close();
-      }
-    }
-  }
-
-  isLg({ name, media, matches, event }) {
     if (this.openedValue) {
       if(matches) {
         this.open();
