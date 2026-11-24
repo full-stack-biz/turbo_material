@@ -1,5 +1,36 @@
 # `turbo_material` Changelog
 
+## v0.3.5
+
+### Breaking
+
+- Data table's rows-per-page form uses the gem's new `material-live-form` controller instead of the host's `live-form`, and takes its choices from a `per_page_options:` local (default 10/25/50/100) instead of a host `per_page_options` helper
+- `material_radio` passes `required:` to its inputs (it was ignored), so a required radio now blocks submit until a choice is made
+- Chips input's search box starts empty instead of showing the stored value
+- Drawer without `data-material-drawer-opened-value` no longer closes itself and sends `PUT close-url` on every page load
+
+### Fixed
+
+- Chips select: removing a chip removed it from the hidden value only in the UI; the removed value was still submitted
+- Chips select: a selected value missing from `options` crashed the controller
+- Chips input: `selected:` chips had no value, so adding a chip wiped them from the hidden field; they now carry `data-value` and a remove icon, and the hidden field defaults to their ids
+- Chips input: removing a chip could remove the first chip instead of the clicked one
+- Menu button and modal never rendered `menu_contents_partial` / `contents_partial` (they always yielded the empty block)
+- Menu button: clicking the button again reopened the menu instead of closing it
+- Switch used a fixed `id="selected-switch"`, so labels of all switches pointed at the first one; it now uses `id:`
+- Chip set referenced a non-existent `material-chipset` controller
+- Data table "select all" checkbox no longer renders as selected
+- Validation messages in input, select and textarea use `role="alert"` instead of `aria-hidden`, so screen readers announce them
+- Engine no longer adds a missing `turbo_material/application.js` to precompile, and skips asset config when the host has no asset pipeline
+
+### Added
+
+- `material_radio` `options:` (`[{ value:, label: }]`), default Yes/No
+- `material_data_table` `per_page_options:`
+- `material-live-form` Stimulus controller (debounced auto-submit, keeps focus across Turbo re-renders)
+- Install generator writes MDC CDN links over `https` with SRI (`TurboMaterial::MDC_CSS_SRI`, `MDC_JS_SRI`)
+- Lookbook previews for data table, drawer, chip set and tooltip
+
 ## v0.3.4
 
 ### Breaking
