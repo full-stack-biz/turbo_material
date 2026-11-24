@@ -47,6 +47,24 @@ class ComponentsHelperTest < ActionView::TestCase
     assert_match 'My Profile', view.material_modal(title: 'Hi', id: 'dlg', contents_partial: 'common/menu_contents')
   end
 
+  test 'chips input accepts selected chips keyed by value and a blank value' do
+    html = view.material_chips_input(form:, name: 'to', id: 'to', url: '/r', value: '',
+                                     selected: [{ value: 3, label: 'Ann' }])
+    assert_match 'data-value="3"', html
+    assert_match(/type="hidden"[^>]*value="3"|value="3"[^>]*type="hidden"/, html)
+  end
+
+  test 'data table uses the host per_page_options helper when present' do
+    view.define_singleton_method(:per_page_options) { [{ value: 7, label: 'seven' }] }
+    require Rails.root.join('../../lib/lookbook/data_table_preview').to_s
+    pagy = DataTablePreview::Pagy.new(page: 1, limit: 7, count: 3)
+    html = view.material_data_table(name: 'T', table_body: 'b', url: '/t', table_params: {}, records: [],
+                                    selected_records: [], pagy:, table_headers_partial: 'lookbook/data_table_headers',
+                                    table_contents_partial: 'lookbook/data_table_rows')
+    assert_match 'data-value="7"', html
+    refute_match 'data-value="25"', html
+  end
+
   test 'switch uses the given id' do
     html = view.material_switch(form:, name: 'on', id: 'notify', label: 'Notify')
     assert_match 'id="notify"', html

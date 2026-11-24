@@ -414,7 +414,7 @@ Implements [Material Design Chips Input](https://github.com/material-components/
                          selected: [{ id: 1, label: 'Tag 1' }, { id: 2, label: 'Tag 2' }] %>
 ```
 
-The hidden `name` field holds the comma-separated `id`s of the chips. Each `selected` and `options` entry needs an `id` and a `label`. The `url` endpoint receives `query`, `exclude` (current ids), `suffix`, `name` and `opened`, and responds with a Turbo Stream that re-renders `material_chips_input_options`.
+The hidden `name` field holds the comma-separated `id`s of the chips. Each `options` entry needs an `id` and a `label`; `selected` entries take `id` or `value`, plus `label`. A blank `value:` option is ignored, so the hidden field still starts with the selected ids. The `url` endpoint receives `query`, `exclude` (current ids), `suffix`, `name` and `opened`, and responds with a Turbo Stream that re-renders `material_chips_input_options`.
 
 #### Options
 
@@ -430,7 +430,7 @@ The hidden `name` field holds the comma-separated `id`s of the chips. Each `sele
 | `suffix` | String | Suffix of the input |
 | `type` | String | Type of the input |
 | `url` | String | URL for fetching options |
-| `selected` | Array | Selected chips, `[{ id:, label: }]` |
+| `selected` | Array | Selected chips, `[{ id:, label: }]` or `[{ value:, label: }]` |
 | `options` | Array | Available options, `[{ id:, label: }]` |
 | `value` | String | Initial hidden value; defaults to the `selected` ids |
 | `fixed` | Boolean | Whether the input is fixed |
@@ -488,7 +488,7 @@ Implements [Material Design Data Table](https://github.com/material-components/m
 | `pagy` | Object | Pagy object for pagination       |
 | `table_headers_partial` | String | Partial name for table headers   |
 | `table_contents_partial` | String | Partial name for table contents  |
-| `per_page_options` | Array | Rows-per-page choices, `[{ value:, label: }]`; default 10/25/50/100 |
+| `per_page_options` | Array | Rows-per-page choices, `[{ value:, label: }]`. Defaults to the host's `per_page_options` helper if it has one, else 10/25/50/100 |
 
 The rows-per-page form uses the gem's `material-live-form` Stimulus controller: it submits on change (debounced 2s for text input, configurable with `data-material-live-form-delay-value`) and keeps focus and caret position across the Turbo re-render. Rows need `data-row-id`. Selecting rows sends `PUT <url>/<row id>/select` and `PUT <url>/select_all`; sorting visits `<url>?order=<column>&reverse=<bool>`.
 

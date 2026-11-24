@@ -62,7 +62,7 @@ export default class extends Controller {
 
     // Read chips from the DOM so server-rendered `selected` chips count too.
     syncHidden() {
-        this.hiddenTarget.value = Array.from(this.chipsetEl.querySelectorAll('.mdc-chip[data-value]'), (chip) => chip.dataset.value).join(',');
+        this.hiddenTarget.value = Array.from(this.chipsetEl.querySelectorAll('.mdc-chip[data-value]'), (chip) => chip.dataset.value).filter(Boolean).join(',');
     }
 
     open() {

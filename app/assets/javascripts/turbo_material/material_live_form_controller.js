@@ -17,13 +17,13 @@ export default class extends Controller {
   }
 
   connect() {
-    if (window.liveForm === undefined) {
-      window.liveForm = {}
+    if (window.materialLiveForm === undefined) {
+      window.materialLiveForm = {}
       document.addEventListener('turbo:submit-start', this.submitStart)
       document.addEventListener('turbo:submit-end', this.submitEnd)
-    } else if (window.liveForm.focused) {
-      this.restoreFocus(window.liveForm.focused, window.liveForm.selectionStart, window.liveForm.selectionEnd)
-      window.liveForm = {}
+    } else if (window.materialLiveForm.focused) {
+      this.restoreFocus(window.materialLiveForm.focused, window.materialLiveForm.selectionStart, window.materialLiveForm.selectionEnd)
+      window.materialLiveForm = {}
     }
     this.element.classList.add('live-form');
   }
@@ -41,9 +41,9 @@ export default class extends Controller {
   submitEnd() {
     document.body.classList.remove('turbo-loading')
     const active = document.activeElement || document.body
-    window.liveForm.selectionStart = active.selectionStart
-    window.liveForm.selectionEnd = active.selectionEnd
-    window.liveForm.focused = active.id
+    window.materialLiveForm.selectionStart = active.selectionStart
+    window.materialLiveForm.selectionEnd = active.selectionEnd
+    window.materialLiveForm.focused = active.id
   }
 
   restoreFocus(focusedId, selectionStart, selectionEnd) {

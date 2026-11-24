@@ -1,4 +1,6 @@
-<%# locals: (name:, table_body:, url:, table_params:, records:, selected_records:, pagy:, table_headers_partial:, table_contents_partial:, per_page_options: [10, 25, 50, 100].map { |n| { value: n, label: n.to_s } }) %>
+<%# locals: (name:, table_body:, url:, table_params:, records:, selected_records:, pagy:, table_headers_partial:, table_contents_partial:, per_page_options: nil) %>
+<%# the local shadows a host `per_page_options` helper, so fall back to it explicitly %>
+<%- per_page_options ||= respond_to?(:per_page_options) ? self.per_page_options : [10, 25, 50, 100].map { |n| { value: n, label: n.to_s } } -%>
 <div class="mdc-data-table w-full" data-controller="material-data-table"
      data-material-data-table-body-value="<%= table_body %>"
      data-material-data-table-url-value="<%= url %>"
